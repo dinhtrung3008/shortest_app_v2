@@ -1,0 +1,30 @@
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+
+import '../../../../domain/core/failures/base_failure.dart';
+import '../../../../domain/repositories/message/i_message_repository.dart';
+import '../../core/mixins/connectivity.dart';
+import '../../core/mixins/execute_repository_impl.dart';
+import '../../data/remote/message/message_remote_service.dart';
+
+@LazySingleton(as: IDeleteMessage)
+class DeleteMessageImpl with ExecuteRepositoryImpl, ConnectionChecker implements IDeleteMessage {
+  final IMessageRemoteService _iMessageRemoteService;
+
+  DeleteMessageImpl(this._iMessageRemoteService);
+
+  @override
+  Future<Either<BaseFailure, Unit>> call({required String messageId}) async {
+    final hasInternet = await internetChecker();
+    if (!hasInternet) {
+      return left(const BaseFailure.offline());
+    }
+
+    return execute<Unit>(
+      action: () async {
+        await _iMessageRemoteService.deleteMessage(messageId: messageId);
+        return right(unit);
+      },
+    );
+  }
+}

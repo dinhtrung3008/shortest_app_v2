@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'infrastructure/core/di/infrastructure_injection.dart';
+import 'l10n/app_localizations.dart';
+import 'presentation/core/mixins/resources_app.dart';
+import 'presentation/core/utils/navigator/navigator_service.dart';
+
+class AppWidget extends StatelessWidget with ResourcesApp {
+  AppWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.dark),
+    );
+
+    return MaterialApp(
+      theme: appColors.lightTheme,
+      themeMode: ThemeMode.light,
+      navigatorKey: injector<NavigationService>().navigatorKey,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      home: Container(),
+    );
+  }
+}

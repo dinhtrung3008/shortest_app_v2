@@ -1,0 +1,40 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../post_shortest/post_shortest.dart';
+import '../user_shortest/user_shortest.dart';
+
+part 'comment_post.freezed.dart';
+part 'comment_post.g.dart';
+
+@freezed
+class CommentPost with _$CommentPost {
+  const CommentPost._();
+
+  const factory CommentPost({
+    required String commentPostId,
+    required String content,
+    required String owner,
+    List<String>? mediaUrls,
+    required String postOwner,
+    required DateTime created,
+    required DateTime updated,
+    required String collectionId,
+    required String collectionName,
+    CommentPostExpand? expand,
+  }) = _CommentPost;
+
+  bool get isEdited {
+    return updated.isAfter(created);
+  }
+
+  factory CommentPost.fromJson(Map<String, dynamic> json) => _$CommentPostFromJson(json);
+}
+
+@freezed
+class CommentPostExpand with _$CommentPostExpand {
+  const CommentPostExpand._();
+
+  const factory CommentPostExpand({UserShortest? owner, PostShortest? postOwner}) = _CommentPostExpand;
+
+  factory CommentPostExpand.fromJson(Map<String, dynamic> json) => _$CommentPostExpandFromJson(json);
+}
