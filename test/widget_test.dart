@@ -1,29 +1,102 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shortest_app/app_widget.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:pocketbase/pocketbase.dart';
+import 'package:shortest_app/domain/core/exceptions/exceptions.dart';
+import 'package:shortest_app/domain/entities/user_shortest/user_shortest.dart';
+import 'package:shortest_app/infrastructure/data/client/dio_client.dart';
+import 'package:shortest_app/infrastructure/data/remote/authentication/authentication_remote_service.dart';
+import 'package:shortest_app/infrastructure/dtos/authentication/authentication_dto.dart';
+import 'package:shortest_app/infrastructure/dtos/chat/chat_dto.dart';
+import 'package:shortest_app/infrastructure/dtos/user_shortest/user_shortest_dto.dart';
+import 'package:shortest_app/presentation/core/constants/collection_names.dart';
+import 'package:shortest_app/presentation/core/constants/global_constants.dart';
+import 'package:shortest_app/presentation/core/constants/user_constants.dart';
+import 'package:uuid/uuid.dart';
 
+import 'widget_test.mocks.dart';
+
+// Generate mocks
+@GenerateMocks([IDioClient, FlutterSecureStorage, PocketBase, AuthStore])
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(AppWidget());
+  group('AuthenticationRemoteServiceImpl', () {
+    late AuthenticationRemoteServiceImpl authService;
+    late MockIDioClient mockDioClient;
+    late MockFlutterSecureStorage mockStorage;
+    late MockPocketBase mockPocketBase;
+    late MockAuthStore mockAuthStore;
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    setUp(() {
+      mockDioClient = MockIDioClient();
+      mockStorage = MockFlutterSecureStorage();
+      mockPocketBase = MockPocketBase();
+      mockAuthStore = MockAuthStore();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      when(mockPocketBase.authStore).thenReturn(mockAuthStore);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      authService = AuthenticationRemoteServiceImpl(mockDioClient, mockStorage, mockPocketBase);
+    });
+
+    group('signInWithEmailAndPassword', () {
+      late UserShortestDTO testUserDTO;
+      late Map<String, dynamic> mockResponseData;
+      late Response mockResponse;
+
+      setUp(() {
+        testUserDTO = UserShortestDTO(identity: 'test@shortest.co', password: 'test123456');
+
+        // Create mock response data as raw JSON structure
+        mockResponseData = {
+          'token': 'token',
+          'user': {
+            'id': 'test-user-id',
+            'identity': 'test@shortest.co',
+            'password': 'test123456',
+            // Add other required fields for UserShortestDTO here
+            // Make sure this matches your UserShortestDTO structure
+          },
+        };
+
+        mockResponse = Response(data: mockResponseData, statusCode: 200, requestOptions: RequestOptions(path: ''));
+      });
+
+      test('should successfully sign in and store user data', () async {
+        // Arrange
+        when(
+          mockDioClient.postRequest(
+            '/api/collections/${CollectionNames.usersCollection}/auth-with-password',
+            bodyParams: testUserDTO.toJson(),
+          ),
+        ).thenAnswer((_) async => mockResponse);
+
+        when(mockStorage.write(key: anyNamed('key'), value: anyNamed('value'))).thenAnswer((_) async {});
+
+        // Act
+        final result = await authService.signInWithEmailAndPassword(userDTO: testUserDTO);
+
+        // Assert
+        expect(result, equals(unit));
+
+        // Verify API call
+        verify(
+          mockDioClient.postRequest(
+            '/api/collections/${CollectionNames.usersCollection}/auth-with-password',
+            bodyParams: testUserDTO.toJson(),
+          ),
+        ).called(1);
+
+        // Verify storage operations
+        verify(mockStorage.write(key: UserConstants.cachedUserKey, value: anyNamed('value'))).called(1);
+
+        verify(mockStorage.write(key: GlobalConstants.accessToken, value: 'token')).called(1);
+
+        verify(mockStorage.write(key: UserConstants.idField, value: 'test-user-id')).called(1);
+      });
+    });
   });
 }

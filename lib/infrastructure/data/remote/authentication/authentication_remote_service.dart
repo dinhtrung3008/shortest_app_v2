@@ -4,12 +4,11 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pocketbase/pocketbase.dart';
-import 'package:shortest_app/infrastructure/core/mixins/execute_service_remote_impl.dart';
 
-import '../../../../../domain/core/exceptions/exceptions.dart';
 import '../../../../../presentation/core/constants/collection_names.dart';
 import '../../../../../presentation/core/constants/global_constants.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
+import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/authentication/authentication_dto.dart';
 import '../../../dtos/user_shortest/user_shortest_dto.dart';
 import '../../client/dio_client.dart';
@@ -27,6 +26,7 @@ class AuthenticationRemoteServiceImpl with ExecuteRemoteServiceImpl implements I
   final IDioClient _iDioClient;
   final FlutterSecureStorage _storage;
   final PocketBase _pocketBase;
+
   AuthenticationRemoteServiceImpl(this._iDioClient, this._storage, this._pocketBase);
 
   @override
@@ -65,31 +65,27 @@ class AuthenticationRemoteServiceImpl with ExecuteRemoteServiceImpl implements I
   @override
   Future<Unit> requestVerificationEmail({required UserShortestDTO userDTO}) async {
     final body = userDTO.toJson();
-    final response = await _iDioClient.postRequest(
-      '/api/collections/${CollectionNames.usersCollection}/request-verification',
-      bodyParams: body,
-    );
 
-    if (response.statusCode == 204) {
-      return unit;
-    } else {
-      throw ServerException(message: response.data?['message'] ?? 'Cannot connect to server side');
-    }
+    return await handleResponse<Unit>(
+      _iDioClient.postRequest(
+        '/api/collections/${CollectionNames.usersCollection}/request-verification',
+        bodyParams: body,
+      ),
+      onSuccess: (_) => unit,
+    );
   }
 
   @override
   Future<Unit> requestPasswordReset({required UserShortestDTO userDTO}) async {
     final body = userDTO.toJson();
-    final response = await _iDioClient.postRequest(
-      '/api/collections/${CollectionNames.usersCollection}/request-password-reset',
-      bodyParams: body,
-    );
 
-    if (response.statusCode == 204) {
-      return unit;
-    } else {
-      throw ServerException(message: response.data?['message'] ?? 'Cannot connect to server side');
-    }
+    return await handleResponse<Unit>(
+      _iDioClient.postRequest(
+        '/api/collections/${CollectionNames.usersCollection}/request-password-reset',
+        bodyParams: body,
+      ),
+      onSuccess: (_) => unit,
+    );
   }
 
   @override

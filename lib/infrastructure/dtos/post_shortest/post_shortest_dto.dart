@@ -24,13 +24,7 @@ class ListPostShortestResponseDTO {
   @JsonKey(name: 'items', includeIfNull: false)
   List<PostShortestDTO>? postsShortest;
 
-  ListPostShortestResponseDTO({
-    this.page,
-    this.perPage,
-    this.totalPages,
-    this.totalItems,
-    this.postsShortest,
-  });
+  ListPostShortestResponseDTO({this.page, this.perPage, this.totalPages, this.totalItems, this.postsShortest});
 
   // Phương thức copyWith
   ListPostShortestResponseDTO copyWith({
@@ -38,14 +32,14 @@ class ListPostShortestResponseDTO {
     int? perPage,
     int? totalPages,
     int? totalItems,
-    List<PostShortestDTO>? posts,
+    List<PostShortestDTO>? postsShortest,
   }) {
     return ListPostShortestResponseDTO(
       page: page ?? this.page,
       perPage: perPage ?? this.perPage,
       totalPages: totalPages ?? this.totalPages,
       totalItems: totalItems ?? this.totalItems,
-      postsShortest: posts ?? this.postsShortest,
+      postsShortest: postsShortest ?? this.postsShortest,
     );
   }
 
@@ -192,14 +186,8 @@ class PostShortestDTO {
       shares: shares ?? [],
       owner: owner ?? '',
       ownerExpand: ownerExpand?.toDomain(),
-      visibility: VisibilityEnum.values.firstWhere(
-        (e) => e.name == visibility,
-        orElse: () => VisibilityEnum.public,
-      ),
-      type: TypePostEnum.values.firstWhere(
-        (e) => e.name == type,
-        orElse: () => TypePostEnum.self,
-      ),
+      visibility: VisibilityEnum.values.firstWhere((e) => e.name == visibility, orElse: () => VisibilityEnum.public),
+      type: TypePostEnum.values.firstWhere((e) => e.name == type, orElse: () => TypePostEnum.self),
     );
   }
 
@@ -238,12 +226,8 @@ class PostShortestOwnerExpandDTO {
 
   PostShortestOwnerExpandDTO({this.owner});
 
-  PostShortestOwnerExpandDTO copyWith({
-    UserShortestDTO? owner,
-  }) {
-    return PostShortestOwnerExpandDTO(
-      owner: owner ?? this.owner,
-    );
+  PostShortestOwnerExpandDTO copyWith({UserShortestDTO? owner}) {
+    return PostShortestOwnerExpandDTO(owner: owner ?? this.owner);
   }
 
   PostShortestOwnerExpand toDomain() {
@@ -251,9 +235,7 @@ class PostShortestOwnerExpandDTO {
   }
 
   factory PostShortestOwnerExpandDTO.fromDomain(PostShortestOwnerExpand expand) {
-    return PostShortestOwnerExpandDTO(
-      owner: expand.owner != null ? UserShortestDTO.fromDomain(expand.owner!) : null,
-    );
+    return PostShortestOwnerExpandDTO(owner: expand.owner != null ? UserShortestDTO.fromDomain(expand.owner!) : null);
   }
 
   factory PostShortestOwnerExpandDTO.fromJson(Map<String, dynamic> json) => _$PostShortestOwnerExpandDTOFromJson(json);
