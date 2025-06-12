@@ -1,9 +1,9 @@
-import '../../../../application/bloc/auth/auth_bloc.dart';
-import '../../../../application/bloc/auth/auth_event.dart';
-import '../../../../application/bloc/auth/auth_state.dart';
-import '../../../../domain/value_object/auth/auth_value_object.dart';
-import '../../../base/base_presenter_has_bloc.dart';
-import '../../../base/base_view_state_has_bloc.dart';
+import '../../bloc/auth/auth_bloc.dart';
+import '../../bloc/auth/auth_event.dart';
+import '../../bloc/auth/auth_state.dart';
+import '../../../domain/value_object/auth/auth_value_object.dart';
+import '../../../presentation/base/base_presenter_has_bloc.dart';
+import '../../../presentation/base/base_view_state_has_bloc.dart';
 
 abstract class SignInView extends BaseViewHasBloc {
   void onNavigateToHome();

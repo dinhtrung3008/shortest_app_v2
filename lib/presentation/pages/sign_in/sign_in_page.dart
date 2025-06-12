@@ -6,7 +6,7 @@ import '../../../infrastructure/core/di/infrastructure_injection.dart';
 import '../../base/base_view_state_has_bloc.dart';
 import '../home/home_page.dart';
 import '../sign_up/sign_up_page.dart';
-import 'presenter/sign_in_presenter.dart';
+import '../../../application/presenters/sign_in/sign_in_presenter.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});

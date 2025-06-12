@@ -4,7 +4,7 @@ import '../../../application/bloc/auth/auth_bloc.dart';
 import '../../../domain/value_object/auth/auth_value_object.dart';
 import '../../../infrastructure/core/di/infrastructure_injection.dart';
 import '../../base/base_view_state_has_bloc.dart';
-import 'presenter/sign_up_presenter.dart';
+import '../../../application/presenters/sign_up/sign_up_presenter.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
