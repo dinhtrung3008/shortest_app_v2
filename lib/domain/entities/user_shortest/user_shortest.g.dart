@@ -6,9 +6,9 @@ part of 'user_shortest.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserShortestImpl _$$UserShortestImplFromJson(
+_UserShortest _$UserShortestFromJson(
   Map<String, dynamic> json,
-) => _$UserShortestImpl(
+) => _UserShortest(
   id: json['id'] as String,
   username: json['username'] as String,
   email: json['email'] as String,
@@ -47,7 +47,7 @@ _$UserShortestImpl _$$UserShortestImplFromJson(
       (json['savedPosts'] as List<dynamic>?)?.map((e) => e as String).toList(),
 );
 
-Map<String, dynamic> _$$UserShortestImplToJson(_$UserShortestImpl instance) =>
+Map<String, dynamic> _$UserShortestToJson(_UserShortest instance) =>
     <String, dynamic>{
       'id': instance.id,
       'username': instance.username,

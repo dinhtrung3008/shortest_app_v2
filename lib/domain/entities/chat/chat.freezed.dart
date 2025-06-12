@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,877 +10,642 @@ part of 'chat.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Chat _$ChatFromJson(Map<String, dynamic> json) {
-  return _Chat.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Chat {
-  String get id => throw _privateConstructorUsedError;
-  String get lastSenderId => throw _privateConstructorUsedError;
-  List<String> get users => throw _privateConstructorUsedError;
-  String get lastMessage => throw _privateConstructorUsedError;
-  LastMessages get lastMessages => throw _privateConstructorUsedError;
-  DateTime get created => throw _privateConstructorUsedError;
-  DateTime get updated => throw _privateConstructorUsedError;
-  String get collectionId => throw _privateConstructorUsedError;
-  String get collectionName => throw _privateConstructorUsedError;
-  ChatExpandUsersInChat? get expand => throw _privateConstructorUsedError;
-  List<UsersInChat> get usersInChat => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ChatCopyWith<Chat> get copyWith => throw _privateConstructorUsedError;
+ String get id; String get lastSenderId; List<String> get users; String get lastMessage; LastMessages get lastMessages; DateTime get created; DateTime get updated; String get collectionId; String get collectionName; ChatExpandUsersInChat? get expand; List<UsersInChat> get usersInChat;
+/// Create a copy of Chat
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChatCopyWith<Chat> get copyWith => _$ChatCopyWithImpl<Chat>(this as Chat, _$identity);
+
+  /// Serializes this Chat to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Chat&&(identical(other.id, id) || other.id == id)&&(identical(other.lastSenderId, lastSenderId) || other.lastSenderId == lastSenderId)&&const DeepCollectionEquality().equals(other.users, users)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.lastMessages, lastMessages) || other.lastMessages == lastMessages)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.expand, expand) || other.expand == expand)&&const DeepCollectionEquality().equals(other.usersInChat, usersInChat));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,lastSenderId,const DeepCollectionEquality().hash(users),lastMessage,lastMessages,created,updated,collectionId,collectionName,expand,const DeepCollectionEquality().hash(usersInChat));
+
+@override
+String toString() {
+  return 'Chat(id: $id, lastSenderId: $lastSenderId, users: $users, lastMessage: $lastMessage, lastMessages: $lastMessages, created: $created, updated: $updated, collectionId: $collectionId, collectionName: $collectionName, expand: $expand, usersInChat: $usersInChat)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ChatCopyWith<$Res> {
-  factory $ChatCopyWith(Chat value, $Res Function(Chat) then) =
-      _$ChatCopyWithImpl<$Res, Chat>;
-  @useResult
-  $Res call(
-      {String id,
-      String lastSenderId,
-      List<String> users,
-      String lastMessage,
-      LastMessages lastMessages,
-      DateTime created,
-      DateTime updated,
-      String collectionId,
-      String collectionName,
-      ChatExpandUsersInChat? expand,
-      List<UsersInChat> usersInChat});
+abstract mixin class $ChatCopyWith<$Res>  {
+  factory $ChatCopyWith(Chat value, $Res Function(Chat) _then) = _$ChatCopyWithImpl;
+@useResult
+$Res call({
+ String id, String lastSenderId, List<String> users, String lastMessage, LastMessages lastMessages, DateTime created, DateTime updated, String collectionId, String collectionName, ChatExpandUsersInChat? expand, List<UsersInChat> usersInChat
+});
 
-  $LastMessagesCopyWith<$Res> get lastMessages;
-  $ChatExpandUsersInChatCopyWith<$Res>? get expand;
+
+$LastMessagesCopyWith<$Res> get lastMessages;$ChatExpandUsersInChatCopyWith<$Res>? get expand;
+
 }
-
 /// @nodoc
-class _$ChatCopyWithImpl<$Res, $Val extends Chat>
+class _$ChatCopyWithImpl<$Res>
     implements $ChatCopyWith<$Res> {
-  _$ChatCopyWithImpl(this._value, this._then);
+  _$ChatCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Chat _self;
+  final $Res Function(Chat) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? lastSenderId = null,
-    Object? users = null,
-    Object? lastMessage = null,
-    Object? lastMessages = null,
-    Object? created = null,
-    Object? updated = null,
-    Object? collectionId = null,
-    Object? collectionName = null,
-    Object? expand = freezed,
-    Object? usersInChat = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastSenderId: null == lastSenderId
-          ? _value.lastSenderId
-          : lastSenderId // ignore: cast_nullable_to_non_nullable
-              as String,
-      users: null == users
-          ? _value.users
-          : users // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      lastMessage: null == lastMessage
-          ? _value.lastMessage
-          : lastMessage // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastMessages: null == lastMessages
-          ? _value.lastMessages
-          : lastMessages // ignore: cast_nullable_to_non_nullable
-              as LastMessages,
-      created: null == created
-          ? _value.created
-          : created // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updated: null == updated
-          ? _value.updated
-          : updated // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      collectionId: null == collectionId
-          ? _value.collectionId
-          : collectionId // ignore: cast_nullable_to_non_nullable
-              as String,
-      collectionName: null == collectionName
-          ? _value.collectionName
-          : collectionName // ignore: cast_nullable_to_non_nullable
-              as String,
-      expand: freezed == expand
-          ? _value.expand
-          : expand // ignore: cast_nullable_to_non_nullable
-              as ChatExpandUsersInChat?,
-      usersInChat: null == usersInChat
-          ? _value.usersInChat
-          : usersInChat // ignore: cast_nullable_to_non_nullable
-              as List<UsersInChat>,
-    ) as $Val);
+/// Create a copy of Chat
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? lastSenderId = null,Object? users = null,Object? lastMessage = null,Object? lastMessages = null,Object? created = null,Object? updated = null,Object? collectionId = null,Object? collectionName = null,Object? expand = freezed,Object? usersInChat = null,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,lastSenderId: null == lastSenderId ? _self.lastSenderId : lastSenderId // ignore: cast_nullable_to_non_nullable
+as String,users: null == users ? _self.users : users // ignore: cast_nullable_to_non_nullable
+as List<String>,lastMessage: null == lastMessage ? _self.lastMessage : lastMessage // ignore: cast_nullable_to_non_nullable
+as String,lastMessages: null == lastMessages ? _self.lastMessages : lastMessages // ignore: cast_nullable_to_non_nullable
+as LastMessages,created: null == created ? _self.created : created // ignore: cast_nullable_to_non_nullable
+as DateTime,updated: null == updated ? _self.updated : updated // ignore: cast_nullable_to_non_nullable
+as DateTime,collectionId: null == collectionId ? _self.collectionId : collectionId // ignore: cast_nullable_to_non_nullable
+as String,collectionName: null == collectionName ? _self.collectionName : collectionName // ignore: cast_nullable_to_non_nullable
+as String,expand: freezed == expand ? _self.expand : expand // ignore: cast_nullable_to_non_nullable
+as ChatExpandUsersInChat?,usersInChat: null == usersInChat ? _self.usersInChat : usersInChat // ignore: cast_nullable_to_non_nullable
+as List<UsersInChat>,
+  ));
+}
+/// Create a copy of Chat
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LastMessagesCopyWith<$Res> get lastMessages {
+  
+  return $LastMessagesCopyWith<$Res>(_self.lastMessages, (value) {
+    return _then(_self.copyWith(lastMessages: value));
+  });
+}/// Create a copy of Chat
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ChatExpandUsersInChatCopyWith<$Res>? get expand {
+    if (_self.expand == null) {
+    return null;
   }
 
-  @override
-  @pragma('vm:prefer-inline')
-  $LastMessagesCopyWith<$Res> get lastMessages {
-    return $LastMessagesCopyWith<$Res>(_value.lastMessages, (value) {
-      return _then(_value.copyWith(lastMessages: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ChatExpandUsersInChatCopyWith<$Res>? get expand {
-    if (_value.expand == null) {
-      return null;
-    }
-
-    return $ChatExpandUsersInChatCopyWith<$Res>(_value.expand!, (value) {
-      return _then(_value.copyWith(expand: value) as $Val);
-    });
-  }
+  return $ChatExpandUsersInChatCopyWith<$Res>(_self.expand!, (value) {
+    return _then(_self.copyWith(expand: value));
+  });
+}
 }
 
-/// @nodoc
-abstract class _$$ChatImplCopyWith<$Res> implements $ChatCopyWith<$Res> {
-  factory _$$ChatImplCopyWith(
-          _$ChatImpl value, $Res Function(_$ChatImpl) then) =
-      __$$ChatImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String lastSenderId,
-      List<String> users,
-      String lastMessage,
-      LastMessages lastMessages,
-      DateTime created,
-      DateTime updated,
-      String collectionId,
-      String collectionName,
-      ChatExpandUsersInChat? expand,
-      List<UsersInChat> usersInChat});
-
-  @override
-  $LastMessagesCopyWith<$Res> get lastMessages;
-  @override
-  $ChatExpandUsersInChatCopyWith<$Res>? get expand;
-}
-
-/// @nodoc
-class __$$ChatImplCopyWithImpl<$Res>
-    extends _$ChatCopyWithImpl<$Res, _$ChatImpl>
-    implements _$$ChatImplCopyWith<$Res> {
-  __$$ChatImplCopyWithImpl(_$ChatImpl _value, $Res Function(_$ChatImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? lastSenderId = null,
-    Object? users = null,
-    Object? lastMessage = null,
-    Object? lastMessages = null,
-    Object? created = null,
-    Object? updated = null,
-    Object? collectionId = null,
-    Object? collectionName = null,
-    Object? expand = freezed,
-    Object? usersInChat = null,
-  }) {
-    return _then(_$ChatImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastSenderId: null == lastSenderId
-          ? _value.lastSenderId
-          : lastSenderId // ignore: cast_nullable_to_non_nullable
-              as String,
-      users: null == users
-          ? _value._users
-          : users // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      lastMessage: null == lastMessage
-          ? _value.lastMessage
-          : lastMessage // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastMessages: null == lastMessages
-          ? _value.lastMessages
-          : lastMessages // ignore: cast_nullable_to_non_nullable
-              as LastMessages,
-      created: null == created
-          ? _value.created
-          : created // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updated: null == updated
-          ? _value.updated
-          : updated // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      collectionId: null == collectionId
-          ? _value.collectionId
-          : collectionId // ignore: cast_nullable_to_non_nullable
-              as String,
-      collectionName: null == collectionName
-          ? _value.collectionName
-          : collectionName // ignore: cast_nullable_to_non_nullable
-              as String,
-      expand: freezed == expand
-          ? _value.expand
-          : expand // ignore: cast_nullable_to_non_nullable
-              as ChatExpandUsersInChat?,
-      usersInChat: null == usersInChat
-          ? _value._usersInChat
-          : usersInChat // ignore: cast_nullable_to_non_nullable
-              as List<UsersInChat>,
-    ));
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$ChatImpl extends _Chat {
-  const _$ChatImpl(
-      {required this.id,
-      required this.lastSenderId,
-      required final List<String> users,
-      required this.lastMessage,
-      required this.lastMessages,
-      required this.created,
-      required this.updated,
-      required this.collectionId,
-      required this.collectionName,
-      this.expand,
-      required final List<UsersInChat> usersInChat})
-      : _users = users,
-        _usersInChat = usersInChat,
-        super._();
 
-  factory _$ChatImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ChatImplFromJson(json);
+class _Chat extends Chat {
+  const _Chat({required this.id, required this.lastSenderId, required final  List<String> users, required this.lastMessage, required this.lastMessages, required this.created, required this.updated, required this.collectionId, required this.collectionName, this.expand, required final  List<UsersInChat> usersInChat}): _users = users,_usersInChat = usersInChat,super._();
+  factory _Chat.fromJson(Map<String, dynamic> json) => _$ChatFromJson(json);
 
-  @override
-  final String id;
-  @override
-  final String lastSenderId;
-  final List<String> _users;
-  @override
-  List<String> get users {
-    if (_users is EqualUnmodifiableListView) return _users;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_users);
-  }
-
-  @override
-  final String lastMessage;
-  @override
-  final LastMessages lastMessages;
-  @override
-  final DateTime created;
-  @override
-  final DateTime updated;
-  @override
-  final String collectionId;
-  @override
-  final String collectionName;
-  @override
-  final ChatExpandUsersInChat? expand;
-  final List<UsersInChat> _usersInChat;
-  @override
-  List<UsersInChat> get usersInChat {
-    if (_usersInChat is EqualUnmodifiableListView) return _usersInChat;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_usersInChat);
-  }
-
-  @override
-  String toString() {
-    return 'Chat(id: $id, lastSenderId: $lastSenderId, users: $users, lastMessage: $lastMessage, lastMessages: $lastMessages, created: $created, updated: $updated, collectionId: $collectionId, collectionName: $collectionName, expand: $expand, usersInChat: $usersInChat)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ChatImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.lastSenderId, lastSenderId) ||
-                other.lastSenderId == lastSenderId) &&
-            const DeepCollectionEquality().equals(other._users, _users) &&
-            (identical(other.lastMessage, lastMessage) ||
-                other.lastMessage == lastMessage) &&
-            (identical(other.lastMessages, lastMessages) ||
-                other.lastMessages == lastMessages) &&
-            (identical(other.created, created) || other.created == created) &&
-            (identical(other.updated, updated) || other.updated == updated) &&
-            (identical(other.collectionId, collectionId) ||
-                other.collectionId == collectionId) &&
-            (identical(other.collectionName, collectionName) ||
-                other.collectionName == collectionName) &&
-            (identical(other.expand, expand) || other.expand == expand) &&
-            const DeepCollectionEquality()
-                .equals(other._usersInChat, _usersInChat));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      lastSenderId,
-      const DeepCollectionEquality().hash(_users),
-      lastMessage,
-      lastMessages,
-      created,
-      updated,
-      collectionId,
-      collectionName,
-      expand,
-      const DeepCollectionEquality().hash(_usersInChat));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ChatImplCopyWith<_$ChatImpl> get copyWith =>
-      __$$ChatImplCopyWithImpl<_$ChatImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ChatImplToJson(
-      this,
-    );
-  }
+@override final  String id;
+@override final  String lastSenderId;
+ final  List<String> _users;
+@override List<String> get users {
+  if (_users is EqualUnmodifiableListView) return _users;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_users);
 }
 
-abstract class _Chat extends Chat {
-  const factory _Chat(
-      {required final String id,
-      required final String lastSenderId,
-      required final List<String> users,
-      required final String lastMessage,
-      required final LastMessages lastMessages,
-      required final DateTime created,
-      required final DateTime updated,
-      required final String collectionId,
-      required final String collectionName,
-      final ChatExpandUsersInChat? expand,
-      required final List<UsersInChat> usersInChat}) = _$ChatImpl;
-  const _Chat._() : super._();
-
-  factory _Chat.fromJson(Map<String, dynamic> json) = _$ChatImpl.fromJson;
-
-  @override
-  String get id;
-  @override
-  String get lastSenderId;
-  @override
-  List<String> get users;
-  @override
-  String get lastMessage;
-  @override
-  LastMessages get lastMessages;
-  @override
-  DateTime get created;
-  @override
-  DateTime get updated;
-  @override
-  String get collectionId;
-  @override
-  String get collectionName;
-  @override
-  ChatExpandUsersInChat? get expand;
-  @override
-  List<UsersInChat> get usersInChat;
-  @override
-  @JsonKey(ignore: true)
-  _$$ChatImplCopyWith<_$ChatImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override final  String lastMessage;
+@override final  LastMessages lastMessages;
+@override final  DateTime created;
+@override final  DateTime updated;
+@override final  String collectionId;
+@override final  String collectionName;
+@override final  ChatExpandUsersInChat? expand;
+ final  List<UsersInChat> _usersInChat;
+@override List<UsersInChat> get usersInChat {
+  if (_usersInChat is EqualUnmodifiableListView) return _usersInChat;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_usersInChat);
 }
 
-ChatExpandUsersInChat _$ChatExpandUsersInChatFromJson(
-    Map<String, dynamic> json) {
-  return _ChatExpandUsersInChat.fromJson(json);
+
+/// Create a copy of Chat
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ChatCopyWith<_Chat> get copyWith => __$ChatCopyWithImpl<_Chat>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ChatToJson(this, );
 }
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Chat&&(identical(other.id, id) || other.id == id)&&(identical(other.lastSenderId, lastSenderId) || other.lastSenderId == lastSenderId)&&const DeepCollectionEquality().equals(other._users, _users)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.lastMessages, lastMessages) || other.lastMessages == lastMessages)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.expand, expand) || other.expand == expand)&&const DeepCollectionEquality().equals(other._usersInChat, _usersInChat));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,lastSenderId,const DeepCollectionEquality().hash(_users),lastMessage,lastMessages,created,updated,collectionId,collectionName,expand,const DeepCollectionEquality().hash(_usersInChat));
+
+@override
+String toString() {
+  return 'Chat(id: $id, lastSenderId: $lastSenderId, users: $users, lastMessage: $lastMessage, lastMessages: $lastMessages, created: $created, updated: $updated, collectionId: $collectionId, collectionName: $collectionName, expand: $expand, usersInChat: $usersInChat)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ChatCopyWith<$Res> implements $ChatCopyWith<$Res> {
+  factory _$ChatCopyWith(_Chat value, $Res Function(_Chat) _then) = __$ChatCopyWithImpl;
+@override @useResult
+$Res call({
+ String id, String lastSenderId, List<String> users, String lastMessage, LastMessages lastMessages, DateTime created, DateTime updated, String collectionId, String collectionName, ChatExpandUsersInChat? expand, List<UsersInChat> usersInChat
+});
+
+
+@override $LastMessagesCopyWith<$Res> get lastMessages;@override $ChatExpandUsersInChatCopyWith<$Res>? get expand;
+
+}
+/// @nodoc
+class __$ChatCopyWithImpl<$Res>
+    implements _$ChatCopyWith<$Res> {
+  __$ChatCopyWithImpl(this._self, this._then);
+
+  final _Chat _self;
+  final $Res Function(_Chat) _then;
+
+/// Create a copy of Chat
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? lastSenderId = null,Object? users = null,Object? lastMessage = null,Object? lastMessages = null,Object? created = null,Object? updated = null,Object? collectionId = null,Object? collectionName = null,Object? expand = freezed,Object? usersInChat = null,}) {
+  return _then(_Chat(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,lastSenderId: null == lastSenderId ? _self.lastSenderId : lastSenderId // ignore: cast_nullable_to_non_nullable
+as String,users: null == users ? _self._users : users // ignore: cast_nullable_to_non_nullable
+as List<String>,lastMessage: null == lastMessage ? _self.lastMessage : lastMessage // ignore: cast_nullable_to_non_nullable
+as String,lastMessages: null == lastMessages ? _self.lastMessages : lastMessages // ignore: cast_nullable_to_non_nullable
+as LastMessages,created: null == created ? _self.created : created // ignore: cast_nullable_to_non_nullable
+as DateTime,updated: null == updated ? _self.updated : updated // ignore: cast_nullable_to_non_nullable
+as DateTime,collectionId: null == collectionId ? _self.collectionId : collectionId // ignore: cast_nullable_to_non_nullable
+as String,collectionName: null == collectionName ? _self.collectionName : collectionName // ignore: cast_nullable_to_non_nullable
+as String,expand: freezed == expand ? _self.expand : expand // ignore: cast_nullable_to_non_nullable
+as ChatExpandUsersInChat?,usersInChat: null == usersInChat ? _self._usersInChat : usersInChat // ignore: cast_nullable_to_non_nullable
+as List<UsersInChat>,
+  ));
+}
+
+/// Create a copy of Chat
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LastMessagesCopyWith<$Res> get lastMessages {
+  
+  return $LastMessagesCopyWith<$Res>(_self.lastMessages, (value) {
+    return _then(_self.copyWith(lastMessages: value));
+  });
+}/// Create a copy of Chat
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ChatExpandUsersInChatCopyWith<$Res>? get expand {
+    if (_self.expand == null) {
+    return null;
+  }
+
+  return $ChatExpandUsersInChatCopyWith<$Res>(_self.expand!, (value) {
+    return _then(_self.copyWith(expand: value));
+  });
+}
+}
+
 
 /// @nodoc
 mixin _$ChatExpandUsersInChat {
-  List<UserShortest>? get users => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ChatExpandUsersInChatCopyWith<ChatExpandUsersInChat> get copyWith =>
-      throw _privateConstructorUsedError;
+ List<UserShortest>? get users;
+/// Create a copy of ChatExpandUsersInChat
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChatExpandUsersInChatCopyWith<ChatExpandUsersInChat> get copyWith => _$ChatExpandUsersInChatCopyWithImpl<ChatExpandUsersInChat>(this as ChatExpandUsersInChat, _$identity);
+
+  /// Serializes this ChatExpandUsersInChat to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatExpandUsersInChat&&const DeepCollectionEquality().equals(other.users, users));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(users));
+
+@override
+String toString() {
+  return 'ChatExpandUsersInChat(users: $users)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ChatExpandUsersInChatCopyWith<$Res> {
-  factory $ChatExpandUsersInChatCopyWith(ChatExpandUsersInChat value,
-          $Res Function(ChatExpandUsersInChat) then) =
-      _$ChatExpandUsersInChatCopyWithImpl<$Res, ChatExpandUsersInChat>;
-  @useResult
-  $Res call({List<UserShortest>? users});
-}
+abstract mixin class $ChatExpandUsersInChatCopyWith<$Res>  {
+  factory $ChatExpandUsersInChatCopyWith(ChatExpandUsersInChat value, $Res Function(ChatExpandUsersInChat) _then) = _$ChatExpandUsersInChatCopyWithImpl;
+@useResult
+$Res call({
+ List<UserShortest>? users
+});
 
+
+
+
+}
 /// @nodoc
-class _$ChatExpandUsersInChatCopyWithImpl<$Res,
-        $Val extends ChatExpandUsersInChat>
+class _$ChatExpandUsersInChatCopyWithImpl<$Res>
     implements $ChatExpandUsersInChatCopyWith<$Res> {
-  _$ChatExpandUsersInChatCopyWithImpl(this._value, this._then);
+  _$ChatExpandUsersInChatCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ChatExpandUsersInChat _self;
+  final $Res Function(ChatExpandUsersInChat) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? users = freezed,
-  }) {
-    return _then(_value.copyWith(
-      users: freezed == users
-          ? _value.users
-          : users // ignore: cast_nullable_to_non_nullable
-              as List<UserShortest>?,
-    ) as $Val);
-  }
+/// Create a copy of ChatExpandUsersInChat
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? users = freezed,}) {
+  return _then(_self.copyWith(
+users: freezed == users ? _self.users : users // ignore: cast_nullable_to_non_nullable
+as List<UserShortest>?,
+  ));
 }
 
-/// @nodoc
-abstract class _$$ChatExpandUsersInChatImplCopyWith<$Res>
-    implements $ChatExpandUsersInChatCopyWith<$Res> {
-  factory _$$ChatExpandUsersInChatImplCopyWith(
-          _$ChatExpandUsersInChatImpl value,
-          $Res Function(_$ChatExpandUsersInChatImpl) then) =
-      __$$ChatExpandUsersInChatImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({List<UserShortest>? users});
 }
 
-/// @nodoc
-class __$$ChatExpandUsersInChatImplCopyWithImpl<$Res>
-    extends _$ChatExpandUsersInChatCopyWithImpl<$Res,
-        _$ChatExpandUsersInChatImpl>
-    implements _$$ChatExpandUsersInChatImplCopyWith<$Res> {
-  __$$ChatExpandUsersInChatImplCopyWithImpl(_$ChatExpandUsersInChatImpl _value,
-      $Res Function(_$ChatExpandUsersInChatImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? users = freezed,
-  }) {
-    return _then(_$ChatExpandUsersInChatImpl(
-      users: freezed == users
-          ? _value._users
-          : users // ignore: cast_nullable_to_non_nullable
-              as List<UserShortest>?,
-    ));
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$ChatExpandUsersInChatImpl extends _ChatExpandUsersInChat {
-  const _$ChatExpandUsersInChatImpl({final List<UserShortest>? users})
-      : _users = users,
-        super._();
 
-  factory _$ChatExpandUsersInChatImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ChatExpandUsersInChatImplFromJson(json);
+class _ChatExpandUsersInChat extends ChatExpandUsersInChat {
+  const _ChatExpandUsersInChat({final  List<UserShortest>? users}): _users = users,super._();
+  factory _ChatExpandUsersInChat.fromJson(Map<String, dynamic> json) => _$ChatExpandUsersInChatFromJson(json);
 
-  final List<UserShortest>? _users;
-  @override
-  List<UserShortest>? get users {
-    final value = _users;
-    if (value == null) return null;
-    if (_users is EqualUnmodifiableListView) return _users;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  @override
-  String toString() {
-    return 'ChatExpandUsersInChat(users: $users)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ChatExpandUsersInChatImpl &&
-            const DeepCollectionEquality().equals(other._users, _users));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_users));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ChatExpandUsersInChatImplCopyWith<_$ChatExpandUsersInChatImpl>
-      get copyWith => __$$ChatExpandUsersInChatImplCopyWithImpl<
-          _$ChatExpandUsersInChatImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ChatExpandUsersInChatImplToJson(
-      this,
-    );
-  }
+ final  List<UserShortest>? _users;
+@override List<UserShortest>? get users {
+  final value = _users;
+  if (value == null) return null;
+  if (_users is EqualUnmodifiableListView) return _users;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
 }
 
-abstract class _ChatExpandUsersInChat extends ChatExpandUsersInChat {
-  const factory _ChatExpandUsersInChat({final List<UserShortest>? users}) =
-      _$ChatExpandUsersInChatImpl;
-  const _ChatExpandUsersInChat._() : super._();
 
-  factory _ChatExpandUsersInChat.fromJson(Map<String, dynamic> json) =
-      _$ChatExpandUsersInChatImpl.fromJson;
+/// Create a copy of ChatExpandUsersInChat
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ChatExpandUsersInChatCopyWith<_ChatExpandUsersInChat> get copyWith => __$ChatExpandUsersInChatCopyWithImpl<_ChatExpandUsersInChat>(this, _$identity);
 
-  @override
-  List<UserShortest>? get users;
-  @override
-  @JsonKey(ignore: true)
-  _$$ChatExpandUsersInChatImplCopyWith<_$ChatExpandUsersInChatImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+Map<String, dynamic> toJson() {
+  return _$ChatExpandUsersInChatToJson(this, );
 }
 
-LastMessages _$LastMessagesFromJson(Map<String, dynamic> json) {
-  return _LastMessages.fromJson(json);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatExpandUsersInChat&&const DeepCollectionEquality().equals(other._users, _users));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_users));
+
+@override
+String toString() {
+  return 'ChatExpandUsersInChat(users: $users)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ChatExpandUsersInChatCopyWith<$Res> implements $ChatExpandUsersInChatCopyWith<$Res> {
+  factory _$ChatExpandUsersInChatCopyWith(_ChatExpandUsersInChat value, $Res Function(_ChatExpandUsersInChat) _then) = __$ChatExpandUsersInChatCopyWithImpl;
+@override @useResult
+$Res call({
+ List<UserShortest>? users
+});
+
+
+
+
+}
+/// @nodoc
+class __$ChatExpandUsersInChatCopyWithImpl<$Res>
+    implements _$ChatExpandUsersInChatCopyWith<$Res> {
+  __$ChatExpandUsersInChatCopyWithImpl(this._self, this._then);
+
+  final _ChatExpandUsersInChat _self;
+  final $Res Function(_ChatExpandUsersInChat) _then;
+
+/// Create a copy of ChatExpandUsersInChat
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? users = freezed,}) {
+  return _then(_ChatExpandUsersInChat(
+users: freezed == users ? _self._users : users // ignore: cast_nullable_to_non_nullable
+as List<UserShortest>?,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$LastMessages {
-  String get sendByUserId => throw _privateConstructorUsedError;
-  List<String> get messages => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $LastMessagesCopyWith<LastMessages> get copyWith =>
-      throw _privateConstructorUsedError;
+ String get sendByUserId; List<String> get messages;
+/// Create a copy of LastMessages
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LastMessagesCopyWith<LastMessages> get copyWith => _$LastMessagesCopyWithImpl<LastMessages>(this as LastMessages, _$identity);
+
+  /// Serializes this LastMessages to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LastMessages&&(identical(other.sendByUserId, sendByUserId) || other.sendByUserId == sendByUserId)&&const DeepCollectionEquality().equals(other.messages, messages));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,sendByUserId,const DeepCollectionEquality().hash(messages));
+
+@override
+String toString() {
+  return 'LastMessages(sendByUserId: $sendByUserId, messages: $messages)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $LastMessagesCopyWith<$Res> {
-  factory $LastMessagesCopyWith(
-          LastMessages value, $Res Function(LastMessages) then) =
-      _$LastMessagesCopyWithImpl<$Res, LastMessages>;
-  @useResult
-  $Res call({String sendByUserId, List<String> messages});
-}
+abstract mixin class $LastMessagesCopyWith<$Res>  {
+  factory $LastMessagesCopyWith(LastMessages value, $Res Function(LastMessages) _then) = _$LastMessagesCopyWithImpl;
+@useResult
+$Res call({
+ String sendByUserId, List<String> messages
+});
 
+
+
+
+}
 /// @nodoc
-class _$LastMessagesCopyWithImpl<$Res, $Val extends LastMessages>
+class _$LastMessagesCopyWithImpl<$Res>
     implements $LastMessagesCopyWith<$Res> {
-  _$LastMessagesCopyWithImpl(this._value, this._then);
+  _$LastMessagesCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final LastMessages _self;
+  final $Res Function(LastMessages) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? sendByUserId = null,
-    Object? messages = null,
-  }) {
-    return _then(_value.copyWith(
-      sendByUserId: null == sendByUserId
-          ? _value.sendByUserId
-          : sendByUserId // ignore: cast_nullable_to_non_nullable
-              as String,
-      messages: null == messages
-          ? _value.messages
-          : messages // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
-  }
+/// Create a copy of LastMessages
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? sendByUserId = null,Object? messages = null,}) {
+  return _then(_self.copyWith(
+sendByUserId: null == sendByUserId ? _self.sendByUserId : sendByUserId // ignore: cast_nullable_to_non_nullable
+as String,messages: null == messages ? _self.messages : messages // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
 }
 
-/// @nodoc
-abstract class _$$LastMessagesImplCopyWith<$Res>
-    implements $LastMessagesCopyWith<$Res> {
-  factory _$$LastMessagesImplCopyWith(
-          _$LastMessagesImpl value, $Res Function(_$LastMessagesImpl) then) =
-      __$$LastMessagesImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String sendByUserId, List<String> messages});
 }
 
-/// @nodoc
-class __$$LastMessagesImplCopyWithImpl<$Res>
-    extends _$LastMessagesCopyWithImpl<$Res, _$LastMessagesImpl>
-    implements _$$LastMessagesImplCopyWith<$Res> {
-  __$$LastMessagesImplCopyWithImpl(
-      _$LastMessagesImpl _value, $Res Function(_$LastMessagesImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? sendByUserId = null,
-    Object? messages = null,
-  }) {
-    return _then(_$LastMessagesImpl(
-      sendByUserId: null == sendByUserId
-          ? _value.sendByUserId
-          : sendByUserId // ignore: cast_nullable_to_non_nullable
-              as String,
-      messages: null == messages
-          ? _value._messages
-          : messages // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ));
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$LastMessagesImpl extends _LastMessages {
-  const _$LastMessagesImpl(
-      {required this.sendByUserId, required final List<String> messages})
-      : _messages = messages,
-        super._();
 
-  factory _$LastMessagesImpl.fromJson(Map<String, dynamic> json) =>
-      _$$LastMessagesImplFromJson(json);
+class _LastMessages extends LastMessages {
+  const _LastMessages({required this.sendByUserId, required final  List<String> messages}): _messages = messages,super._();
+  factory _LastMessages.fromJson(Map<String, dynamic> json) => _$LastMessagesFromJson(json);
 
-  @override
-  final String sendByUserId;
-  final List<String> _messages;
-  @override
-  List<String> get messages {
-    if (_messages is EqualUnmodifiableListView) return _messages;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_messages);
-  }
-
-  @override
-  String toString() {
-    return 'LastMessages(sendByUserId: $sendByUserId, messages: $messages)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LastMessagesImpl &&
-            (identical(other.sendByUserId, sendByUserId) ||
-                other.sendByUserId == sendByUserId) &&
-            const DeepCollectionEquality().equals(other._messages, _messages));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, sendByUserId,
-      const DeepCollectionEquality().hash(_messages));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LastMessagesImplCopyWith<_$LastMessagesImpl> get copyWith =>
-      __$$LastMessagesImplCopyWithImpl<_$LastMessagesImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$LastMessagesImplToJson(
-      this,
-    );
-  }
+@override final  String sendByUserId;
+ final  List<String> _messages;
+@override List<String> get messages {
+  if (_messages is EqualUnmodifiableListView) return _messages;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_messages);
 }
 
-abstract class _LastMessages extends LastMessages {
-  const factory _LastMessages(
-      {required final String sendByUserId,
-      required final List<String> messages}) = _$LastMessagesImpl;
-  const _LastMessages._() : super._();
 
-  factory _LastMessages.fromJson(Map<String, dynamic> json) =
-      _$LastMessagesImpl.fromJson;
+/// Create a copy of LastMessages
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LastMessagesCopyWith<_LastMessages> get copyWith => __$LastMessagesCopyWithImpl<_LastMessages>(this, _$identity);
 
-  @override
-  String get sendByUserId;
-  @override
-  List<String> get messages;
-  @override
-  @JsonKey(ignore: true)
-  _$$LastMessagesImplCopyWith<_$LastMessagesImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+Map<String, dynamic> toJson() {
+  return _$LastMessagesToJson(this, );
 }
 
-UsersInChat _$UsersInChatFromJson(Map<String, dynamic> json) {
-  return _UsersInChat.fromJson(json);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LastMessages&&(identical(other.sendByUserId, sendByUserId) || other.sendByUserId == sendByUserId)&&const DeepCollectionEquality().equals(other._messages, _messages));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,sendByUserId,const DeepCollectionEquality().hash(_messages));
+
+@override
+String toString() {
+  return 'LastMessages(sendByUserId: $sendByUserId, messages: $messages)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$LastMessagesCopyWith<$Res> implements $LastMessagesCopyWith<$Res> {
+  factory _$LastMessagesCopyWith(_LastMessages value, $Res Function(_LastMessages) _then) = __$LastMessagesCopyWithImpl;
+@override @useResult
+$Res call({
+ String sendByUserId, List<String> messages
+});
+
+
+
+
+}
+/// @nodoc
+class __$LastMessagesCopyWithImpl<$Res>
+    implements _$LastMessagesCopyWith<$Res> {
+  __$LastMessagesCopyWithImpl(this._self, this._then);
+
+  final _LastMessages _self;
+  final $Res Function(_LastMessages) _then;
+
+/// Create a copy of LastMessages
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? sendByUserId = null,Object? messages = null,}) {
+  return _then(_LastMessages(
+sendByUserId: null == sendByUserId ? _self.sendByUserId : sendByUserId // ignore: cast_nullable_to_non_nullable
+as String,messages: null == messages ? _self._messages : messages // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$UsersInChat {
-  String get userId => throw _privateConstructorUsedError;
-  bool get isRead => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $UsersInChatCopyWith<UsersInChat> get copyWith =>
-      throw _privateConstructorUsedError;
+ String get userId; bool get isRead;
+/// Create a copy of UsersInChat
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UsersInChatCopyWith<UsersInChat> get copyWith => _$UsersInChatCopyWithImpl<UsersInChat>(this as UsersInChat, _$identity);
+
+  /// Serializes this UsersInChat to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UsersInChat&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.isRead, isRead) || other.isRead == isRead));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,userId,isRead);
+
+@override
+String toString() {
+  return 'UsersInChat(userId: $userId, isRead: $isRead)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $UsersInChatCopyWith<$Res> {
-  factory $UsersInChatCopyWith(
-          UsersInChat value, $Res Function(UsersInChat) then) =
-      _$UsersInChatCopyWithImpl<$Res, UsersInChat>;
-  @useResult
-  $Res call({String userId, bool isRead});
-}
+abstract mixin class $UsersInChatCopyWith<$Res>  {
+  factory $UsersInChatCopyWith(UsersInChat value, $Res Function(UsersInChat) _then) = _$UsersInChatCopyWithImpl;
+@useResult
+$Res call({
+ String userId, bool isRead
+});
 
+
+
+
+}
 /// @nodoc
-class _$UsersInChatCopyWithImpl<$Res, $Val extends UsersInChat>
+class _$UsersInChatCopyWithImpl<$Res>
     implements $UsersInChatCopyWith<$Res> {
-  _$UsersInChatCopyWithImpl(this._value, this._then);
+  _$UsersInChatCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final UsersInChat _self;
+  final $Res Function(UsersInChat) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = null,
-    Object? isRead = null,
-  }) {
-    return _then(_value.copyWith(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      isRead: null == isRead
-          ? _value.isRead
-          : isRead // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
+/// Create a copy of UsersInChat
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? isRead = null,}) {
+  return _then(_self.copyWith(
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,isRead: null == isRead ? _self.isRead : isRead // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-abstract class _$$UsersInChatImplCopyWith<$Res>
-    implements $UsersInChatCopyWith<$Res> {
-  factory _$$UsersInChatImplCopyWith(
-          _$UsersInChatImpl value, $Res Function(_$UsersInChatImpl) then) =
-      __$$UsersInChatImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String userId, bool isRead});
 }
 
-/// @nodoc
-class __$$UsersInChatImplCopyWithImpl<$Res>
-    extends _$UsersInChatCopyWithImpl<$Res, _$UsersInChatImpl>
-    implements _$$UsersInChatImplCopyWith<$Res> {
-  __$$UsersInChatImplCopyWithImpl(
-      _$UsersInChatImpl _value, $Res Function(_$UsersInChatImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = null,
-    Object? isRead = null,
-  }) {
-    return _then(_$UsersInChatImpl(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      isRead: null == isRead
-          ? _value.isRead
-          : isRead // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$UsersInChatImpl extends _UsersInChat {
-  const _$UsersInChatImpl({required this.userId, required this.isRead})
-      : super._();
 
-  factory _$UsersInChatImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UsersInChatImplFromJson(json);
+class _UsersInChat implements UsersInChat {
+  const _UsersInChat({required this.userId, required this.isRead});
+  factory _UsersInChat.fromJson(Map<String, dynamic> json) => _$UsersInChatFromJson(json);
 
-  @override
-  final String userId;
-  @override
-  final bool isRead;
+@override final  String userId;
+@override final  bool isRead;
 
-  @override
-  String toString() {
-    return 'UsersInChat(userId: $userId, isRead: $isRead)';
-  }
+/// Create a copy of UsersInChat
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$UsersInChatCopyWith<_UsersInChat> get copyWith => __$UsersInChatCopyWithImpl<_UsersInChat>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UsersInChatImpl &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.isRead, isRead) || other.isRead == isRead));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, userId, isRead);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UsersInChatImplCopyWith<_$UsersInChatImpl> get copyWith =>
-      __$$UsersInChatImplCopyWithImpl<_$UsersInChatImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UsersInChatImplToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$UsersInChatToJson(this, );
 }
 
-abstract class _UsersInChat extends UsersInChat {
-  const factory _UsersInChat(
-      {required final String userId,
-      required final bool isRead}) = _$UsersInChatImpl;
-  const _UsersInChat._() : super._();
-
-  factory _UsersInChat.fromJson(Map<String, dynamic> json) =
-      _$UsersInChatImpl.fromJson;
-
-  @override
-  String get userId;
-  @override
-  bool get isRead;
-  @override
-  @JsonKey(ignore: true)
-  _$$UsersInChatImplCopyWith<_$UsersInChatImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UsersInChat&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.isRead, isRead) || other.isRead == isRead));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,userId,isRead);
+
+@override
+String toString() {
+  return 'UsersInChat(userId: $userId, isRead: $isRead)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$UsersInChatCopyWith<$Res> implements $UsersInChatCopyWith<$Res> {
+  factory _$UsersInChatCopyWith(_UsersInChat value, $Res Function(_UsersInChat) _then) = __$UsersInChatCopyWithImpl;
+@override @useResult
+$Res call({
+ String userId, bool isRead
+});
+
+
+
+
+}
+/// @nodoc
+class __$UsersInChatCopyWithImpl<$Res>
+    implements _$UsersInChatCopyWith<$Res> {
+  __$UsersInChatCopyWithImpl(this._self, this._then);
+
+  final _UsersInChat _self;
+  final $Res Function(_UsersInChat) _then;
+
+/// Create a copy of UsersInChat
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? isRead = null,}) {
+  return _then(_UsersInChat(
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,isRead: null == isRead ? _self.isRead : isRead // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+// dart format on

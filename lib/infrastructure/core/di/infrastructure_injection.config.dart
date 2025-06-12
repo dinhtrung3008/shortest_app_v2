@@ -14,6 +14,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:pocketbase/pocketbase.dart' as _i169;
+import 'package:shortest_app/application/bloc/auth/auth_bloc.dart' as _i1033;
 import 'package:shortest_app/domain/repositories/auth/i_auth_repository.dart'
     as _i1061;
 import 'package:shortest_app/domain/repositories/chat/i_chat_repository.dart'
@@ -397,6 +398,14 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i433.IIncreaseLikesPostCount>(
       () => _i650.IncreaseLikesPostCountImpl(gh<_i803.IPostRemoteService>()),
+    );
+    gh.factory<_i1033.AuthBloc>(
+      () => _i1033.AuthBloc(
+        gh<_i1061.ISignInWithEmail>(),
+        gh<_i1061.ISignUpWithEmail>(),
+        gh<_i1061.IVerificationEmail>(),
+        gh<_i1061.ISignOut>(),
+      ),
     );
     gh.lazySingleton<_i197.IDecreaseFollowings>(
       () => _i323.DecrementFollowingsImpl(

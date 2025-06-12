@@ -6,9 +6,7 @@ part of 'comment_post.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CommentPostImpl _$$CommentPostImplFromJson(
-  Map<String, dynamic> json,
-) => _$CommentPostImpl(
+_CommentPost _$CommentPostFromJson(Map<String, dynamic> json) => _CommentPost(
   commentPostId: json['commentPostId'] as String,
   content: json['content'] as String,
   owner: json['owner'] as String,
@@ -25,7 +23,7 @@ _$CommentPostImpl _$$CommentPostImplFromJson(
           : CommentPostExpand.fromJson(json['expand'] as Map<String, dynamic>),
 );
 
-Map<String, dynamic> _$$CommentPostImplToJson(_$CommentPostImpl instance) =>
+Map<String, dynamic> _$CommentPostToJson(_CommentPost instance) =>
     <String, dynamic>{
       'commentPostId': instance.commentPostId,
       'content': instance.content,
@@ -39,22 +37,19 @@ Map<String, dynamic> _$$CommentPostImplToJson(_$CommentPostImpl instance) =>
       'expand': instance.expand,
     };
 
-_$CommentPostExpandImpl _$$CommentPostExpandImplFromJson(
-  Map<String, dynamic> json,
-) => _$CommentPostExpandImpl(
-  owner:
-      json['owner'] == null
-          ? null
-          : UserShortest.fromJson(json['owner'] as Map<String, dynamic>),
-  postOwner:
-      json['postOwner'] == null
-          ? null
-          : PostShortest.fromJson(json['postOwner'] as Map<String, dynamic>),
-);
+_CommentPostExpand _$CommentPostExpandFromJson(Map<String, dynamic> json) =>
+    _CommentPostExpand(
+      owner:
+          json['owner'] == null
+              ? null
+              : UserShortest.fromJson(json['owner'] as Map<String, dynamic>),
+      postOwner:
+          json['postOwner'] == null
+              ? null
+              : PostShortest.fromJson(
+                json['postOwner'] as Map<String, dynamic>,
+              ),
+    );
 
-Map<String, dynamic> _$$CommentPostExpandImplToJson(
-  _$CommentPostExpandImpl instance,
-) => <String, dynamic>{
-  'owner': instance.owner,
-  'postOwner': instance.postOwner,
-};
+Map<String, dynamic> _$CommentPostExpandToJson(_CommentPostExpand instance) =>
+    <String, dynamic>{'owner': instance.owner, 'postOwner': instance.postOwner};

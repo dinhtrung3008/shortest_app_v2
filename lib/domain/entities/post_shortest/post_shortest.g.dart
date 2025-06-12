@@ -6,9 +6,9 @@ part of 'post_shortest.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PostShortestImpl _$$PostShortestImplFromJson(
+_PostShortest _$PostShortestFromJson(
   Map<String, dynamic> json,
-) => _$PostShortestImpl(
+) => _PostShortest(
   postId: json['postId'] as String,
   mediaUrls:
       (json['mediaUrls'] as List<dynamic>?)?.map((e) => e as String).toList(),
@@ -36,7 +36,7 @@ _$PostShortestImpl _$$PostShortestImplFromJson(
           ),
 );
 
-Map<String, dynamic> _$$PostShortestImplToJson(_$PostShortestImpl instance) =>
+Map<String, dynamic> _$PostShortestToJson(_PostShortest instance) =>
     <String, dynamic>{
       'postId': instance.postId,
       'mediaUrls': instance.mediaUrls,
@@ -69,15 +69,15 @@ const _$TypePostEnumEnumMap = {
   TypePostEnum.shared: 'shared',
 };
 
-_$PostShortestOwnerExpandImpl _$$PostShortestOwnerExpandImplFromJson(
+_PostShortestOwnerExpand _$PostShortestOwnerExpandFromJson(
   Map<String, dynamic> json,
-) => _$PostShortestOwnerExpandImpl(
+) => _PostShortestOwnerExpand(
   owner:
       json['owner'] == null
           ? null
           : UserShortest.fromJson(json['owner'] as Map<String, dynamic>),
 );
 
-Map<String, dynamic> _$$PostShortestOwnerExpandImplToJson(
-  _$PostShortestOwnerExpandImpl instance,
+Map<String, dynamic> _$PostShortestOwnerExpandToJson(
+  _PostShortestOwnerExpand instance,
 ) => <String, dynamic>{'owner': instance.owner};

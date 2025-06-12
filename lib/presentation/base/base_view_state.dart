@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:shortest_app/presentation/base/base_view.dart';
 
 import 'base_presenter.dart';
-import 'base_widget.dart';
+import 'base_view.dart';
 
-abstract class BaseWidgetState<T extends BaseWidget<P>, P extends BasePresenter> extends State<T> implements BaseView {
+abstract class BaseViewState<T extends StatefulWidget, P extends BasePresenter>
+    extends State<T>
+    implements BaseView {
   late P presenter;
   ValueNotifier<bool> isLoadingNotifier = ValueNotifier<bool>(false);
+
+  P createPresenter();
 
   @override
   void initState() {
     super.initState();
-    presenter = widget.createPresenter();
+    presenter = createPresenter();
     presenter.attachView(this as dynamic);
   }
 
@@ -35,14 +38,18 @@ abstract class BaseWidgetState<T extends BaseWidget<P>, P extends BasePresenter>
   @override
   void showError(String message) {
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message), backgroundColor: Colors.red));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message), backgroundColor: Colors.red),
+      );
     }
   }
 
   @override
   void showSuccess(String message) {
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message), backgroundColor: Colors.green));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message), backgroundColor: Colors.green),
+      );
     }
   }
 
@@ -64,7 +71,10 @@ abstract class BaseWidgetState<T extends BaseWidget<P>, P extends BasePresenter>
           valueListenable: isLoadingNotifier,
           builder: (context, isLoading, child) {
             if (isLoading) {
-              return Container(color: Colors.black26, child: buildLoadingWidget());
+              return Container(
+                color: Colors.black26,
+                child: buildLoadingWidget(),
+              );
             }
             return const SizedBox.shrink();
           },

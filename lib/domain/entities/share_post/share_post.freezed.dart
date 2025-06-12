@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,521 +10,371 @@ part of 'share_post.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-SharePost _$SharePostFromJson(Map<String, dynamic> json) {
-  return _SharePost.fromJson(json);
-}
 
 /// @nodoc
 mixin _$SharePost {
-  String? get sharePostId => throw _privateConstructorUsedError;
-  String? get owner => throw _privateConstructorUsedError;
-  String? get postOwner => throw _privateConstructorUsedError;
-  DateTime? get created => throw _privateConstructorUsedError;
-  DateTime? get updated => throw _privateConstructorUsedError;
-  String? get collectionId => throw _privateConstructorUsedError;
-  String? get collectionName => throw _privateConstructorUsedError;
-  SharePostExpand? get expand => throw _privateConstructorUsedError;
-  int? get likesCount => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $SharePostCopyWith<SharePost> get copyWith =>
-      throw _privateConstructorUsedError;
+ String? get sharePostId; String? get owner; String? get postOwner; DateTime? get created; DateTime? get updated; String? get collectionId; String? get collectionName; SharePostExpand? get expand; int? get likesCount;
+/// Create a copy of SharePost
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SharePostCopyWith<SharePost> get copyWith => _$SharePostCopyWithImpl<SharePost>(this as SharePost, _$identity);
+
+  /// Serializes this SharePost to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SharePost&&(identical(other.sharePostId, sharePostId) || other.sharePostId == sharePostId)&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.expand, expand) || other.expand == expand)&&(identical(other.likesCount, likesCount) || other.likesCount == likesCount));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,sharePostId,owner,postOwner,created,updated,collectionId,collectionName,expand,likesCount);
+
+@override
+String toString() {
+  return 'SharePost(sharePostId: $sharePostId, owner: $owner, postOwner: $postOwner, created: $created, updated: $updated, collectionId: $collectionId, collectionName: $collectionName, expand: $expand, likesCount: $likesCount)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $SharePostCopyWith<$Res> {
-  factory $SharePostCopyWith(SharePost value, $Res Function(SharePost) then) =
-      _$SharePostCopyWithImpl<$Res, SharePost>;
-  @useResult
-  $Res call(
-      {String? sharePostId,
-      String? owner,
-      String? postOwner,
-      DateTime? created,
-      DateTime? updated,
-      String? collectionId,
-      String? collectionName,
-      SharePostExpand? expand,
-      int? likesCount});
+abstract mixin class $SharePostCopyWith<$Res>  {
+  factory $SharePostCopyWith(SharePost value, $Res Function(SharePost) _then) = _$SharePostCopyWithImpl;
+@useResult
+$Res call({
+ String? sharePostId, String? owner, String? postOwner, DateTime? created, DateTime? updated, String? collectionId, String? collectionName, SharePostExpand? expand, int? likesCount
+});
 
-  $SharePostExpandCopyWith<$Res>? get expand;
+
+$SharePostExpandCopyWith<$Res>? get expand;
+
 }
-
 /// @nodoc
-class _$SharePostCopyWithImpl<$Res, $Val extends SharePost>
+class _$SharePostCopyWithImpl<$Res>
     implements $SharePostCopyWith<$Res> {
-  _$SharePostCopyWithImpl(this._value, this._then);
+  _$SharePostCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final SharePost _self;
+  final $Res Function(SharePost) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? sharePostId = freezed,
-    Object? owner = freezed,
-    Object? postOwner = freezed,
-    Object? created = freezed,
-    Object? updated = freezed,
-    Object? collectionId = freezed,
-    Object? collectionName = freezed,
-    Object? expand = freezed,
-    Object? likesCount = freezed,
-  }) {
-    return _then(_value.copyWith(
-      sharePostId: freezed == sharePostId
-          ? _value.sharePostId
-          : sharePostId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      owner: freezed == owner
-          ? _value.owner
-          : owner // ignore: cast_nullable_to_non_nullable
-              as String?,
-      postOwner: freezed == postOwner
-          ? _value.postOwner
-          : postOwner // ignore: cast_nullable_to_non_nullable
-              as String?,
-      created: freezed == created
-          ? _value.created
-          : created // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updated: freezed == updated
-          ? _value.updated
-          : updated // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      collectionId: freezed == collectionId
-          ? _value.collectionId
-          : collectionId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      collectionName: freezed == collectionName
-          ? _value.collectionName
-          : collectionName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      expand: freezed == expand
-          ? _value.expand
-          : expand // ignore: cast_nullable_to_non_nullable
-              as SharePostExpand?,
-      likesCount: freezed == likesCount
-          ? _value.likesCount
-          : likesCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ) as $Val);
+/// Create a copy of SharePost
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? sharePostId = freezed,Object? owner = freezed,Object? postOwner = freezed,Object? created = freezed,Object? updated = freezed,Object? collectionId = freezed,Object? collectionName = freezed,Object? expand = freezed,Object? likesCount = freezed,}) {
+  return _then(_self.copyWith(
+sharePostId: freezed == sharePostId ? _self.sharePostId : sharePostId // ignore: cast_nullable_to_non_nullable
+as String?,owner: freezed == owner ? _self.owner : owner // ignore: cast_nullable_to_non_nullable
+as String?,postOwner: freezed == postOwner ? _self.postOwner : postOwner // ignore: cast_nullable_to_non_nullable
+as String?,created: freezed == created ? _self.created : created // ignore: cast_nullable_to_non_nullable
+as DateTime?,updated: freezed == updated ? _self.updated : updated // ignore: cast_nullable_to_non_nullable
+as DateTime?,collectionId: freezed == collectionId ? _self.collectionId : collectionId // ignore: cast_nullable_to_non_nullable
+as String?,collectionName: freezed == collectionName ? _self.collectionName : collectionName // ignore: cast_nullable_to_non_nullable
+as String?,expand: freezed == expand ? _self.expand : expand // ignore: cast_nullable_to_non_nullable
+as SharePostExpand?,likesCount: freezed == likesCount ? _self.likesCount : likesCount // ignore: cast_nullable_to_non_nullable
+as int?,
+  ));
+}
+/// Create a copy of SharePost
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SharePostExpandCopyWith<$Res>? get expand {
+    if (_self.expand == null) {
+    return null;
   }
 
-  @override
-  @pragma('vm:prefer-inline')
-  $SharePostExpandCopyWith<$Res>? get expand {
-    if (_value.expand == null) {
-      return null;
-    }
-
-    return $SharePostExpandCopyWith<$Res>(_value.expand!, (value) {
-      return _then(_value.copyWith(expand: value) as $Val);
-    });
-  }
+  return $SharePostExpandCopyWith<$Res>(_self.expand!, (value) {
+    return _then(_self.copyWith(expand: value));
+  });
+}
 }
 
-/// @nodoc
-abstract class _$$SharePostImplCopyWith<$Res>
-    implements $SharePostCopyWith<$Res> {
-  factory _$$SharePostImplCopyWith(
-          _$SharePostImpl value, $Res Function(_$SharePostImpl) then) =
-      __$$SharePostImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? sharePostId,
-      String? owner,
-      String? postOwner,
-      DateTime? created,
-      DateTime? updated,
-      String? collectionId,
-      String? collectionName,
-      SharePostExpand? expand,
-      int? likesCount});
-
-  @override
-  $SharePostExpandCopyWith<$Res>? get expand;
-}
-
-/// @nodoc
-class __$$SharePostImplCopyWithImpl<$Res>
-    extends _$SharePostCopyWithImpl<$Res, _$SharePostImpl>
-    implements _$$SharePostImplCopyWith<$Res> {
-  __$$SharePostImplCopyWithImpl(
-      _$SharePostImpl _value, $Res Function(_$SharePostImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? sharePostId = freezed,
-    Object? owner = freezed,
-    Object? postOwner = freezed,
-    Object? created = freezed,
-    Object? updated = freezed,
-    Object? collectionId = freezed,
-    Object? collectionName = freezed,
-    Object? expand = freezed,
-    Object? likesCount = freezed,
-  }) {
-    return _then(_$SharePostImpl(
-      sharePostId: freezed == sharePostId
-          ? _value.sharePostId
-          : sharePostId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      owner: freezed == owner
-          ? _value.owner
-          : owner // ignore: cast_nullable_to_non_nullable
-              as String?,
-      postOwner: freezed == postOwner
-          ? _value.postOwner
-          : postOwner // ignore: cast_nullable_to_non_nullable
-              as String?,
-      created: freezed == created
-          ? _value.created
-          : created // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updated: freezed == updated
-          ? _value.updated
-          : updated // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      collectionId: freezed == collectionId
-          ? _value.collectionId
-          : collectionId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      collectionName: freezed == collectionName
-          ? _value.collectionName
-          : collectionName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      expand: freezed == expand
-          ? _value.expand
-          : expand // ignore: cast_nullable_to_non_nullable
-              as SharePostExpand?,
-      likesCount: freezed == likesCount
-          ? _value.likesCount
-          : likesCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$SharePostImpl extends _SharePost {
-  const _$SharePostImpl(
-      {this.sharePostId,
-      this.owner,
-      this.postOwner,
-      this.created,
-      this.updated,
-      this.collectionId,
-      this.collectionName,
-      this.expand,
-      this.likesCount = 0})
-      : super._();
 
-  factory _$SharePostImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SharePostImplFromJson(json);
+class _SharePost extends SharePost {
+  const _SharePost({this.sharePostId, this.owner, this.postOwner, this.created, this.updated, this.collectionId, this.collectionName, this.expand, this.likesCount = 0}): super._();
+  factory _SharePost.fromJson(Map<String, dynamic> json) => _$SharePostFromJson(json);
 
-  @override
-  final String? sharePostId;
-  @override
-  final String? owner;
-  @override
-  final String? postOwner;
-  @override
-  final DateTime? created;
-  @override
-  final DateTime? updated;
-  @override
-  final String? collectionId;
-  @override
-  final String? collectionName;
-  @override
-  final SharePostExpand? expand;
-  @override
-  @JsonKey()
-  final int? likesCount;
+@override final  String? sharePostId;
+@override final  String? owner;
+@override final  String? postOwner;
+@override final  DateTime? created;
+@override final  DateTime? updated;
+@override final  String? collectionId;
+@override final  String? collectionName;
+@override final  SharePostExpand? expand;
+@override@JsonKey() final  int? likesCount;
 
-  @override
-  String toString() {
-    return 'SharePost(sharePostId: $sharePostId, owner: $owner, postOwner: $postOwner, created: $created, updated: $updated, collectionId: $collectionId, collectionName: $collectionName, expand: $expand, likesCount: $likesCount)';
-  }
+/// Create a copy of SharePost
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SharePostCopyWith<_SharePost> get copyWith => __$SharePostCopyWithImpl<_SharePost>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SharePostImpl &&
-            (identical(other.sharePostId, sharePostId) ||
-                other.sharePostId == sharePostId) &&
-            (identical(other.owner, owner) || other.owner == owner) &&
-            (identical(other.postOwner, postOwner) ||
-                other.postOwner == postOwner) &&
-            (identical(other.created, created) || other.created == created) &&
-            (identical(other.updated, updated) || other.updated == updated) &&
-            (identical(other.collectionId, collectionId) ||
-                other.collectionId == collectionId) &&
-            (identical(other.collectionName, collectionName) ||
-                other.collectionName == collectionName) &&
-            (identical(other.expand, expand) || other.expand == expand) &&
-            (identical(other.likesCount, likesCount) ||
-                other.likesCount == likesCount));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, sharePostId, owner, postOwner,
-      created, updated, collectionId, collectionName, expand, likesCount);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SharePostImplCopyWith<_$SharePostImpl> get copyWith =>
-      __$$SharePostImplCopyWithImpl<_$SharePostImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SharePostImplToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$SharePostToJson(this, );
 }
 
-abstract class _SharePost extends SharePost {
-  const factory _SharePost(
-      {final String? sharePostId,
-      final String? owner,
-      final String? postOwner,
-      final DateTime? created,
-      final DateTime? updated,
-      final String? collectionId,
-      final String? collectionName,
-      final SharePostExpand? expand,
-      final int? likesCount}) = _$SharePostImpl;
-  const _SharePost._() : super._();
-
-  factory _SharePost.fromJson(Map<String, dynamic> json) =
-      _$SharePostImpl.fromJson;
-
-  @override
-  String? get sharePostId;
-  @override
-  String? get owner;
-  @override
-  String? get postOwner;
-  @override
-  DateTime? get created;
-  @override
-  DateTime? get updated;
-  @override
-  String? get collectionId;
-  @override
-  String? get collectionName;
-  @override
-  SharePostExpand? get expand;
-  @override
-  int? get likesCount;
-  @override
-  @JsonKey(ignore: true)
-  _$$SharePostImplCopyWith<_$SharePostImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SharePost&&(identical(other.sharePostId, sharePostId) || other.sharePostId == sharePostId)&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.expand, expand) || other.expand == expand)&&(identical(other.likesCount, likesCount) || other.likesCount == likesCount));
 }
 
-SharePostExpand _$SharePostExpandFromJson(Map<String, dynamic> json) {
-  return _SharePostExpand.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,sharePostId,owner,postOwner,created,updated,collectionId,collectionName,expand,likesCount);
+
+@override
+String toString() {
+  return 'SharePost(sharePostId: $sharePostId, owner: $owner, postOwner: $postOwner, created: $created, updated: $updated, collectionId: $collectionId, collectionName: $collectionName, expand: $expand, likesCount: $likesCount)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SharePostCopyWith<$Res> implements $SharePostCopyWith<$Res> {
+  factory _$SharePostCopyWith(_SharePost value, $Res Function(_SharePost) _then) = __$SharePostCopyWithImpl;
+@override @useResult
+$Res call({
+ String? sharePostId, String? owner, String? postOwner, DateTime? created, DateTime? updated, String? collectionId, String? collectionName, SharePostExpand? expand, int? likesCount
+});
+
+
+@override $SharePostExpandCopyWith<$Res>? get expand;
+
+}
+/// @nodoc
+class __$SharePostCopyWithImpl<$Res>
+    implements _$SharePostCopyWith<$Res> {
+  __$SharePostCopyWithImpl(this._self, this._then);
+
+  final _SharePost _self;
+  final $Res Function(_SharePost) _then;
+
+/// Create a copy of SharePost
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? sharePostId = freezed,Object? owner = freezed,Object? postOwner = freezed,Object? created = freezed,Object? updated = freezed,Object? collectionId = freezed,Object? collectionName = freezed,Object? expand = freezed,Object? likesCount = freezed,}) {
+  return _then(_SharePost(
+sharePostId: freezed == sharePostId ? _self.sharePostId : sharePostId // ignore: cast_nullable_to_non_nullable
+as String?,owner: freezed == owner ? _self.owner : owner // ignore: cast_nullable_to_non_nullable
+as String?,postOwner: freezed == postOwner ? _self.postOwner : postOwner // ignore: cast_nullable_to_non_nullable
+as String?,created: freezed == created ? _self.created : created // ignore: cast_nullable_to_non_nullable
+as DateTime?,updated: freezed == updated ? _self.updated : updated // ignore: cast_nullable_to_non_nullable
+as DateTime?,collectionId: freezed == collectionId ? _self.collectionId : collectionId // ignore: cast_nullable_to_non_nullable
+as String?,collectionName: freezed == collectionName ? _self.collectionName : collectionName // ignore: cast_nullable_to_non_nullable
+as String?,expand: freezed == expand ? _self.expand : expand // ignore: cast_nullable_to_non_nullable
+as SharePostExpand?,likesCount: freezed == likesCount ? _self.likesCount : likesCount // ignore: cast_nullable_to_non_nullable
+as int?,
+  ));
+}
+
+/// Create a copy of SharePost
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SharePostExpandCopyWith<$Res>? get expand {
+    if (_self.expand == null) {
+    return null;
+  }
+
+  return $SharePostExpandCopyWith<$Res>(_self.expand!, (value) {
+    return _then(_self.copyWith(expand: value));
+  });
+}
+}
+
 
 /// @nodoc
 mixin _$SharePostExpand {
-  UserShortest? get owner => throw _privateConstructorUsedError;
-  PostShortest? get postOwner => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $SharePostExpandCopyWith<SharePostExpand> get copyWith =>
-      throw _privateConstructorUsedError;
+ UserShortest? get owner; PostShortest? get postOwner;
+/// Create a copy of SharePostExpand
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SharePostExpandCopyWith<SharePostExpand> get copyWith => _$SharePostExpandCopyWithImpl<SharePostExpand>(this as SharePostExpand, _$identity);
+
+  /// Serializes this SharePostExpand to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SharePostExpand&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,owner,postOwner);
+
+@override
+String toString() {
+  return 'SharePostExpand(owner: $owner, postOwner: $postOwner)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $SharePostExpandCopyWith<$Res> {
-  factory $SharePostExpandCopyWith(
-          SharePostExpand value, $Res Function(SharePostExpand) then) =
-      _$SharePostExpandCopyWithImpl<$Res, SharePostExpand>;
-  @useResult
-  $Res call({UserShortest? owner, PostShortest? postOwner});
+abstract mixin class $SharePostExpandCopyWith<$Res>  {
+  factory $SharePostExpandCopyWith(SharePostExpand value, $Res Function(SharePostExpand) _then) = _$SharePostExpandCopyWithImpl;
+@useResult
+$Res call({
+ UserShortest? owner, PostShortest? postOwner
+});
 
-  $UserShortestCopyWith<$Res>? get owner;
-  $PostShortestCopyWith<$Res>? get postOwner;
+
+$UserShortestCopyWith<$Res>? get owner;$PostShortestCopyWith<$Res>? get postOwner;
+
 }
-
 /// @nodoc
-class _$SharePostExpandCopyWithImpl<$Res, $Val extends SharePostExpand>
+class _$SharePostExpandCopyWithImpl<$Res>
     implements $SharePostExpandCopyWith<$Res> {
-  _$SharePostExpandCopyWithImpl(this._value, this._then);
+  _$SharePostExpandCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final SharePostExpand _self;
+  final $Res Function(SharePostExpand) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? owner = freezed,
-    Object? postOwner = freezed,
-  }) {
-    return _then(_value.copyWith(
-      owner: freezed == owner
-          ? _value.owner
-          : owner // ignore: cast_nullable_to_non_nullable
-              as UserShortest?,
-      postOwner: freezed == postOwner
-          ? _value.postOwner
-          : postOwner // ignore: cast_nullable_to_non_nullable
-              as PostShortest?,
-    ) as $Val);
+/// Create a copy of SharePostExpand
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? owner = freezed,Object? postOwner = freezed,}) {
+  return _then(_self.copyWith(
+owner: freezed == owner ? _self.owner : owner // ignore: cast_nullable_to_non_nullable
+as UserShortest?,postOwner: freezed == postOwner ? _self.postOwner : postOwner // ignore: cast_nullable_to_non_nullable
+as PostShortest?,
+  ));
+}
+/// Create a copy of SharePostExpand
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UserShortestCopyWith<$Res>? get owner {
+    if (_self.owner == null) {
+    return null;
   }
 
-  @override
-  @pragma('vm:prefer-inline')
-  $UserShortestCopyWith<$Res>? get owner {
-    if (_value.owner == null) {
-      return null;
-    }
-
-    return $UserShortestCopyWith<$Res>(_value.owner!, (value) {
-      return _then(_value.copyWith(owner: value) as $Val);
-    });
+  return $UserShortestCopyWith<$Res>(_self.owner!, (value) {
+    return _then(_self.copyWith(owner: value));
+  });
+}/// Create a copy of SharePostExpand
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PostShortestCopyWith<$Res>? get postOwner {
+    if (_self.postOwner == null) {
+    return null;
   }
 
-  @override
-  @pragma('vm:prefer-inline')
-  $PostShortestCopyWith<$Res>? get postOwner {
-    if (_value.postOwner == null) {
-      return null;
-    }
-
-    return $PostShortestCopyWith<$Res>(_value.postOwner!, (value) {
-      return _then(_value.copyWith(postOwner: value) as $Val);
-    });
-  }
+  return $PostShortestCopyWith<$Res>(_self.postOwner!, (value) {
+    return _then(_self.copyWith(postOwner: value));
+  });
+}
 }
 
-/// @nodoc
-abstract class _$$SharePostExpandImplCopyWith<$Res>
-    implements $SharePostExpandCopyWith<$Res> {
-  factory _$$SharePostExpandImplCopyWith(_$SharePostExpandImpl value,
-          $Res Function(_$SharePostExpandImpl) then) =
-      __$$SharePostExpandImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({UserShortest? owner, PostShortest? postOwner});
-
-  @override
-  $UserShortestCopyWith<$Res>? get owner;
-  @override
-  $PostShortestCopyWith<$Res>? get postOwner;
-}
-
-/// @nodoc
-class __$$SharePostExpandImplCopyWithImpl<$Res>
-    extends _$SharePostExpandCopyWithImpl<$Res, _$SharePostExpandImpl>
-    implements _$$SharePostExpandImplCopyWith<$Res> {
-  __$$SharePostExpandImplCopyWithImpl(
-      _$SharePostExpandImpl _value, $Res Function(_$SharePostExpandImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? owner = freezed,
-    Object? postOwner = freezed,
-  }) {
-    return _then(_$SharePostExpandImpl(
-      owner: freezed == owner
-          ? _value.owner
-          : owner // ignore: cast_nullable_to_non_nullable
-              as UserShortest?,
-      postOwner: freezed == postOwner
-          ? _value.postOwner
-          : postOwner // ignore: cast_nullable_to_non_nullable
-              as PostShortest?,
-    ));
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$SharePostExpandImpl extends _SharePostExpand {
-  const _$SharePostExpandImpl({this.owner, this.postOwner}) : super._();
 
-  factory _$SharePostExpandImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SharePostExpandImplFromJson(json);
+class _SharePostExpand extends SharePostExpand {
+  const _SharePostExpand({this.owner, this.postOwner}): super._();
+  factory _SharePostExpand.fromJson(Map<String, dynamic> json) => _$SharePostExpandFromJson(json);
 
-  @override
-  final UserShortest? owner;
-  @override
-  final PostShortest? postOwner;
+@override final  UserShortest? owner;
+@override final  PostShortest? postOwner;
 
-  @override
-  String toString() {
-    return 'SharePostExpand(owner: $owner, postOwner: $postOwner)';
-  }
+/// Create a copy of SharePostExpand
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SharePostExpandCopyWith<_SharePostExpand> get copyWith => __$SharePostExpandCopyWithImpl<_SharePostExpand>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SharePostExpandImpl &&
-            (identical(other.owner, owner) || other.owner == owner) &&
-            (identical(other.postOwner, postOwner) ||
-                other.postOwner == postOwner));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, owner, postOwner);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SharePostExpandImplCopyWith<_$SharePostExpandImpl> get copyWith =>
-      __$$SharePostExpandImplCopyWithImpl<_$SharePostExpandImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SharePostExpandImplToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$SharePostExpandToJson(this, );
 }
 
-abstract class _SharePostExpand extends SharePostExpand {
-  const factory _SharePostExpand(
-      {final UserShortest? owner,
-      final PostShortest? postOwner}) = _$SharePostExpandImpl;
-  const _SharePostExpand._() : super._();
-
-  factory _SharePostExpand.fromJson(Map<String, dynamic> json) =
-      _$SharePostExpandImpl.fromJson;
-
-  @override
-  UserShortest? get owner;
-  @override
-  PostShortest? get postOwner;
-  @override
-  @JsonKey(ignore: true)
-  _$$SharePostExpandImplCopyWith<_$SharePostExpandImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SharePostExpand&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,owner,postOwner);
+
+@override
+String toString() {
+  return 'SharePostExpand(owner: $owner, postOwner: $postOwner)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SharePostExpandCopyWith<$Res> implements $SharePostExpandCopyWith<$Res> {
+  factory _$SharePostExpandCopyWith(_SharePostExpand value, $Res Function(_SharePostExpand) _then) = __$SharePostExpandCopyWithImpl;
+@override @useResult
+$Res call({
+ UserShortest? owner, PostShortest? postOwner
+});
+
+
+@override $UserShortestCopyWith<$Res>? get owner;@override $PostShortestCopyWith<$Res>? get postOwner;
+
+}
+/// @nodoc
+class __$SharePostExpandCopyWithImpl<$Res>
+    implements _$SharePostExpandCopyWith<$Res> {
+  __$SharePostExpandCopyWithImpl(this._self, this._then);
+
+  final _SharePostExpand _self;
+  final $Res Function(_SharePostExpand) _then;
+
+/// Create a copy of SharePostExpand
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? owner = freezed,Object? postOwner = freezed,}) {
+  return _then(_SharePostExpand(
+owner: freezed == owner ? _self.owner : owner // ignore: cast_nullable_to_non_nullable
+as UserShortest?,postOwner: freezed == postOwner ? _self.postOwner : postOwner // ignore: cast_nullable_to_non_nullable
+as PostShortest?,
+  ));
+}
+
+/// Create a copy of SharePostExpand
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UserShortestCopyWith<$Res>? get owner {
+    if (_self.owner == null) {
+    return null;
+  }
+
+  return $UserShortestCopyWith<$Res>(_self.owner!, (value) {
+    return _then(_self.copyWith(owner: value));
+  });
+}/// Create a copy of SharePostExpand
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PostShortestCopyWith<$Res>? get postOwner {
+    if (_self.postOwner == null) {
+    return null;
+  }
+
+  return $PostShortestCopyWith<$Res>(_self.postOwner!, (value) {
+    return _then(_self.copyWith(postOwner: value));
+  });
+}
+}
+
+// dart format on

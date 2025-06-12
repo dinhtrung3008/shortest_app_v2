@@ -7,7 +7,7 @@ part 'like_comment.freezed.dart';
 part 'like_comment.g.dart';
 
 @freezed
-class LikeComment with _$LikeComment {
+abstract class LikeComment with _$LikeComment {
   const LikeComment._();
 
   const factory LikeComment({
@@ -21,14 +21,19 @@ class LikeComment with _$LikeComment {
     LikeCommentExpand? expand,
   }) = _LikeComment;
 
-  factory LikeComment.fromJson(Map<String, dynamic> json) => _$LikeCommentFromJson(json);
+  factory LikeComment.fromJson(Map<String, dynamic> json) =>
+      _$LikeCommentFromJson(json);
 }
 
 @freezed
-class LikeCommentExpand with _$LikeCommentExpand {
+abstract class LikeCommentExpand with _$LikeCommentExpand {
   const LikeCommentExpand._();
 
-  const factory LikeCommentExpand({UserShortest? owner, CommentPost? commentOwner}) = _LikeCommentExpand;
+  const factory LikeCommentExpand({
+    UserShortest? owner,
+    CommentPost? commentOwner,
+  }) = _LikeCommentExpand;
 
-  factory LikeCommentExpand.fromJson(Map<String, dynamic> json) => _$LikeCommentExpandFromJson(json);
+  factory LikeCommentExpand.fromJson(Map<String, dynamic> json) =>
+      _$LikeCommentExpandFromJson(json);
 }

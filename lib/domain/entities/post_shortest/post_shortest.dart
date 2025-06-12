@@ -8,7 +8,7 @@ part 'post_shortest.freezed.dart';
 part 'post_shortest.g.dart';
 
 @freezed
-class PostShortest with _$PostShortest {
+abstract class PostShortest with _$PostShortest {
   const PostShortest._();
 
   const factory PostShortest({
@@ -34,16 +34,17 @@ class PostShortest with _$PostShortest {
 
   bool mediasAreNotEmpty() => mediaUrls != null && mediaUrls!.isNotEmpty;
 
-  factory PostShortest.fromJson(Map<String, dynamic> json) => _$PostShortestFromJson(json);
+  factory PostShortest.fromJson(Map<String, dynamic> json) =>
+      _$PostShortestFromJson(json);
 }
 
 @freezed
-class PostShortestOwnerExpand with _$PostShortestOwnerExpand {
+abstract class PostShortestOwnerExpand with _$PostShortestOwnerExpand {
   const PostShortestOwnerExpand._();
 
-  const factory PostShortestOwnerExpand({
-    UserShortest? owner,
-  }) = _PostShortestOwnerExpand;
+  const factory PostShortestOwnerExpand({UserShortest? owner}) =
+      _PostShortestOwnerExpand;
 
-  factory PostShortestOwnerExpand.fromJson(Map<String, dynamic> json) => _$PostShortestOwnerExpandFromJson(json);
+  factory PostShortestOwnerExpand.fromJson(Map<String, dynamic> json) =>
+      _$PostShortestOwnerExpandFromJson(json);
 }

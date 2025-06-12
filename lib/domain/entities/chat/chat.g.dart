@@ -6,7 +6,7 @@ part of 'chat.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ChatImpl _$$ChatImplFromJson(Map<String, dynamic> json) => _$ChatImpl(
+_Chat _$ChatFromJson(Map<String, dynamic> json) => _Chat(
   id: json['id'] as String,
   lastSenderId: json['lastSenderId'] as String,
   users: (json['users'] as List<dynamic>).map((e) => e as String).toList(),
@@ -30,52 +30,50 @@ _$ChatImpl _$$ChatImplFromJson(Map<String, dynamic> json) => _$ChatImpl(
           .toList(),
 );
 
-Map<String, dynamic> _$$ChatImplToJson(_$ChatImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'lastSenderId': instance.lastSenderId,
-      'users': instance.users,
-      'lastMessage': instance.lastMessage,
-      'lastMessages': instance.lastMessages,
-      'created': instance.created.toIso8601String(),
-      'updated': instance.updated.toIso8601String(),
-      'collectionId': instance.collectionId,
-      'collectionName': instance.collectionName,
-      'expand': instance.expand,
-      'usersInChat': instance.usersInChat,
-    };
+Map<String, dynamic> _$ChatToJson(_Chat instance) => <String, dynamic>{
+  'id': instance.id,
+  'lastSenderId': instance.lastSenderId,
+  'users': instance.users,
+  'lastMessage': instance.lastMessage,
+  'lastMessages': instance.lastMessages,
+  'created': instance.created.toIso8601String(),
+  'updated': instance.updated.toIso8601String(),
+  'collectionId': instance.collectionId,
+  'collectionName': instance.collectionName,
+  'expand': instance.expand,
+  'usersInChat': instance.usersInChat,
+};
 
-_$ChatExpandUsersInChatImpl _$$ChatExpandUsersInChatImplFromJson(
+_ChatExpandUsersInChat _$ChatExpandUsersInChatFromJson(
   Map<String, dynamic> json,
-) => _$ChatExpandUsersInChatImpl(
+) => _ChatExpandUsersInChat(
   users:
       (json['users'] as List<dynamic>?)
           ?.map((e) => UserShortest.fromJson(e as Map<String, dynamic>))
           .toList(),
 );
 
-Map<String, dynamic> _$$ChatExpandUsersInChatImplToJson(
-  _$ChatExpandUsersInChatImpl instance,
+Map<String, dynamic> _$ChatExpandUsersInChatToJson(
+  _ChatExpandUsersInChat instance,
 ) => <String, dynamic>{'users': instance.users};
 
-_$LastMessagesImpl _$$LastMessagesImplFromJson(Map<String, dynamic> json) =>
-    _$LastMessagesImpl(
+_LastMessages _$LastMessagesFromJson(Map<String, dynamic> json) =>
+    _LastMessages(
       sendByUserId: json['sendByUserId'] as String,
       messages:
           (json['messages'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$LastMessagesImplToJson(_$LastMessagesImpl instance) =>
+Map<String, dynamic> _$LastMessagesToJson(_LastMessages instance) =>
     <String, dynamic>{
       'sendByUserId': instance.sendByUserId,
       'messages': instance.messages,
     };
 
-_$UsersInChatImpl _$$UsersInChatImplFromJson(Map<String, dynamic> json) =>
-    _$UsersInChatImpl(
-      userId: json['userId'] as String,
-      isRead: json['isRead'] as bool,
-    );
+_UsersInChat _$UsersInChatFromJson(Map<String, dynamic> json) => _UsersInChat(
+  userId: json['userId'] as String,
+  isRead: json['isRead'] as bool,
+);
 
-Map<String, dynamic> _$$UsersInChatImplToJson(_$UsersInChatImpl instance) =>
+Map<String, dynamic> _$UsersInChatToJson(_UsersInChat instance) =>
     <String, dynamic>{'userId': instance.userId, 'isRead': instance.isRead};

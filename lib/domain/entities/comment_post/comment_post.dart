@@ -7,7 +7,7 @@ part 'comment_post.freezed.dart';
 part 'comment_post.g.dart';
 
 @freezed
-class CommentPost with _$CommentPost {
+abstract class CommentPost with _$CommentPost {
   const CommentPost._();
 
   const factory CommentPost({
@@ -27,14 +27,19 @@ class CommentPost with _$CommentPost {
     return updated.isAfter(created);
   }
 
-  factory CommentPost.fromJson(Map<String, dynamic> json) => _$CommentPostFromJson(json);
+  factory CommentPost.fromJson(Map<String, dynamic> json) =>
+      _$CommentPostFromJson(json);
 }
 
 @freezed
-class CommentPostExpand with _$CommentPostExpand {
+abstract class CommentPostExpand with _$CommentPostExpand {
   const CommentPostExpand._();
 
-  const factory CommentPostExpand({UserShortest? owner, PostShortest? postOwner}) = _CommentPostExpand;
+  const factory CommentPostExpand({
+    UserShortest? owner,
+    PostShortest? postOwner,
+  }) = _CommentPostExpand;
 
-  factory CommentPostExpand.fromJson(Map<String, dynamic> json) => _$CommentPostExpandFromJson(json);
+  factory CommentPostExpand.fromJson(Map<String, dynamic> json) =>
+      _$CommentPostExpandFromJson(json);
 }

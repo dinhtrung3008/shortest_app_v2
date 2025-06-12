@@ -7,7 +7,7 @@ part 'share_post.freezed.dart';
 part 'share_post.g.dart';
 
 @freezed
-class SharePost with _$SharePost {
+abstract class SharePost with _$SharePost {
   const SharePost._();
 
   const factory SharePost({
@@ -22,11 +22,12 @@ class SharePost with _$SharePost {
     @Default(0) int? likesCount,
   }) = _SharePost;
 
-  factory SharePost.fromJson(Map<String, dynamic> json) => _$SharePostFromJson(json);
+  factory SharePost.fromJson(Map<String, dynamic> json) =>
+      _$SharePostFromJson(json);
 }
 
 @freezed
-class SharePostExpand with _$SharePostExpand {
+abstract class SharePostExpand with _$SharePostExpand {
   const SharePostExpand._();
 
   const factory SharePostExpand({
@@ -34,5 +35,6 @@ class SharePostExpand with _$SharePostExpand {
     PostShortest? postOwner,
   }) = _SharePostExpand;
 
-  factory SharePostExpand.fromJson(Map<String, dynamic> json) => _$SharePostExpandFromJson(json);
+  factory SharePostExpand.fromJson(Map<String, dynamic> json) =>
+      _$SharePostExpandFromJson(json);
 }

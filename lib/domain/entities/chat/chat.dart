@@ -6,7 +6,7 @@ part 'chat.freezed.dart';
 part 'chat.g.dart';
 
 @freezed
-class Chat with _$Chat {
+abstract class Chat with _$Chat {
   const Chat._();
 
   const factory Chat({
@@ -29,31 +29,37 @@ class Chat with _$Chat {
 }
 
 @freezed
-class ChatExpandUsersInChat with _$ChatExpandUsersInChat {
+abstract class ChatExpandUsersInChat with _$ChatExpandUsersInChat {
   const ChatExpandUsersInChat._();
 
-  const factory ChatExpandUsersInChat({List<UserShortest>? users}) = _ChatExpandUsersInChat;
+  const factory ChatExpandUsersInChat({List<UserShortest>? users}) =
+      _ChatExpandUsersInChat;
 
-  factory ChatExpandUsersInChat.fromJson(Map<String, dynamic> json) => _$ChatExpandUsersInChatFromJson(json);
+  factory ChatExpandUsersInChat.fromJson(Map<String, dynamic> json) =>
+      _$ChatExpandUsersInChatFromJson(json);
 }
 
 @freezed
-class LastMessages with _$LastMessages {
+abstract class LastMessages with _$LastMessages {
   const LastMessages._();
 
-  const factory LastMessages({required String sendByUserId, required List<String> messages}) = _LastMessages;
+  const factory LastMessages({
+    required String sendByUserId,
+    required List<String> messages,
+  }) = _LastMessages;
 
   bool get messagesNotEmpty => messages.isNotEmpty;
   String get lengthOfLastMessages => messages.length.toString();
 
-  factory LastMessages.fromJson(Map<String, dynamic> json) => _$LastMessagesFromJson(json);
+  factory LastMessages.fromJson(Map<String, dynamic> json) =>
+      _$LastMessagesFromJson(json);
 }
 
 @freezed
-class UsersInChat with _$UsersInChat {
-  const UsersInChat._();
+abstract class UsersInChat with _$UsersInChat {
+  const factory UsersInChat({required String userId, required bool isRead}) =
+      _UsersInChat;
 
-  const factory UsersInChat({required String userId, required bool isRead}) = _UsersInChat;
-
-  factory UsersInChat.fromJson(Map<String, dynamic> json) => _$UsersInChatFromJson(json);
+  factory UsersInChat.fromJson(Map<String, dynamic> json) =>
+      _$UsersInChatFromJson(json);
 }

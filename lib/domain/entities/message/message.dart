@@ -6,7 +6,7 @@ part 'message.freezed.dart';
 part 'message.g.dart';
 
 @freezed
-class Message with _$Message {
+abstract class Message with _$Message {
   const Message._();
 
   const factory Message({
@@ -24,16 +24,17 @@ class Message with _$Message {
     @Default(false) bool isLiked,
   }) = _Message;
 
-  factory Message.fromJson(Map<String, dynamic> json) => _$MessageFromJson(json);
+  factory Message.fromJson(Map<String, dynamic> json) =>
+      _$MessageFromJson(json);
 }
 
 @freezed
-class MessageExpandSendById with _$MessageExpandSendById {
+abstract class MessageExpandSendById with _$MessageExpandSendById {
   const MessageExpandSendById._();
 
-  const factory MessageExpandSendById({
-    UserShortest? sendById,
-  }) = _MessageExpandSendById;
+  const factory MessageExpandSendById({UserShortest? sendById}) =
+      _MessageExpandSendById;
 
-  factory MessageExpandSendById.fromJson(Map<String, dynamic> json) => _$MessageExpandSendByIdFromJson(json);
+  factory MessageExpandSendById.fromJson(Map<String, dynamic> json) =>
+      _$MessageExpandSendByIdFromJson(json);
 }

@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -7,17 +6,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:pocketbase/pocketbase.dart';
-import 'package:shortest_app/domain/core/exceptions/exceptions.dart';
-import 'package:shortest_app/domain/entities/user_shortest/user_shortest.dart';
 import 'package:shortest_app/infrastructure/data/client/dio_client.dart';
 import 'package:shortest_app/infrastructure/data/remote/authentication/authentication_remote_service.dart';
-import 'package:shortest_app/infrastructure/dtos/authentication/authentication_dto.dart';
-import 'package:shortest_app/infrastructure/dtos/chat/chat_dto.dart';
 import 'package:shortest_app/infrastructure/dtos/user_shortest/user_shortest_dto.dart';
 import 'package:shortest_app/presentation/core/constants/collection_names.dart';
 import 'package:shortest_app/presentation/core/constants/global_constants.dart';
 import 'package:shortest_app/presentation/core/constants/user_constants.dart';
-import 'package:uuid/uuid.dart';
 
 import 'widget_test.mocks.dart';
 
