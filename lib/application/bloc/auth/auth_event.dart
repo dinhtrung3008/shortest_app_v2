@@ -6,12 +6,9 @@ part 'auth_event.freezed.dart';
 
 @freezed
 class AuthEvent with _$AuthEvent {
-  const factory AuthEvent.signInWithEmail({
-    required EmailAddress email,
-    required Password password,
-  }) = _SignInWithEmail;
+  const factory AuthEvent.signInWithEmailEvent({required EmailAddress email, required Password password}) = SignInWithEmailEvent;
 
-  const factory AuthEvent.signUpWithEmail({
+  const factory AuthEvent.signUpWithEmailEvent({
     required FullName fullName,
     required EmailAddress emailAddress,
     required PhoneNumber phoneNumber,
@@ -20,10 +17,9 @@ class AuthEvent with _$AuthEvent {
     required Address address,
     required Password password,
     required ConfirmPassword confirmPassword,
-  }) = _SignUpWithEmail;
+  }) = SignUpWithEmailEvent;
 
-  const factory AuthEvent.verificationEmail({required EmailAddress email}) =
-      _VerificationEmail;
+  const factory AuthEvent.verificationEmailEvent({required EmailAddress email}) = VerificationEmailEvent;
 
-  const factory AuthEvent.signOut() = _SignOut;
+  const factory AuthEvent.signOutEvent() = SignOutEvent;
 }

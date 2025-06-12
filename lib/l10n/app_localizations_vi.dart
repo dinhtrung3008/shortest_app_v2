@@ -151,4 +151,19 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get other => 'Khác';
+
+  @override
+  String get errorSessionExpired => 'Phiên đăng nhập đã hết hạn';
+
+  @override
+  String get errorServerError => 'Đã xảy ra lỗi từ máy chủ';
+
+  @override
+  String get errorCacheError => 'Lỗi bộ nhớ đệm';
+
+  @override
+  String get errorNoConnection => 'Không có kết nối internet';
+
+  @override
+  String get errorUnexpected => 'Đã xảy ra lỗi không mong muốn';
 }

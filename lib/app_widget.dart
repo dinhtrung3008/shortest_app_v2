@@ -5,6 +5,7 @@ import 'infrastructure/core/di/infrastructure_injection.dart';
 import 'l10n/app_localizations.dart';
 import 'presentation/core/mixins/resources_app.dart';
 import 'presentation/core/utils/navigator/navigator_service.dart';
+import 'presentation/pages/sign_in/sign_in_page.dart';
 
 class AppWidget extends StatelessWidget with ResourcesApp {
   AppWidget({super.key});
@@ -23,7 +24,7 @@ class AppWidget extends StatelessWidget with ResourcesApp {
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: Container(),
+      home: SignInPage(),
     );
   }
 }

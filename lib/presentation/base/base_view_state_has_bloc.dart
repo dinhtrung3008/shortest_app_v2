@@ -1,32 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'base_presenter.dart';
+import 'base_presenter_has_bloc.dart';
 
-abstract class BaseView {
+abstract class BaseViewHasBloc {
   void showLoading();
   void hideLoading();
   void onFailure({String? message});
   void onSuccess({String? message});
 }
 
-abstract class BaseViewState<T extends StatefulWidget, P extends BasePresenter> extends State<T> implements BaseView {
+abstract class BaseViewStateHasBloc<T extends StatefulWidget, P extends BasePresenterHasBloc, B extends BlocBase>
+    extends State<T>
+    implements BaseViewHasBloc {
   late P presenter;
+  late B bloc;
 
   P createPresenter();
+  B createBloc();
 
   final ValueNotifier<bool> _isLoadingNotifier = ValueNotifier<bool>(false);
 
   @override
   void initState() {
-    super.initState();
+    bloc = createBloc();
     presenter = createPresenter();
-    presenter.attachView(this, context);
+    presenter.attachView(this, this.bloc);
+    super.initState();
   }
 
   @override
   void dispose() {
     _isLoadingNotifier.dispose();
     presenter.dispose();
+    bloc.close();
     super.dispose();
   }
 
@@ -62,19 +69,22 @@ abstract class BaseViewState<T extends StatefulWidget, P extends BasePresenter> 
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        buildContent(),
-        ValueListenableBuilder<bool>(
-          valueListenable: _isLoadingNotifier,
-          builder: (_, isLoading, _) {
-            if (isLoading) {
-              return Container(color: Colors.black26, child: buildLoadingWidget());
-            }
-            return const SizedBox.shrink();
-          },
-        ),
-      ],
+    return BlocProvider<B>(
+      create: (_) => bloc,
+      child: Stack(
+        children: [
+          buildContent(),
+          ValueListenableBuilder<bool>(
+            valueListenable: _isLoadingNotifier,
+            builder: (_, isLoading, _) {
+              if (isLoading) {
+                return Container(color: Colors.black26, child: buildLoadingWidget());
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+        ],
+      ),
     );
   }
 }

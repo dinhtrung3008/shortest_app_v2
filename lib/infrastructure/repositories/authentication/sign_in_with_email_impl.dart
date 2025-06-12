@@ -20,7 +20,7 @@ class SignInWithEmailImpl with ExecuteRepositoryImpl, ConnectionChecker implemen
     final hasInternet = await internetChecker();
 
     if (!hasInternet) {
-      return left(const BaseFailure.offline());
+      return left(BaseFailure.offline(message: 'No internet connection'));
     }
 
     return execute<Unit>(

@@ -379,6 +379,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Other'**
   String get other;
+
+  /// No description provided for @errorSessionExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Session has expired'**
+  String get errorSessionExpired;
+
+  /// No description provided for @errorServerError.
+  ///
+  /// In en, this message translates to:
+  /// **'Server error occurred'**
+  String get errorServerError;
+
+  /// No description provided for @errorCacheError.
+  ///
+  /// In en, this message translates to:
+  /// **'Cache error occurred'**
+  String get errorCacheError;
+
+  /// No description provided for @errorNoConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection'**
+  String get errorNoConnection;
+
+  /// No description provided for @errorUnexpected.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred'**
+  String get errorUnexpected;
 }
 
 class _AppLocalizationsDelegate

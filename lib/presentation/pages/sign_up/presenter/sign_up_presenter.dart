@@ -1,49 +1,67 @@
-import 'package:shortest_app/application/bloc/auth/auth_bloc.dart';
+import '../../../../application/bloc/auth/auth_bloc.dart';
+import '../../../../application/bloc/auth/auth_event.dart';
+import '../../../../application/bloc/auth/auth_state.dart';
+import '../../../../domain/value_object/auth/auth_value_object.dart';
+import '../../../base/base_presenter_has_bloc.dart';
+import '../../../base/base_view_state_has_bloc.dart';
 
-import '../../../base/base_presenter.dart';
-import '../../../base/base_view.dart';
-
-abstract class SignUpView extends BaseView {
-  void onSignUpSuccess(String success);
-  void onSignUpFailure(String failure);
+abstract class SignUpView extends BaseViewHasBloc {
+  void onPop();
 }
 
-class SignUpPresenter extends BasePresenter<SignUpView> {
-  final AuthBloc authBloc;
-
-  SignUpPresenter({required this.authBloc});
+class SignUpPresenter extends BasePresenterHasBloc<SignUpView, AuthBloc> {
+  SignUpPresenter();
 
   @override
   void onViewAttached() {
     super.onViewAttached();
-    loadUsers();
+    bloc?.stream.listen(_handleState);
   }
 
-  void loadUsers() {
-    // authBloc.add(LoadUsers());
+  void _handleState(AuthState state) {
+    if (!isViewAttached) return;
+
+    if (state is Loading) {
+      view?.showLoading();
+    } else if (state is Success) {
+      view?.hideLoading();
+      view?.onPop();
+    } else if (state is Failure) {
+      view?.hideLoading();
+      view?.onFailure(message: state.message ?? 'An error occurred');
+    }
   }
 
-  void createUser(String name, String email) {
-    // authBloc.add(CreateUser(name: name, email: email));
-  }
-
-  // void handleState(UserState state) {
-  //   if (!isViewAttached) return;
-
-  //   if (state is UserLoading) {
-  //     view?.showLoading();
-  //   } else if (state is UserLoaded) {
-  //     view?.hideLoading();
-  //     view?.showUsers(state.users);
-  //   } else if (state is UserError) {
-  //     view?.hideLoading();
-  //     view?.showError(state.message);
-  //   }
-  // }
-
-  @override
-  void dispose() {
-    authBloc.close();
-    super.dispose();
+  void signUpWithEmail({
+    required FullName fullName,
+    required EmailAddress email,
+    required PhoneNumber phoneNumber,
+    required BirthDate birthDate,
+    required Gender gender,
+    required Address address,
+    required Password password,
+    required ConfirmPassword confirmPassword,
+  }) {
+    if (fullName.isRight() &&
+        email.isRight() &&
+        phoneNumber.isRight() &&
+        birthDate.isRight() &&
+        gender.isRight() &&
+        address.isRight() &&
+        password.isRight() &&
+        confirmPassword.isRight()) {
+      bloc?.add(
+        SignUpWithEmailEvent(
+          fullName: fullName,
+          emailAddress: email,
+          phoneNumber: phoneNumber,
+          birthDate: birthDate,
+          gender: gender,
+          address: address,
+          password: password,
+          confirmPassword: confirmPassword,
+        ),
+      );
+    }
   }
 }

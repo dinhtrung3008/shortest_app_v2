@@ -151,4 +151,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get other => 'Other';
+
+  @override
+  String get errorSessionExpired => 'Session has expired';
+
+  @override
+  String get errorServerError => 'Server error occurred';
+
+  @override
+  String get errorCacheError => 'Cache error occurred';
+
+  @override
+  String get errorNoConnection => 'No internet connection';
+
+  @override
+  String get errorUnexpected => 'An unexpected error occurred';
 }

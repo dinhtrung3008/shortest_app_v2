@@ -45,5 +45,10 @@
   "selectGender": "Vui lòng chọn giới tính",
   "male": "Nam",
   "female": "Nữ",
-  "other": "Khác"
+  "other": "Khác",
+  "errorSessionExpired": "Phiên đăng nhập đã hết hạn",
+  "errorServerError": "Đã xảy ra lỗi từ máy chủ",
+  "errorCacheError": "Lỗi bộ nhớ đệm",
+  "errorNoConnection": "Không có kết nối internet",
+  "errorUnexpected": "Đã xảy ra lỗi không mong muốn"
 }

@@ -45,5 +45,10 @@
   "selectGender": "Please select a gender",
   "male": "Male",
   "female": "Female",
-  "other": "Other"
+  "other": "Other",
+  "errorSessionExpired": "Session has expired",
+  "errorServerError": "Server error occurred",
+  "errorCacheError": "Cache error occurred",
+  "errorNoConnection": "No internet connection",
+  "errorUnexpected": "An unexpected error occurred"
 }
