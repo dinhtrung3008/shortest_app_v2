@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../application/bloc/auth/auth_bloc.dart';
+import '../../../application/blocs/auth/auth_bloc.dart';
 import '../../../domain/value_object/auth/auth_value_object.dart';
 import '../../../infrastructure/core/di/infrastructure_injection.dart';
 import '../../base/base_view_state_has_bloc.dart';
