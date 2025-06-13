@@ -171,8 +171,6 @@ import 'package:shortest_app/infrastructure/repositories/viewer_user/increase_fo
     as _i389;
 import 'package:shortest_app/presentation/core/theme/app_sizes.dart' as _i565;
 import 'package:shortest_app/presentation/core/theme/app_themes.dart' as _i290;
-import 'package:shortest_app/presentation/core/utils/navigator/navigator_service.dart'
-    as _i379;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -182,7 +180,6 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final injectableModule = _$InjectableModule();
-    gh.singleton<_i379.NavigationService>(() => _i379.NavigationService());
     gh.singleton<_i565.AppSizes>(() => _i565.AppSizes());
     gh.singleton<_i290.AppThemes>(() => _i290.AppThemes());
     gh.lazySingleton<_i558.FlutterSecureStorage>(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'infrastructure/core/di/infrastructure_injection.dart';
 import 'l10n/app_localizations.dart';
 import 'presentation/core/mixins/resources_app.dart';
 import 'presentation/core/utils/navigator/navigator_service.dart';
@@ -19,7 +18,8 @@ class AppWidget extends StatelessWidget with ResourcesApp {
     return MaterialApp(
       theme: appColors.lightTheme,
       themeMode: ThemeMode.light,
-      navigatorKey: injector<NavigationService>().navigatorKey,
+      navigatorKey: NavigationService().navigatorKey,
+      locale: AppLocalizations.supportedLocales.first,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../application/blocs/auth/auth_bloc.dart';
+import '../../../application/presenters/sign_up/sign_up_presenter.dart';
 import '../../../domain/value_object/auth/auth_value_object.dart';
 import '../../../infrastructure/core/di/infrastructure_injection.dart';
 import '../../base/base_view_state_has_bloc.dart';
-import '../../../application/presenters/sign_up/sign_up_presenter.dart';
+import '../../core/utils/navigator/navigator_service.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -13,7 +14,9 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends BaseViewStateHasBloc<SignUpPage, SignUpPresenter, AuthBloc> implements SignUpView {
+class _SignUpPageState
+    extends BaseViewStateHasBloc<SignUpPage, SignUpPresenter, AuthBloc>
+    implements SignUpView {
   @override
   AuthBloc createBloc() => injector<AuthBloc>();
 
@@ -22,7 +25,7 @@ class _SignUpPageState extends BaseViewStateHasBloc<SignUpPage, SignUpPresenter,
 
   @override
   void onPop() {
-    Navigator.of(context).pop();
+    NavigationService().pop();
   }
 
   @override
@@ -36,13 +39,18 @@ class _SignUpPageState extends BaseViewStateHasBloc<SignUpPage, SignUpPresenter,
                 fullName: FullName('JohnDoe'),
                 email: EmailAddress('test1@shortest.co'),
                 phoneNumber: PhoneNumber('0396071116'),
-                birthDate: BirthDate(DateTime(1998, 08, 30).toUtc().toIso8601String()),
+                birthDate: BirthDate(
+                  DateTime(1998, 08, 30).toUtc().toIso8601String(),
+                ),
                 gender: Gender('male'),
                 address: Address('123 Main St'),
                 password: Password('test123456'),
                 confirmPassword: ConfirmPassword('test123456', 'test123456'),
               ),
-          child: const Text('Sign Up with Email', style: TextStyle(color: Colors.black)),
+          child: const Text(
+            'Sign Up with Email',
+            style: TextStyle(color: Colors.black),
+          ),
         ),
       ),
     );

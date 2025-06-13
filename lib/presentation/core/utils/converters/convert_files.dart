@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../constants/global_constants.dart';
+import '../../constants/global_constants.dart';
 
 class ConvertFile {
   static String convertFilesToString({

@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -14,18 +15,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IVerificationEmail _iVerificationEmail;
   final ISignOut _iSignOut;
 
-  AuthBloc(this._iSignInWithEmail, this._iSignUpWithEmail, this._iVerificationEmail, this._iSignOut)
-    : super(AuthState.initial()) {
-    on<SignInWithEmailEvent>(_onSignInWithEmailAndPassword);
-    on<SignUpWithEmailEvent>(_onSignUpWithEmailAndPassword);
-    on<VerificationEmailEvent>(_onVerificationEmail);
-    on<SignOutEvent>(_onSignOut);
+  AuthBloc(
+    this._iSignInWithEmail,
+    this._iSignUpWithEmail,
+    this._iVerificationEmail,
+    this._iSignOut,
+  ) : super(AuthState.initial()) {
+    on<SignInWithEmailEvent>(
+      _onSignInWithEmailAndPassword,
+      transformer: droppable(),
+    );
+    on<SignUpWithEmailEvent>(
+      _onSignUpWithEmailAndPassword,
+      transformer: droppable(),
+    );
+    on<VerificationEmailEvent>(_onVerificationEmail, transformer: droppable());
+    on<SignOutEvent>(_onSignOut, transformer: droppable());
   }
 
-  Future<Unit> _onSignInWithEmailAndPassword(SignInWithEmailEvent event, Emitter<AuthState> emit) async {
+  Future<Unit> _onSignInWithEmailAndPassword(
+    SignInWithEmailEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthState.loading());
 
-    final facade = await _iSignInWithEmail.call(email: event.email, password: event.password);
+    final facade = await _iSignInWithEmail.call(
+      email: event.email,
+      password: event.password,
+    );
 
     facade.fold(
       (failure) {
@@ -38,7 +55,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     return unit;
   }
 
-  Future<Unit> _onSignUpWithEmailAndPassword(SignUpWithEmailEvent event, Emitter<AuthState> emit) async {
+  Future<Unit> _onSignUpWithEmailAndPassword(
+    SignUpWithEmailEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthState.loading());
 
     final facade = await _iSignUpWithEmail.call(
@@ -63,7 +83,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     return unit;
   }
 
-  Future<Unit> _onVerificationEmail(VerificationEmailEvent event, Emitter<AuthState> emit) async {
+  Future<Unit> _onVerificationEmail(
+    VerificationEmailEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthState.loading());
 
     final facade = await _iVerificationEmail.call(emailAddress: event.email);

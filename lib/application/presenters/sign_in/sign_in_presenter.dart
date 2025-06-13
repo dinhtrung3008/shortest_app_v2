@@ -1,9 +1,9 @@
-import '../../blocs/auth/auth_bloc.dart';
-import '../../blocs/auth/auth_event.dart';
-import '../../blocs/auth/auth_state.dart';
 import '../../../domain/value_object/auth/auth_value_object.dart';
 import '../../../presentation/base/base_presenter_has_bloc.dart';
 import '../../../presentation/base/base_view_state_has_bloc.dart';
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/auth/auth_event.dart';
+import '../../blocs/auth/auth_state.dart';
 
 abstract class SignInView extends BaseViewHasBloc {
   void onNavigateToHome();
@@ -21,18 +21,27 @@ class SignInPresenter extends BasePresenterHasBloc<SignInView, AuthBloc> {
   void _handleState(AuthState state) {
     if (!isViewAttached) return;
 
-    if (state is Loading) {
-      view?.showLoading();
-    } else if (state is Success) {
-      view?.hideLoading();
-      view?.onNavigateToHome();
-    } else if (state is Failure) {
-      view?.hideLoading();
-      view?.onFailure(message: state.message ?? 'An error occurred');
+    switch (state) {
+      case Loading():
+        view?.showLoading();
+        break;
+      case Success():
+        view?.hideLoading();
+        view?.onNavigateToHome();
+        break;
+      case Failure():
+        view?.hideLoading();
+        view?.onFailure(message: state.message ?? 'An error occurred');
+        break;
+      default:
+        break;
     }
   }
 
-  void signInWithEmail({required EmailAddress email, required Password password}) {
+  void signInWithEmail({
+    required EmailAddress email,
+    required Password password,
+  }) {
     if (email.isRight() && password.isRight()) {
       bloc?.add(SignInWithEmailEvent(email: email, password: password));
     }

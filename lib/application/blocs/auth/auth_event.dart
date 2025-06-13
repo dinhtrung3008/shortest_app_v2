@@ -4,9 +4,12 @@ import '../../../domain/value_object/auth/auth_value_object.dart';
 
 part 'auth_event.freezed.dart';
 
-@freezed
-class AuthEvent with _$AuthEvent {
-  const factory AuthEvent.signInWithEmailEvent({required EmailAddress email, required Password password}) = SignInWithEmailEvent;
+@Freezed(copyWith: false, equal: false, fromJson: false, toJson: false)
+sealed class AuthEvent with _$AuthEvent {
+  const factory AuthEvent.signInWithEmailEvent({
+    required EmailAddress email,
+    required Password password,
+  }) = SignInWithEmailEvent;
 
   const factory AuthEvent.signUpWithEmailEvent({
     required FullName fullName,
@@ -19,7 +22,9 @@ class AuthEvent with _$AuthEvent {
     required ConfirmPassword confirmPassword,
   }) = SignUpWithEmailEvent;
 
-  const factory AuthEvent.verificationEmailEvent({required EmailAddress email}) = VerificationEmailEvent;
+  const factory AuthEvent.verificationEmailEvent({
+    required EmailAddress email,
+  }) = VerificationEmailEvent;
 
   const factory AuthEvent.signOutEvent() = SignOutEvent;
 }
