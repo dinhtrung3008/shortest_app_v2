@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../application/blocs/auth/auth_bloc.dart';
-import '../../../application/presenters/sign_up/sign_up_presenter.dart';
+import '../../presenters/sign_up/sign_up_presenter.dart';
 import '../../../domain/value_object/auth/auth_value_object.dart';
 import '../../../infrastructure/core/di/infrastructure_injection.dart';
 import '../../base/base_view_state_has_bloc.dart';

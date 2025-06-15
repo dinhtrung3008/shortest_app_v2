@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 
-import '../../../../../presentation/core/constants/collection_names.dart';
+import '../../../../presentation/core/constants/api_urls.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/post_shortest/post_shortest_dto.dart';
 import '../../client/dio_client.dart';
@@ -38,7 +38,7 @@ class SearchTrendRemoteServiceImpl with ExecuteRemoteServiceImpl implements ISea
     };
 
     return handleResponse<ListPostShortestResponseDTO>(
-      _iDioClient.getRequest("/api/collections/${CollectionNames.postsCollection}/records", queryParams: queryParams),
+      _iDioClient.getRequest("/${APIUrls.postsUrl}/records", queryParams: queryParams),
       onSuccess: (response) {
         return ListPostShortestResponseDTO.fromJson(response.data);
       },

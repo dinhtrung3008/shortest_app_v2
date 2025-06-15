@@ -7,8 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../domain/core/exceptions/exceptions.dart';
-import '../../../../../presentation/core/constants/collection_names.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
+import '../../../../presentation/core/constants/api_urls.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/post_shortest/post_shortest_dto.dart';
 import '../../../dtos/user_shortest/user_shortest_dto.dart';
@@ -81,11 +81,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
     final formData = await _createFormData(body: postDTO.toJson(), mediaFiles: mediaFiles);
 
     return await handleResponse<PostShortestDTO>(
-      _iDioClient.postRequest(
-        "/api/collections/${CollectionNames.postsCollection}/records",
-        formData: formData,
-        queryParams: {"expand": "owner"},
-      ),
+      _iDioClient.postRequest("/${APIUrls.postsUrl}/records", formData: formData, queryParams: {"expand": "owner"}),
       onSuccess: (response) => PostShortestDTO.fromJson(response.data),
     );
   }
@@ -104,7 +100,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
 
     return await handleResponse<PostShortestDTO>(
       _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.postsCollection}/records/$postId",
+        "/${APIUrls.postsUrl}/records/$postId",
         formData: formData,
         queryParams: {"expand": "owner"},
       ),
@@ -118,7 +114,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
 
     return await handleResponse<ListPostShortestResponseDTO>(
       _iDioClient.getRequest(
-        "/api/collections/${CollectionNames.postsCollection}/records",
+        "/${APIUrls.postsUrl}/records",
         queryParams: {"page": page, "perPage": perPage, "sort": "-created", "filter": finalFilter, "expand": "owner"},
       ),
       onSuccess: (response) => ListPostShortestResponseDTO.fromJson(response.data),
@@ -128,10 +124,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
   @override
   Future<PostShortestDTO> getPostById({required String postId}) async {
     return await handleResponse<PostShortestDTO>(
-      _iDioClient.getRequest(
-        "/api/collections/${CollectionNames.postsCollection}/records/$postId",
-        queryParams: {"expand": "owner"},
-      ),
+      _iDioClient.getRequest("/${APIUrls.postsUrl}/records/$postId", queryParams: {"expand": "owner"}),
       onSuccess: (response) => PostShortestDTO.fromJson(response.data),
     );
   }
@@ -139,7 +132,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
   @override
   Future<Unit> deletePost({required String postId}) async {
     return await handleResponse<Unit>(
-      _iDioClient.deleteRequest("/api/collections/${CollectionNames.postsCollection}/records/$postId"),
+      _iDioClient.deleteRequest("/${APIUrls.postsUrl}/records/$postId"),
       onSuccess: (_) => unit,
     );
   }
@@ -147,7 +140,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
   @override
   Future<int> getPostsCount() async {
     return await handleResponse<int>(
-      _iDioClient.deleteRequest("/api/collections/${CollectionNames.postsCollection}/records"),
+      _iDioClient.deleteRequest("/${APIUrls.postsUrl}/records"),
       onSuccess: (response) => response.data['totalItems'] ?? 0,
     );
   }
@@ -167,7 +160,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
 
     return await handleResponse<PostShortestDTO>(
       _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.postsCollection}/records/$postId",
+        "/${APIUrls.postsUrl}/records/$postId",
         bodyParams: body,
         queryParams: {"expand": "owner"},
       ),
@@ -190,7 +183,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
 
     return await handleResponse<PostShortestDTO>(
       _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.postsCollection}/records/$postId",
+        "/${APIUrls.postsUrl}/records/$postId",
         bodyParams: body,
         queryParams: {"expand": "owner"},
       ),
@@ -213,7 +206,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
 
     return await handleResponse<PostShortestDTO>(
       _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.postsCollection}/records/$postId",
+        "/${APIUrls.postsUrl}/records/$postId",
         bodyParams: body,
         queryParams: {"expand": "owner"},
       ),
@@ -236,7 +229,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
 
     return await handleResponse<PostShortestDTO>(
       _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.postsCollection}/records/$postId",
+        "/${APIUrls.postsUrl}/records/$postId",
         bodyParams: body,
         queryParams: {"expand": "owner"},
       ),
@@ -259,7 +252,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
 
     return await handleResponse<PostShortestDTO>(
       _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.postsCollection}/records/$postId",
+        "/${APIUrls.postsUrl}/records/$postId",
         bodyParams: body,
         queryParams: {"expand": "owner"},
       ),
@@ -282,7 +275,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
 
     return await handleResponse<PostShortestDTO>(
       _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.postsCollection}/records/$postId",
+        "/${APIUrls.postsUrl}/records/$postId",
         bodyParams: body,
         queryParams: {"expand": "owner"},
       ),
@@ -298,7 +291,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
 
     return await handleResponse<PostShortestDTO>(
       _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.postsCollection}/records/$postId",
+        "/${APIUrls.postsUrl}/records/$postId",
         bodyParams: body,
         queryParams: {"expand": "owner"},
       ),

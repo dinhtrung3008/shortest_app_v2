@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../../presentation/core/constants/collection_names.dart';
+import '../../../../presentation/core/constants/api_urls.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/like_comment/like_comment_dto.dart';
 import '../../client/dio_client.dart';
@@ -28,10 +28,7 @@ class LikeCommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements 
     final body = LikeCommentDTO(commentOwner: commentId);
 
     return handleResponse<LikeCommentDTO>(
-      _iDioClient.postRequest(
-        '/api/collections/${CollectionNames.likesCommentsCollection}/records',
-        bodyParams: body.toJson(),
-      ),
+      _iDioClient.postRequest('/${APIUrls.likesCommentsUrl}/records', bodyParams: body.toJson()),
       onSuccess: (response) => LikeCommentDTO.fromJson(response.data),
     );
   }
@@ -39,7 +36,7 @@ class LikeCommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements 
   @override
   Future<void> unlikeComment({required String likeCommentId}) async {
     return handleResponse<void>(
-      _iDioClient.deleteRequest('/api/collections/${CollectionNames.likesCommentsCollection}/records/$likeCommentId'),
+      _iDioClient.deleteRequest('/${APIUrls.likesCommentsUrl}/records/$likeCommentId'),
       onSuccess: (response) {
         return;
       },
@@ -55,10 +52,7 @@ class LikeCommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements 
     final queryParams = {'filter': "(commentOwner~'$commentId')", 'page': page, 'perPage': perPage};
 
     return handleResponse<ListLikeCommentResponseDTO>(
-      _iDioClient.getRequest(
-        '/api/collections/${CollectionNames.likesCommentsCollection}/records',
-        queryParams: queryParams,
-      ),
+      _iDioClient.getRequest('/${APIUrls.likesCommentsUrl}/records', queryParams: queryParams),
       onSuccess: (response) => ListLikeCommentResponseDTO.fromJson(response.data),
     );
   }
@@ -66,7 +60,7 @@ class LikeCommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements 
   @override
   Future<Unit> deleteLikeComment({required String likeCommentId}) async {
     return handleResponse<Unit>(
-      _iDioClient.deleteRequest('/api/collections/${CollectionNames.likesCommentsCollection}/records/$likeCommentId'),
+      _iDioClient.deleteRequest('/${APIUrls.likesCommentsUrl}/records/$likeCommentId'),
       onSuccess: (response) {
         return unit;
       },

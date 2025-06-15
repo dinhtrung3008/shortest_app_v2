@@ -3,8 +3,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../domain/core/exceptions/exceptions.dart';
-import '../../../../../presentation/core/constants/collection_names.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
+import '../../../../presentation/core/constants/api_urls.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/message/message_dto.dart';
 import '../../client/dio_client.dart';
@@ -49,11 +49,7 @@ class MessageRemoteServiceImpl with ExecuteRemoteServiceImpl implements IMessage
     final queryParams = {"expand": "sendById"};
 
     return handleResponse<MessageDTO>(
-      _iDioClient.postRequest(
-        "/api/collections/${CollectionNames.messagesChatCollection}/records",
-        bodyParams: body,
-        queryParams: queryParams,
-      ),
+      _iDioClient.postRequest("/${APIUrls.messagesChatUrl}/records", bodyParams: body, queryParams: queryParams),
       onSuccess: (response) => MessageDTO.fromJson(response.data),
     );
   }
@@ -74,10 +70,7 @@ class MessageRemoteServiceImpl with ExecuteRemoteServiceImpl implements IMessage
     };
 
     return handleResponse<ListMessageResponseDTO>(
-      _iDioClient.getRequest(
-        "/api/collections/${CollectionNames.messagesChatCollection}/records",
-        queryParams: queryParams,
-      ),
+      _iDioClient.getRequest("/${APIUrls.messagesChatUrl}/records", queryParams: queryParams),
       onSuccess: (response) => ListMessageResponseDTO.fromJson(response.data),
     );
   }
@@ -85,7 +78,7 @@ class MessageRemoteServiceImpl with ExecuteRemoteServiceImpl implements IMessage
   @override
   Future<Unit> deleteMessage({required String messageId}) {
     return handleResponse<Unit>(
-      _iDioClient.deleteRequest("/api/collections/${CollectionNames.messagesChatCollection}/records/$messageId"),
+      _iDioClient.deleteRequest("/${APIUrls.messagesChatUrl}/records/$messageId"),
       onSuccess: (_) => unit,
     );
   }
@@ -97,7 +90,7 @@ class MessageRemoteServiceImpl with ExecuteRemoteServiceImpl implements IMessage
 
     return handleResponse<MessageDTO>(
       _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.messagesChatCollection}/records/$messageId",
+        "/${APIUrls.messagesChatUrl}/records/$messageId",
         bodyParams: body,
         queryParams: queryParams,
       ),
@@ -112,7 +105,7 @@ class MessageRemoteServiceImpl with ExecuteRemoteServiceImpl implements IMessage
 
     return handleResponse<MessageDTO>(
       _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.messagesChatCollection}/records/$messageId",
+        "/${APIUrls.messagesChatUrl}/records/$messageId",
         bodyParams: body,
         queryParams: queryParams,
       ),

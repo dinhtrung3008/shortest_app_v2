@@ -5,9 +5,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pocketbase/pocketbase.dart';
 
-import '../../../../../presentation/core/constants/collection_names.dart';
 import '../../../../../presentation/core/constants/global_constants.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
+import '../../../../presentation/core/constants/api_urls.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/authentication/authentication_dto.dart';
 import '../../../dtos/user_shortest/user_shortest_dto.dart';
@@ -34,10 +34,7 @@ class AuthenticationRemoteServiceImpl with ExecuteRemoteServiceImpl implements I
     final body = userDTO.toJson();
 
     return await handleResponseAsync<Unit>(
-      _iDioClient.postRequest(
-        '/api/collections/${CollectionNames.usersCollection}/auth-with-password',
-        bodyParams: body,
-      ),
+      _iDioClient.postRequest('${APIUrls.usersUrl}/auth-with-password', bodyParams: body),
       onSuccess: (response) async {
         final authenticationDTO = AuthenticationDTO.fromJson(response.data);
         final token = authenticationDTO.token;
@@ -57,7 +54,7 @@ class AuthenticationRemoteServiceImpl with ExecuteRemoteServiceImpl implements I
     final body = userDTO.toJson();
 
     return await handleResponse<Unit>(
-      _iDioClient.postRequest('/api/collections/${CollectionNames.usersCollection}/records', bodyParams: body),
+      _iDioClient.postRequest('/${APIUrls.usersUrl}/records', bodyParams: body),
       onSuccess: (_) => unit,
     );
   }
@@ -67,10 +64,7 @@ class AuthenticationRemoteServiceImpl with ExecuteRemoteServiceImpl implements I
     final body = userDTO.toJson();
 
     return await handleResponse<Unit>(
-      _iDioClient.postRequest(
-        '/api/collections/${CollectionNames.usersCollection}/request-verification',
-        bodyParams: body,
-      ),
+      _iDioClient.postRequest('/${APIUrls.usersUrl}/request-verification', bodyParams: body),
       onSuccess: (_) => unit,
     );
   }
@@ -80,10 +74,7 @@ class AuthenticationRemoteServiceImpl with ExecuteRemoteServiceImpl implements I
     final body = userDTO.toJson();
 
     return await handleResponse<Unit>(
-      _iDioClient.postRequest(
-        '/api/collections/${CollectionNames.usersCollection}/request-password-reset',
-        bodyParams: body,
-      ),
+      _iDioClient.postRequest('/${APIUrls.usersUrl}/request-password-reset', bodyParams: body),
       onSuccess: (_) => unit,
     );
   }

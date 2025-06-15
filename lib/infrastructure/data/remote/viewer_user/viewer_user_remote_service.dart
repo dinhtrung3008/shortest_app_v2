@@ -2,8 +2,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../domain/core/exceptions/exceptions.dart';
-import '../../../../../presentation/core/constants/collection_names.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
+import '../../../../presentation/core/constants/api_urls.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/user_shortest/user_shortest_dto.dart';
 import '../../client/dio_client.dart';
@@ -24,7 +24,7 @@ class ViewerUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements IView
   @override
   Future<UserShortestDTO> getViewerById({required String viewerId}) async {
     return handleResponse<UserShortestDTO>(
-      _iDioClient.getRequest("/api/collections/${CollectionNames.usersCollection}/records/$viewerId"),
+      _iDioClient.getRequest("/${APIUrls.usersUrl}/records/$viewerId"),
       onSuccess: (response) => UserShortestDTO.fromJson(response.data),
     );
   }
@@ -40,10 +40,7 @@ class ViewerUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements IView
     final updatedFollowers = List<String>.from(viewerFollowers)..add(currentUserId);
 
     return handleResponse<UserShortestDTO>(
-      _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.usersCollection}/records/$viewerId",
-        bodyParams: {'followers': updatedFollowers},
-      ),
+      _iDioClient.patchRequest("/${APIUrls.usersUrl}/records/$viewerId", bodyParams: {'followers': updatedFollowers}),
       onSuccess: (response) => UserShortestDTO.fromJson(response.data),
     );
   }
@@ -59,10 +56,7 @@ class ViewerUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements IView
     final updatedFollowers = List<String>.from(viewerFollowers)..remove(currentUserId);
 
     return handleResponse<UserShortestDTO>(
-      _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.usersCollection}/records/$viewerId",
-        bodyParams: {'followers': updatedFollowers},
-      ),
+      _iDioClient.patchRequest("/${APIUrls.usersUrl}/records/$viewerId", bodyParams: {'followers': updatedFollowers}),
       onSuccess: (response) => UserShortestDTO.fromJson(response.data),
     );
   }

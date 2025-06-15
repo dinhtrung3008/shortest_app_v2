@@ -7,6 +7,4 @@ class CollectionNames {
   static const String messagesChatCollection = 'messagesChat';
   static const String postsCollection = 'posts';
   static const String sharesPostCollection = 'sharesPost';
-
-  static const String idField = 'id';
 }
