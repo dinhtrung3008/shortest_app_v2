@@ -1,9 +1,9 @@
 import '../../../domain/value_object/auth/auth_value_object.dart';
-import '../../../presentation/base/base_presenter_has_bloc.dart';
-import '../../../presentation/base/base_view_state_has_bloc.dart';
-import '../../blocs/auth/auth_bloc.dart';
-import '../../blocs/auth/auth_event.dart';
-import '../../blocs/auth/auth_state.dart';
+import '../../base/base_presenter_has_bloc.dart';
+import '../../base/base_view_state_has_bloc.dart';
+import '../../../application/blocs/auth/auth_bloc.dart';
+import '../../../application/blocs/auth/auth_event.dart';
+import '../../../application/blocs/auth/auth_state.dart';
 
 abstract class SignUpView extends BaseViewHasBloc {
   void onPop();

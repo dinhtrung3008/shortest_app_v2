@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -9,7 +8,7 @@ import 'package:pocketbase/pocketbase.dart';
 import 'package:shortest_app/infrastructure/data/client/dio_client.dart';
 import 'package:shortest_app/infrastructure/data/remote/authentication/authentication_remote_service.dart';
 import 'package:shortest_app/infrastructure/dtos/user_shortest/user_shortest_dto.dart';
-import 'package:shortest_app/presentation/core/constants/collection_names.dart';
+import 'package:shortest_app/presentation/core/constants/api_urls.dart';
 import 'package:shortest_app/presentation/core/constants/global_constants.dart';
 import 'package:shortest_app/presentation/core/constants/user_constants.dart';
 
@@ -62,10 +61,7 @@ void main() {
       test('should successfully sign in and store user data', () async {
         // Arrange
         when(
-          mockDioClient.postRequest(
-            '/api/collections/${CollectionNames.usersCollection}/auth-with-password',
-            bodyParams: testUserDTO.toJson(),
-          ),
+          mockDioClient.postRequest('/${APIUrls.usersUrl}/auth-with-password', bodyParams: testUserDTO.toJson()),
         ).thenAnswer((_) async => mockResponse);
 
         when(mockStorage.write(key: anyNamed('key'), value: anyNamed('value'))).thenAnswer((_) async {});
@@ -78,10 +74,7 @@ void main() {
 
         // Verify API call
         verify(
-          mockDioClient.postRequest(
-            '/api/collections/${CollectionNames.usersCollection}/auth-with-password',
-            bodyParams: testUserDTO.toJson(),
-          ),
+          mockDioClient.postRequest('/${APIUrls.usersUrl}/auth-with-password', bodyParams: testUserDTO.toJson()),
         ).called(1);
 
         // Verify storage operations

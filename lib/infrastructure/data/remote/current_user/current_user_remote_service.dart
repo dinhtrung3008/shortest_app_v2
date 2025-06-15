@@ -6,8 +6,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../domain/core/exceptions/exceptions.dart';
-import '../../../../../presentation/core/constants/collection_names.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
+import '../../../../presentation/core/constants/api_urls.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/user_shortest/user_shortest_dto.dart';
 import '../../client/dio_client.dart';
@@ -53,7 +53,7 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
     }
 
     return handleResponse<Option<UserShortestDTO?>>(
-      _iDioClient.getRequest("/api/collections/${CollectionNames.usersCollection}/records/$currentUserId"),
+      _iDioClient.getRequest("/${APIUrls.usersUrl}/records/$currentUserId"),
       onSuccess: (response) {
         final userDTO = UserShortestDTO.fromJson(response.data);
         return some(userDTO);
@@ -75,10 +75,7 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
     });
 
     return handleResponse<UserShortestDTO>(
-      _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.usersCollection}/records/$currentUserId",
-        formData: formData,
-      ),
+      _iDioClient.patchRequest("/${APIUrls.usersUrl}/records/$currentUserId", formData: formData),
       onSuccess: (response) => UserShortestDTO.fromJson(response.data),
     );
   }
@@ -91,10 +88,7 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
   @override
   Future<ListUserShortestResponseDTO> getUsersSearchByUsername({required String userName}) async {
     return handleResponse<ListUserShortestResponseDTO>(
-      _iDioClient.getRequest(
-        "/api/collections/${CollectionNames.usersCollection}/records",
-        queryParams: {"filter": "(username~'$userName')"},
-      ),
+      _iDioClient.getRequest("/${APIUrls.usersUrl}/records", queryParams: {"filter": "(username~'$userName')"}),
       onSuccess: (response) => ListUserShortestResponseDTO.fromJson(response.data),
     );
   }
@@ -110,7 +104,7 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
 
     return handleResponse<UserShortestDTO>(
       _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.usersCollection}/records/$currentUserId",
+        "/${APIUrls.usersUrl}/records/$currentUserId",
         bodyParams: {'followings': updatedFollowings},
       ),
       onSuccess: (response) => UserShortestDTO.fromJson(response.data),
@@ -128,7 +122,7 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
 
     return handleResponse<UserShortestDTO>(
       _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.usersCollection}/records/$currentUserId",
+        "/${APIUrls.usersUrl}/records/$currentUserId",
         bodyParams: {'followings': updatedFollowings},
       ),
       onSuccess: (response) => UserShortestDTO.fromJson(response.data),

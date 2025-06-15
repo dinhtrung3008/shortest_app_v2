@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../../../../presentation/core/constants/collection_names.dart';
 import '../../../../presentation/core/constants/global_constants.dart';
 import '../../../../presentation/core/constants/user_constants.dart';
+import '../../../presentation/core/constants/api_urls.dart';
 
 class RefreshTokenInterceptor extends Interceptor {
   final Dio _dio;
@@ -29,7 +29,7 @@ class RefreshTokenInterceptor extends Interceptor {
 
         if (accessToken != null) {
           final response = await _dio.post(
-            '/api/collections/${CollectionNames.usersCollection}/auth-refresh',
+            '${APIUrls.usersUrl}/auth-refresh',
             options: Options(headers: {'Authorization': 'Bearer $accessToken'}),
           );
 

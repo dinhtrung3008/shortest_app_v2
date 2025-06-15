@@ -3,8 +3,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../domain/core/exceptions/exceptions.dart';
-import '../../../../../presentation/core/constants/collection_names.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
+import '../../../../presentation/core/constants/api_urls.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/chat/chat_dto.dart';
 import '../../client/dio_client.dart';
@@ -53,11 +53,7 @@ class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemote
     final queryParams = {"expand": "users"};
 
     return await handleResponse<ChatDTO>(
-      _iDioClient.postRequest(
-        "/api/collections/${CollectionNames.chatsCollection}/records",
-        bodyParams: body,
-        queryParams: queryParams,
-      ),
+      _iDioClient.postRequest("/${APIUrls.chatUrl}/records", bodyParams: body, queryParams: queryParams),
       onSuccess: (response) => ChatDTO.fromJson(response.data),
     );
   }
@@ -78,7 +74,7 @@ class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemote
     };
 
     return handleResponse<ListChatResponseDTO>(
-      _iDioClient.getRequest("/api/collections/${CollectionNames.chatsCollection}/records", queryParams: queryParams),
+      _iDioClient.getRequest("/${APIUrls.chatUrl}/records", queryParams: queryParams),
       onSuccess: (response) => ListChatResponseDTO.fromJson(response.data),
     );
   }
@@ -86,7 +82,7 @@ class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemote
   @override
   Future<Unit> markAsRead({required String chatId}) async {
     final currentChat = await handleResponse<ChatDTO>(
-      _iDioClient.getRequest("/api/collections/${CollectionNames.chatsCollection}/records/$chatId"),
+      _iDioClient.getRequest("/${APIUrls.chatUrl}/records/$chatId"),
       onSuccess: (response) => ChatDTO.fromJson(response.data),
     );
 
@@ -116,11 +112,7 @@ class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemote
     final queryParams = {"expand": "users"};
 
     return await handleResponse<Unit>(
-      _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.chatsCollection}/records/$chatId",
-        bodyParams: body,
-        queryParams: queryParams,
-      ),
+      _iDioClient.patchRequest("/${APIUrls.chatUrl}/records/$chatId", bodyParams: body, queryParams: queryParams),
       onSuccess: (_) => unit,
     );
   }
@@ -128,7 +120,7 @@ class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemote
   @override
   Future<Unit> markAsUnRead({required String chatId}) async {
     final currentChat = await handleResponse<ChatDTO>(
-      _iDioClient.getRequest("/api/collections/${CollectionNames.chatsCollection}/records/$chatId"),
+      _iDioClient.getRequest("/${APIUrls.chatUrl}/records/$chatId"),
       onSuccess: (response) => ChatDTO.fromJson(response.data),
     );
 
@@ -153,11 +145,7 @@ class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemote
     final queryParams = {"expand": "users"};
 
     return await handleResponse<Unit>(
-      _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.chatsCollection}/records/$chatId",
-        bodyParams: body,
-        queryParams: queryParams,
-      ),
+      _iDioClient.patchRequest("/${APIUrls.chatUrl}/records/$chatId", bodyParams: body, queryParams: queryParams),
       onSuccess: (_) => unit,
     );
   }
@@ -165,7 +153,7 @@ class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemote
   @override
   Future<Unit> deleteChatRoom({required String chatId}) {
     return handleResponse<Unit>(
-      _iDioClient.deleteRequest("/api/collections/${CollectionNames.chatsCollection}/records/$chatId"),
+      _iDioClient.deleteRequest("/${APIUrls.chatUrl}/records/$chatId"),
       onSuccess: (_) => unit,
     );
   }
@@ -173,7 +161,7 @@ class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemote
   @override
   Future<Unit> updateChatRoom({required String chatId, required String lastMessage}) async {
     final currentChat = await handleResponse<ChatDTO>(
-      _iDioClient.getRequest("/api/collections/${CollectionNames.chatsCollection}/records/$chatId"),
+      _iDioClient.getRequest("/${APIUrls.chatUrl}/records/$chatId"),
       onSuccess: (response) => ChatDTO.fromJson(response.data),
     );
 
@@ -200,11 +188,7 @@ class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemote
     final queryParams = {"expand": "users"};
 
     return await handleResponse<Unit>(
-      _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.chatsCollection}/records/$chatId",
-        bodyParams: body,
-        queryParams: queryParams,
-      ),
+      _iDioClient.patchRequest("/${APIUrls.chatUrl}/records/$chatId", bodyParams: body, queryParams: queryParams),
       onSuccess: (_) => unit,
     );
   }

@@ -3,8 +3,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../domain/core/exceptions/exceptions.dart';
-import '../../../../../presentation/core/constants/collection_names.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
+import '../../../../presentation/core/constants/api_urls.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/like_post/like_post_dto.dart';
 import '../../client/dio_client.dart';
@@ -34,11 +34,7 @@ class LikePostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ILikePo
     final queryParams = {"expand": "owner"};
 
     return handleResponse<LikePostDTO>(
-      _iDioClient.postRequest(
-        "/api/collections/${CollectionNames.likesPostCollection}/records",
-        bodyParams: body,
-        queryParams: queryParams,
-      ),
+      _iDioClient.postRequest("/${APIUrls.likesPostUrl}/records", bodyParams: body, queryParams: queryParams),
       onSuccess: (response) => LikePostDTO.fromJson(response.data),
     );
   }
@@ -46,7 +42,7 @@ class LikePostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ILikePo
   @override
   Future<Unit> unlikePost({required String likePostId}) async {
     return handleResponse<Unit>(
-      _iDioClient.deleteRequest("/api/collections/${CollectionNames.likesPostCollection}/records/$likePostId"),
+      _iDioClient.deleteRequest("/${APIUrls.likesPostUrl}/records/$likePostId"),
       onSuccess: (response) {
         return unit;
       },
@@ -58,10 +54,7 @@ class LikePostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ILikePo
     final queryParams = {"page": page, "perPage": perPage, "filter": "(postOwner~'$postId')", "expand": "owner"};
 
     return handleResponse<ListLikePostResponseDTO>(
-      _iDioClient.getRequest(
-        "/api/collections/${CollectionNames.likesPostCollection}/records",
-        queryParams: queryParams,
-      ),
+      _iDioClient.getRequest("/${APIUrls.likesPostUrl}/records", queryParams: queryParams),
       onSuccess: (response) => ListLikePostResponseDTO.fromJson(response.data),
     );
   }

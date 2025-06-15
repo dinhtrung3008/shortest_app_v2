@@ -5,8 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../domain/core/exceptions/exceptions.dart';
-import '../../../../../presentation/core/constants/collection_names.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
+import '../../../../presentation/core/constants/api_urls.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/comment_post/comment_post_dto.dart';
 import '../../client/dio_client.dart';
@@ -52,7 +52,7 @@ class CommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICom
 
     return handleResponse<CommentPostDTO>(
       _iDioClient.postRequest(
-        "/api/collections/${CollectionNames.commentsPostCollection}/records",
+        "/${APIUrls.commentsPostUrl}/records",
         formData: formData,
         queryParams: {"expand": "owner"},
       ),
@@ -72,7 +72,7 @@ class CommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICom
 
     return handleResponse<CommentPostDTO>(
       _iDioClient.patchRequest(
-        "/api/collections/${CollectionNames.commentsPostCollection}/records/$commentId",
+        "/${APIUrls.commentsPostUrl}/records/$commentId",
         formData: formData,
         queryParams: {"expand": "owner"},
       ),
@@ -95,10 +95,7 @@ class CommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICom
     };
 
     return handleResponse<ListCommentPostResponseDTO>(
-      _iDioClient.getRequest(
-        "/api/collections/${CollectionNames.commentsPostCollection}/records",
-        queryParams: queryParams,
-      ),
+      _iDioClient.getRequest("/${APIUrls.commentsPostUrl}/records", queryParams: queryParams),
       onSuccess: (response) => ListCommentPostResponseDTO.fromJson(response.data),
     );
   }
@@ -106,7 +103,7 @@ class CommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICom
   @override
   Future<Unit> deleteComment({required String commentId}) async {
     return handleResponse<Unit>(
-      _iDioClient.deleteRequest("/api/collections/${CollectionNames.commentsPostCollection}/records/$commentId"),
+      _iDioClient.deleteRequest("/${APIUrls.commentsPostUrl}/records/$commentId"),
       onSuccess: (_) {
         return unit;
       },
