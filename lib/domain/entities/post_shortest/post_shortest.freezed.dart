@@ -12,7 +12,6 @@ part of 'post_shortest.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$PostShortest {
 
@@ -23,8 +22,6 @@ mixin _$PostShortest {
 @pragma('vm:prefer-inline')
 $PostShortestCopyWith<PostShortest> get copyWith => _$PostShortestCopyWithImpl<PostShortest>(this as PostShortest, _$identity);
 
-  /// Serializes this PostShortest to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -32,7 +29,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is PostShortest&&(identical(other.postId, postId) || other.postId == postId)&&const DeepCollectionEquality().equals(other.mediaUrls, mediaUrls)&&(identical(other.content, content) || other.content == content)&&(identical(other.visibility, visibility) || other.visibility == visibility)&&(identical(other.type, type) || other.type == type)&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.viewsCount, viewsCount) || other.viewsCount == viewsCount)&&(identical(other.likesCount, likesCount) || other.likesCount == likesCount)&&(identical(other.commentsCount, commentsCount) || other.commentsCount == commentsCount)&&(identical(other.sharesCount, sharesCount) || other.sharesCount == sharesCount)&&const DeepCollectionEquality().equals(other.likes, likes)&&const DeepCollectionEquality().equals(other.comments, comments)&&const DeepCollectionEquality().equals(other.shares, shares)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.ownerExpand, ownerExpand) || other.ownerExpand == ownerExpand));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,postId,const DeepCollectionEquality().hash(mediaUrls),content,visibility,type,owner,viewsCount,likesCount,commentsCount,sharesCount,const DeepCollectionEquality().hash(likes),const DeepCollectionEquality().hash(comments),const DeepCollectionEquality().hash(shares),created,updated,collectionId,collectionName,ownerExpand);
 
@@ -106,11 +103,11 @@ $PostShortestOwnerExpandCopyWith<$Res>? get ownerExpand {
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _PostShortest extends PostShortest {
   const _PostShortest({required this.postId, final  List<String>? mediaUrls, required this.content, required this.visibility, required this.type, required this.owner, required this.viewsCount, required this.likesCount, required this.commentsCount, required this.sharesCount, required final  List<String> likes, required final  List<String> comments, required final  List<String> shares, required this.created, required this.updated, required this.collectionId, required this.collectionName, this.ownerExpand}): _mediaUrls = mediaUrls,_likes = likes,_comments = comments,_shares = shares,super._();
-  factory _PostShortest.fromJson(Map<String, dynamic> json) => _$PostShortestFromJson(json);
+  
 
 @override final  String postId;
  final  List<String>? _mediaUrls;
@@ -163,17 +160,14 @@ class _PostShortest extends PostShortest {
 @pragma('vm:prefer-inline')
 _$PostShortestCopyWith<_PostShortest> get copyWith => __$PostShortestCopyWithImpl<_PostShortest>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$PostShortestToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostShortest&&(identical(other.postId, postId) || other.postId == postId)&&const DeepCollectionEquality().equals(other._mediaUrls, _mediaUrls)&&(identical(other.content, content) || other.content == content)&&(identical(other.visibility, visibility) || other.visibility == visibility)&&(identical(other.type, type) || other.type == type)&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.viewsCount, viewsCount) || other.viewsCount == viewsCount)&&(identical(other.likesCount, likesCount) || other.likesCount == likesCount)&&(identical(other.commentsCount, commentsCount) || other.commentsCount == commentsCount)&&(identical(other.sharesCount, sharesCount) || other.sharesCount == sharesCount)&&const DeepCollectionEquality().equals(other._likes, _likes)&&const DeepCollectionEquality().equals(other._comments, _comments)&&const DeepCollectionEquality().equals(other._shares, _shares)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.ownerExpand, ownerExpand) || other.ownerExpand == ownerExpand));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,postId,const DeepCollectionEquality().hash(_mediaUrls),content,visibility,type,owner,viewsCount,likesCount,commentsCount,sharesCount,const DeepCollectionEquality().hash(_likes),const DeepCollectionEquality().hash(_comments),const DeepCollectionEquality().hash(_shares),created,updated,collectionId,collectionName,ownerExpand);
 
@@ -246,7 +240,6 @@ $PostShortestOwnerExpandCopyWith<$Res>? get ownerExpand {
 }
 }
 
-
 /// @nodoc
 mixin _$PostShortestOwnerExpand {
 
@@ -257,8 +250,6 @@ mixin _$PostShortestOwnerExpand {
 @pragma('vm:prefer-inline')
 $PostShortestOwnerExpandCopyWith<PostShortestOwnerExpand> get copyWith => _$PostShortestOwnerExpandCopyWithImpl<PostShortestOwnerExpand>(this as PostShortestOwnerExpand, _$identity);
 
-  /// Serializes this PostShortestOwnerExpand to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -266,7 +257,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is PostShortestOwnerExpand&&(identical(other.owner, owner) || other.owner == owner));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,owner);
 
@@ -323,11 +314,11 @@ $UserShortestCopyWith<$Res>? get owner {
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _PostShortestOwnerExpand extends PostShortestOwnerExpand {
   const _PostShortestOwnerExpand({this.owner}): super._();
-  factory _PostShortestOwnerExpand.fromJson(Map<String, dynamic> json) => _$PostShortestOwnerExpandFromJson(json);
+  
 
 @override final  UserShortest? owner;
 
@@ -337,17 +328,14 @@ class _PostShortestOwnerExpand extends PostShortestOwnerExpand {
 @pragma('vm:prefer-inline')
 _$PostShortestOwnerExpandCopyWith<_PostShortestOwnerExpand> get copyWith => __$PostShortestOwnerExpandCopyWithImpl<_PostShortestOwnerExpand>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$PostShortestOwnerExpandToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostShortestOwnerExpand&&(identical(other.owner, owner) || other.owner == owner));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,owner);
 

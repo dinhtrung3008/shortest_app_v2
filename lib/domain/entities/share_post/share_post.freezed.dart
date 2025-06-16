@@ -12,7 +12,6 @@ part of 'share_post.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$SharePost {
 
@@ -23,8 +22,6 @@ mixin _$SharePost {
 @pragma('vm:prefer-inline')
 $SharePostCopyWith<SharePost> get copyWith => _$SharePostCopyWithImpl<SharePost>(this as SharePost, _$identity);
 
-  /// Serializes this SharePost to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -32,7 +29,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is SharePost&&(identical(other.sharePostId, sharePostId) || other.sharePostId == sharePostId)&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.expand, expand) || other.expand == expand)&&(identical(other.likesCount, likesCount) || other.likesCount == likesCount));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,sharePostId,owner,postOwner,created,updated,collectionId,collectionName,expand,likesCount);
 
@@ -97,11 +94,11 @@ $SharePostExpandCopyWith<$Res>? get expand {
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _SharePost extends SharePost {
   const _SharePost({this.sharePostId, this.owner, this.postOwner, this.created, this.updated, this.collectionId, this.collectionName, this.expand, this.likesCount = 0}): super._();
-  factory _SharePost.fromJson(Map<String, dynamic> json) => _$SharePostFromJson(json);
+  
 
 @override final  String? sharePostId;
 @override final  String? owner;
@@ -119,17 +116,14 @@ class _SharePost extends SharePost {
 @pragma('vm:prefer-inline')
 _$SharePostCopyWith<_SharePost> get copyWith => __$SharePostCopyWithImpl<_SharePost>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$SharePostToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _SharePost&&(identical(other.sharePostId, sharePostId) || other.sharePostId == sharePostId)&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.expand, expand) || other.expand == expand)&&(identical(other.likesCount, likesCount) || other.likesCount == likesCount));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,sharePostId,owner,postOwner,created,updated,collectionId,collectionName,expand,likesCount);
 
@@ -193,7 +187,6 @@ $SharePostExpandCopyWith<$Res>? get expand {
 }
 }
 
-
 /// @nodoc
 mixin _$SharePostExpand {
 
@@ -204,8 +197,6 @@ mixin _$SharePostExpand {
 @pragma('vm:prefer-inline')
 $SharePostExpandCopyWith<SharePostExpand> get copyWith => _$SharePostExpandCopyWithImpl<SharePostExpand>(this as SharePostExpand, _$identity);
 
-  /// Serializes this SharePostExpand to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -213,7 +204,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is SharePostExpand&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,owner,postOwner);
 
@@ -283,11 +274,11 @@ $PostShortestCopyWith<$Res>? get postOwner {
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _SharePostExpand extends SharePostExpand {
   const _SharePostExpand({this.owner, this.postOwner}): super._();
-  factory _SharePostExpand.fromJson(Map<String, dynamic> json) => _$SharePostExpandFromJson(json);
+  
 
 @override final  UserShortest? owner;
 @override final  PostShortest? postOwner;
@@ -298,17 +289,14 @@ class _SharePostExpand extends SharePostExpand {
 @pragma('vm:prefer-inline')
 _$SharePostExpandCopyWith<_SharePostExpand> get copyWith => __$SharePostExpandCopyWithImpl<_SharePostExpand>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$SharePostExpandToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _SharePostExpand&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,owner,postOwner);
 

@@ -12,7 +12,6 @@ part of 'comment_post.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$CommentPost {
 
@@ -23,8 +22,6 @@ mixin _$CommentPost {
 @pragma('vm:prefer-inline')
 $CommentPostCopyWith<CommentPost> get copyWith => _$CommentPostCopyWithImpl<CommentPost>(this as CommentPost, _$identity);
 
-  /// Serializes this CommentPost to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -32,7 +29,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is CommentPost&&(identical(other.commentPostId, commentPostId) || other.commentPostId == commentPostId)&&(identical(other.content, content) || other.content == content)&&(identical(other.owner, owner) || other.owner == owner)&&const DeepCollectionEquality().equals(other.mediaUrls, mediaUrls)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.expand, expand) || other.expand == expand));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,commentPostId,content,owner,const DeepCollectionEquality().hash(mediaUrls),postOwner,created,updated,collectionId,collectionName,expand);
 
@@ -98,11 +95,11 @@ $CommentPostExpandCopyWith<$Res>? get expand {
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _CommentPost extends CommentPost {
   const _CommentPost({required this.commentPostId, required this.content, required this.owner, final  List<String>? mediaUrls, required this.postOwner, required this.created, required this.updated, required this.collectionId, required this.collectionName, this.expand}): _mediaUrls = mediaUrls,super._();
-  factory _CommentPost.fromJson(Map<String, dynamic> json) => _$CommentPostFromJson(json);
+  
 
 @override final  String commentPostId;
 @override final  String content;
@@ -129,17 +126,14 @@ class _CommentPost extends CommentPost {
 @pragma('vm:prefer-inline')
 _$CommentPostCopyWith<_CommentPost> get copyWith => __$CommentPostCopyWithImpl<_CommentPost>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$CommentPostToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _CommentPost&&(identical(other.commentPostId, commentPostId) || other.commentPostId == commentPostId)&&(identical(other.content, content) || other.content == content)&&(identical(other.owner, owner) || other.owner == owner)&&const DeepCollectionEquality().equals(other._mediaUrls, _mediaUrls)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.expand, expand) || other.expand == expand));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,commentPostId,content,owner,const DeepCollectionEquality().hash(_mediaUrls),postOwner,created,updated,collectionId,collectionName,expand);
 
@@ -204,7 +198,6 @@ $CommentPostExpandCopyWith<$Res>? get expand {
 }
 }
 
-
 /// @nodoc
 mixin _$CommentPostExpand {
 
@@ -215,8 +208,6 @@ mixin _$CommentPostExpand {
 @pragma('vm:prefer-inline')
 $CommentPostExpandCopyWith<CommentPostExpand> get copyWith => _$CommentPostExpandCopyWithImpl<CommentPostExpand>(this as CommentPostExpand, _$identity);
 
-  /// Serializes this CommentPostExpand to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -224,7 +215,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is CommentPostExpand&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,owner,postOwner);
 
@@ -294,11 +285,11 @@ $PostShortestCopyWith<$Res>? get postOwner {
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _CommentPostExpand extends CommentPostExpand {
   const _CommentPostExpand({this.owner, this.postOwner}): super._();
-  factory _CommentPostExpand.fromJson(Map<String, dynamic> json) => _$CommentPostExpandFromJson(json);
+  
 
 @override final  UserShortest? owner;
 @override final  PostShortest? postOwner;
@@ -309,17 +300,14 @@ class _CommentPostExpand extends CommentPostExpand {
 @pragma('vm:prefer-inline')
 _$CommentPostExpandCopyWith<_CommentPostExpand> get copyWith => __$CommentPostExpandCopyWithImpl<_CommentPostExpand>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$CommentPostExpandToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _CommentPostExpand&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,owner,postOwner);
 

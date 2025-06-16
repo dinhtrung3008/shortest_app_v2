@@ -4,7 +4,6 @@ import '../post_shortest/post_shortest.dart';
 import '../user_shortest/user_shortest.dart';
 
 part 'share_post.freezed.dart';
-part 'share_post.g.dart';
 
 @freezed
 abstract class SharePost with _$SharePost {
@@ -22,8 +21,6 @@ abstract class SharePost with _$SharePost {
     @Default(0) int? likesCount,
   }) = _SharePost;
 
-  factory SharePost.fromJson(Map<String, dynamic> json) =>
-      _$SharePostFromJson(json);
 }
 
 @freezed
@@ -35,6 +32,5 @@ abstract class SharePostExpand with _$SharePostExpand {
     PostShortest? postOwner,
   }) = _SharePostExpand;
 
-  factory SharePostExpand.fromJson(Map<String, dynamic> json) =>
-      _$SharePostExpandFromJson(json);
+  
 }

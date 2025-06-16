@@ -38,9 +38,7 @@ abstract class UserShortest with _$UserShortest {
     return (followings?.length ?? 0) >= 1;
   }
 
-  bool isMe(String currentUserId, String otherUserId) =>
-      currentUserId == otherUserId;
+  bool isMe(String currentUserId, String otherUserId) => currentUserId == otherUserId;
 
-  factory UserShortest.fromJson(Map<String, dynamic> json) =>
-      _$UserShortestFromJson(json);
+  factory UserShortest.fromJson(Map<String, dynamic> json) => _$UserShortestFromJson(json);
 }

@@ -12,7 +12,6 @@ part of 'like_post.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$LikePost {
 
@@ -23,8 +22,6 @@ mixin _$LikePost {
 @pragma('vm:prefer-inline')
 $LikePostCopyWith<LikePost> get copyWith => _$LikePostCopyWithImpl<LikePost>(this as LikePost, _$identity);
 
-  /// Serializes this LikePost to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -32,7 +29,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is LikePost&&(identical(other.likePostId, likePostId) || other.likePostId == likePostId)&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.expand, expand) || other.expand == expand));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,likePostId,owner,postOwner,created,updated,collectionId,collectionName,expand);
 
@@ -96,11 +93,11 @@ $LikePostExpandCopyWith<$Res>? get expand {
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _LikePost extends LikePost {
   const _LikePost({required this.likePostId, required this.owner, required this.postOwner, required this.created, required this.updated, required this.collectionId, required this.collectionName, this.expand}): super._();
-  factory _LikePost.fromJson(Map<String, dynamic> json) => _$LikePostFromJson(json);
+  
 
 @override final  String likePostId;
 @override final  String owner;
@@ -117,17 +114,14 @@ class _LikePost extends LikePost {
 @pragma('vm:prefer-inline')
 _$LikePostCopyWith<_LikePost> get copyWith => __$LikePostCopyWithImpl<_LikePost>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$LikePostToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _LikePost&&(identical(other.likePostId, likePostId) || other.likePostId == likePostId)&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.expand, expand) || other.expand == expand));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,likePostId,owner,postOwner,created,updated,collectionId,collectionName,expand);
 
@@ -190,7 +184,6 @@ $LikePostExpandCopyWith<$Res>? get expand {
 }
 }
 
-
 /// @nodoc
 mixin _$LikePostExpand {
 
@@ -201,8 +194,6 @@ mixin _$LikePostExpand {
 @pragma('vm:prefer-inline')
 $LikePostExpandCopyWith<LikePostExpand> get copyWith => _$LikePostExpandCopyWithImpl<LikePostExpand>(this as LikePostExpand, _$identity);
 
-  /// Serializes this LikePostExpand to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -210,7 +201,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is LikePostExpand&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,owner,postOwner);
 
@@ -280,11 +271,11 @@ $PostShortestCopyWith<$Res>? get postOwner {
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _LikePostExpand extends LikePostExpand {
   const _LikePostExpand({this.owner, this.postOwner}): super._();
-  factory _LikePostExpand.fromJson(Map<String, dynamic> json) => _$LikePostExpandFromJson(json);
+  
 
 @override final  UserShortest? owner;
 @override final  PostShortest? postOwner;
@@ -295,17 +286,14 @@ class _LikePostExpand extends LikePostExpand {
 @pragma('vm:prefer-inline')
 _$LikePostExpandCopyWith<_LikePostExpand> get copyWith => __$LikePostExpandCopyWithImpl<_LikePostExpand>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$LikePostExpandToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _LikePostExpand&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.postOwner, postOwner) || other.postOwner == postOwner));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,owner,postOwner);
 

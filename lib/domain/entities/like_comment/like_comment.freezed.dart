@@ -12,7 +12,6 @@ part of 'like_comment.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$LikeComment {
 
@@ -23,8 +22,6 @@ mixin _$LikeComment {
 @pragma('vm:prefer-inline')
 $LikeCommentCopyWith<LikeComment> get copyWith => _$LikeCommentCopyWithImpl<LikeComment>(this as LikeComment, _$identity);
 
-  /// Serializes this LikeComment to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -32,7 +29,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is LikeComment&&(identical(other.likeCommentId, likeCommentId) || other.likeCommentId == likeCommentId)&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.commentOwner, commentOwner) || other.commentOwner == commentOwner)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.expand, expand) || other.expand == expand));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,likeCommentId,owner,commentOwner,collectionId,collectionName,created,updated,expand);
 
@@ -96,11 +93,11 @@ $LikeCommentExpandCopyWith<$Res>? get expand {
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _LikeComment extends LikeComment {
   const _LikeComment({required this.likeCommentId, required this.owner, required this.commentOwner, required this.collectionId, required this.collectionName, required this.created, required this.updated, this.expand}): super._();
-  factory _LikeComment.fromJson(Map<String, dynamic> json) => _$LikeCommentFromJson(json);
+  
 
 @override final  String likeCommentId;
 @override final  String owner;
@@ -117,17 +114,14 @@ class _LikeComment extends LikeComment {
 @pragma('vm:prefer-inline')
 _$LikeCommentCopyWith<_LikeComment> get copyWith => __$LikeCommentCopyWithImpl<_LikeComment>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$LikeCommentToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _LikeComment&&(identical(other.likeCommentId, likeCommentId) || other.likeCommentId == likeCommentId)&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.commentOwner, commentOwner) || other.commentOwner == commentOwner)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.expand, expand) || other.expand == expand));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,likeCommentId,owner,commentOwner,collectionId,collectionName,created,updated,expand);
 
@@ -190,7 +184,6 @@ $LikeCommentExpandCopyWith<$Res>? get expand {
 }
 }
 
-
 /// @nodoc
 mixin _$LikeCommentExpand {
 
@@ -201,8 +194,6 @@ mixin _$LikeCommentExpand {
 @pragma('vm:prefer-inline')
 $LikeCommentExpandCopyWith<LikeCommentExpand> get copyWith => _$LikeCommentExpandCopyWithImpl<LikeCommentExpand>(this as LikeCommentExpand, _$identity);
 
-  /// Serializes this LikeCommentExpand to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -210,7 +201,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is LikeCommentExpand&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.commentOwner, commentOwner) || other.commentOwner == commentOwner));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,owner,commentOwner);
 
@@ -280,11 +271,11 @@ $CommentPostCopyWith<$Res>? get commentOwner {
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _LikeCommentExpand extends LikeCommentExpand {
   const _LikeCommentExpand({this.owner, this.commentOwner}): super._();
-  factory _LikeCommentExpand.fromJson(Map<String, dynamic> json) => _$LikeCommentExpandFromJson(json);
+  
 
 @override final  UserShortest? owner;
 @override final  CommentPost? commentOwner;
@@ -295,17 +286,14 @@ class _LikeCommentExpand extends LikeCommentExpand {
 @pragma('vm:prefer-inline')
 _$LikeCommentExpandCopyWith<_LikeCommentExpand> get copyWith => __$LikeCommentExpandCopyWithImpl<_LikeCommentExpand>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$LikeCommentExpandToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _LikeCommentExpand&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.commentOwner, commentOwner) || other.commentOwner == commentOwner));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,owner,commentOwner);
 

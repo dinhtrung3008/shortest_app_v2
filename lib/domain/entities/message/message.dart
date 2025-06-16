@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../user_shortest/user_shortest.dart';
 
 part 'message.freezed.dart';
-part 'message.g.dart';
 
 @freezed
 abstract class Message with _$Message {
@@ -23,18 +22,11 @@ abstract class Message with _$Message {
     required DateTime updated,
     @Default(false) bool isLiked,
   }) = _Message;
-
-  factory Message.fromJson(Map<String, dynamic> json) =>
-      _$MessageFromJson(json);
 }
 
 @freezed
 abstract class MessageExpandSendById with _$MessageExpandSendById {
   const MessageExpandSendById._();
 
-  const factory MessageExpandSendById({UserShortest? sendById}) =
-      _MessageExpandSendById;
-
-  factory MessageExpandSendById.fromJson(Map<String, dynamic> json) =>
-      _$MessageExpandSendByIdFromJson(json);
+  const factory MessageExpandSendById({UserShortest? sendById}) = _MessageExpandSendById;
 }
