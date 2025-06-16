@@ -12,7 +12,6 @@ part of 'chat.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$Chat {
 
@@ -23,8 +22,6 @@ mixin _$Chat {
 @pragma('vm:prefer-inline')
 $ChatCopyWith<Chat> get copyWith => _$ChatCopyWithImpl<Chat>(this as Chat, _$identity);
 
-  /// Serializes this Chat to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -32,7 +29,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is Chat&&(identical(other.id, id) || other.id == id)&&(identical(other.lastSenderId, lastSenderId) || other.lastSenderId == lastSenderId)&&const DeepCollectionEquality().equals(other.users, users)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.lastMessages, lastMessages) || other.lastMessages == lastMessages)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.expand, expand) || other.expand == expand)&&const DeepCollectionEquality().equals(other.usersInChat, usersInChat));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,lastSenderId,const DeepCollectionEquality().hash(users),lastMessage,lastMessages,created,updated,collectionId,collectionName,expand,const DeepCollectionEquality().hash(usersInChat));
 
@@ -108,11 +105,11 @@ $ChatExpandUsersInChatCopyWith<$Res>? get expand {
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _Chat extends Chat {
   const _Chat({required this.id, required this.lastSenderId, required final  List<String> users, required this.lastMessage, required this.lastMessages, required this.created, required this.updated, required this.collectionId, required this.collectionName, this.expand, required final  List<UsersInChat> usersInChat}): _users = users,_usersInChat = usersInChat,super._();
-  factory _Chat.fromJson(Map<String, dynamic> json) => _$ChatFromJson(json);
+  
 
 @override final  String id;
 @override final  String lastSenderId;
@@ -144,17 +141,14 @@ class _Chat extends Chat {
 @pragma('vm:prefer-inline')
 _$ChatCopyWith<_Chat> get copyWith => __$ChatCopyWithImpl<_Chat>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$ChatToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _Chat&&(identical(other.id, id) || other.id == id)&&(identical(other.lastSenderId, lastSenderId) || other.lastSenderId == lastSenderId)&&const DeepCollectionEquality().equals(other._users, _users)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.lastMessages, lastMessages) || other.lastMessages == lastMessages)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.expand, expand) || other.expand == expand)&&const DeepCollectionEquality().equals(other._usersInChat, _usersInChat));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,lastSenderId,const DeepCollectionEquality().hash(_users),lastMessage,lastMessages,created,updated,collectionId,collectionName,expand,const DeepCollectionEquality().hash(_usersInChat));
 
@@ -229,7 +223,6 @@ $ChatExpandUsersInChatCopyWith<$Res>? get expand {
 }
 }
 
-
 /// @nodoc
 mixin _$ChatExpandUsersInChat {
 
@@ -240,8 +233,6 @@ mixin _$ChatExpandUsersInChat {
 @pragma('vm:prefer-inline')
 $ChatExpandUsersInChatCopyWith<ChatExpandUsersInChat> get copyWith => _$ChatExpandUsersInChatCopyWithImpl<ChatExpandUsersInChat>(this as ChatExpandUsersInChat, _$identity);
 
-  /// Serializes this ChatExpandUsersInChat to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -249,7 +240,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatExpandUsersInChat&&const DeepCollectionEquality().equals(other.users, users));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(users));
 
@@ -294,11 +285,11 @@ as List<UserShortest>?,
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _ChatExpandUsersInChat extends ChatExpandUsersInChat {
   const _ChatExpandUsersInChat({final  List<UserShortest>? users}): _users = users,super._();
-  factory _ChatExpandUsersInChat.fromJson(Map<String, dynamic> json) => _$ChatExpandUsersInChatFromJson(json);
+  
 
  final  List<UserShortest>? _users;
 @override List<UserShortest>? get users {
@@ -316,17 +307,14 @@ class _ChatExpandUsersInChat extends ChatExpandUsersInChat {
 @pragma('vm:prefer-inline')
 _$ChatExpandUsersInChatCopyWith<_ChatExpandUsersInChat> get copyWith => __$ChatExpandUsersInChatCopyWithImpl<_ChatExpandUsersInChat>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$ChatExpandUsersInChatToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatExpandUsersInChat&&const DeepCollectionEquality().equals(other._users, _users));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_users));
 
@@ -370,7 +358,6 @@ as List<UserShortest>?,
 
 }
 
-
 /// @nodoc
 mixin _$LastMessages {
 
@@ -381,8 +368,6 @@ mixin _$LastMessages {
 @pragma('vm:prefer-inline')
 $LastMessagesCopyWith<LastMessages> get copyWith => _$LastMessagesCopyWithImpl<LastMessages>(this as LastMessages, _$identity);
 
-  /// Serializes this LastMessages to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -390,7 +375,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is LastMessages&&(identical(other.sendByUserId, sendByUserId) || other.sendByUserId == sendByUserId)&&const DeepCollectionEquality().equals(other.messages, messages));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,sendByUserId,const DeepCollectionEquality().hash(messages));
 
@@ -436,11 +421,11 @@ as List<String>,
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _LastMessages extends LastMessages {
   const _LastMessages({required this.sendByUserId, required final  List<String> messages}): _messages = messages,super._();
-  factory _LastMessages.fromJson(Map<String, dynamic> json) => _$LastMessagesFromJson(json);
+  
 
 @override final  String sendByUserId;
  final  List<String> _messages;
@@ -457,17 +442,14 @@ class _LastMessages extends LastMessages {
 @pragma('vm:prefer-inline')
 _$LastMessagesCopyWith<_LastMessages> get copyWith => __$LastMessagesCopyWithImpl<_LastMessages>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$LastMessagesToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _LastMessages&&(identical(other.sendByUserId, sendByUserId) || other.sendByUserId == sendByUserId)&&const DeepCollectionEquality().equals(other._messages, _messages));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,sendByUserId,const DeepCollectionEquality().hash(_messages));
 
@@ -512,7 +494,6 @@ as List<String>,
 
 }
 
-
 /// @nodoc
 mixin _$UsersInChat {
 
@@ -523,8 +504,6 @@ mixin _$UsersInChat {
 @pragma('vm:prefer-inline')
 $UsersInChatCopyWith<UsersInChat> get copyWith => _$UsersInChatCopyWithImpl<UsersInChat>(this as UsersInChat, _$identity);
 
-  /// Serializes this UsersInChat to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -532,7 +511,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is UsersInChat&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.isRead, isRead) || other.isRead == isRead));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,userId,isRead);
 
@@ -578,11 +557,11 @@ as bool,
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _UsersInChat implements UsersInChat {
   const _UsersInChat({required this.userId, required this.isRead});
-  factory _UsersInChat.fromJson(Map<String, dynamic> json) => _$UsersInChatFromJson(json);
+  
 
 @override final  String userId;
 @override final  bool isRead;
@@ -593,17 +572,14 @@ class _UsersInChat implements UsersInChat {
 @pragma('vm:prefer-inline')
 _$UsersInChatCopyWith<_UsersInChat> get copyWith => __$UsersInChatCopyWithImpl<_UsersInChat>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$UsersInChatToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _UsersInChat&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.isRead, isRead) || other.isRead == isRead));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,userId,isRead);
 

@@ -5,7 +5,6 @@ import '../../../presentation/core/enums/visibility_enum.dart';
 import '../user_shortest/user_shortest.dart';
 
 part 'post_shortest.freezed.dart';
-part 'post_shortest.g.dart';
 
 @freezed
 abstract class PostShortest with _$PostShortest {
@@ -34,8 +33,7 @@ abstract class PostShortest with _$PostShortest {
 
   bool mediasAreNotEmpty() => mediaUrls != null && mediaUrls!.isNotEmpty;
 
-  factory PostShortest.fromJson(Map<String, dynamic> json) =>
-      _$PostShortestFromJson(json);
+ 
 }
 
 @freezed
@@ -45,6 +43,5 @@ abstract class PostShortestOwnerExpand with _$PostShortestOwnerExpand {
   const factory PostShortestOwnerExpand({UserShortest? owner}) =
       _PostShortestOwnerExpand;
 
-  factory PostShortestOwnerExpand.fromJson(Map<String, dynamic> json) =>
-      _$PostShortestOwnerExpandFromJson(json);
+ 
 }

@@ -4,7 +4,6 @@ import '../comment_post/comment_post.dart';
 import '../user_shortest/user_shortest.dart';
 
 part 'like_comment.freezed.dart';
-part 'like_comment.g.dart';
 
 @freezed
 abstract class LikeComment with _$LikeComment {
@@ -20,20 +19,11 @@ abstract class LikeComment with _$LikeComment {
     required DateTime updated,
     LikeCommentExpand? expand,
   }) = _LikeComment;
-
-  factory LikeComment.fromJson(Map<String, dynamic> json) =>
-      _$LikeCommentFromJson(json);
 }
 
 @freezed
 abstract class LikeCommentExpand with _$LikeCommentExpand {
   const LikeCommentExpand._();
 
-  const factory LikeCommentExpand({
-    UserShortest? owner,
-    CommentPost? commentOwner,
-  }) = _LikeCommentExpand;
-
-  factory LikeCommentExpand.fromJson(Map<String, dynamic> json) =>
-      _$LikeCommentExpandFromJson(json);
+  const factory LikeCommentExpand({UserShortest? owner, CommentPost? commentOwner}) = _LikeCommentExpand;
 }

@@ -4,7 +4,6 @@ import '../post_shortest/post_shortest.dart';
 import '../user_shortest/user_shortest.dart';
 
 part 'comment_post.freezed.dart';
-part 'comment_post.g.dart';
 
 @freezed
 abstract class CommentPost with _$CommentPost {
@@ -26,9 +25,6 @@ abstract class CommentPost with _$CommentPost {
   bool get isEdited {
     return updated.isAfter(created);
   }
-
-  factory CommentPost.fromJson(Map<String, dynamic> json) =>
-      _$CommentPostFromJson(json);
 }
 
 @freezed
@@ -40,6 +36,4 @@ abstract class CommentPostExpand with _$CommentPostExpand {
     PostShortest? postOwner,
   }) = _CommentPostExpand;
 
-  factory CommentPostExpand.fromJson(Map<String, dynamic> json) =>
-      _$CommentPostExpandFromJson(json);
 }

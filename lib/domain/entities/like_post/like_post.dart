@@ -4,7 +4,6 @@ import '../post_shortest/post_shortest.dart';
 import '../user_shortest/user_shortest.dart';
 
 part 'like_post.freezed.dart';
-part 'like_post.g.dart';
 
 @freezed
 abstract class LikePost with _$LikePost {
@@ -20,18 +19,11 @@ abstract class LikePost with _$LikePost {
     required String collectionName,
     LikePostExpand? expand,
   }) = _LikePost;
-
-  factory LikePost.fromJson(Map<String, dynamic> json) =>
-      _$LikePostFromJson(json);
 }
 
 @freezed
 abstract class LikePostExpand with _$LikePostExpand {
   const LikePostExpand._();
 
-  const factory LikePostExpand({UserShortest? owner, PostShortest? postOwner}) =
-      _LikePostExpand;
-
-  factory LikePostExpand.fromJson(Map<String, dynamic> json) =>
-      _$LikePostExpandFromJson(json);
+  const factory LikePostExpand({UserShortest? owner, PostShortest? postOwner}) = _LikePostExpand;
 }

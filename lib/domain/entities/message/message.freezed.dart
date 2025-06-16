@@ -12,7 +12,6 @@ part of 'message.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$Message {
 
@@ -23,8 +22,6 @@ mixin _$Message {
 @pragma('vm:prefer-inline')
 $MessageCopyWith<Message> get copyWith => _$MessageCopyWithImpl<Message>(this as Message, _$identity);
 
-  /// Serializes this Message to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -32,7 +29,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is Message&&(identical(other.id, id) || other.id == id)&&(identical(other.chatId, chatId) || other.chatId == chatId)&&(identical(other.sendById, sendById) || other.sendById == sendById)&&(identical(other.type, type) || other.type == type)&&(identical(other.content, content) || other.content == content)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.sendingTime, sendingTime) || other.sendingTime == sendingTime)&&(identical(other.expand, expand) || other.expand == expand)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,chatId,sendById,type,content,collectionId,collectionName,sendingTime,expand,created,updated,isLiked);
 
@@ -100,11 +97,11 @@ $MessageExpandSendByIdCopyWith<$Res>? get expand {
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _Message extends Message {
   const _Message({required this.id, required this.chatId, required this.sendById, required this.type, required this.content, required this.collectionId, required this.collectionName, required this.sendingTime, this.expand, required this.created, required this.updated, this.isLiked = false}): super._();
-  factory _Message.fromJson(Map<String, dynamic> json) => _$MessageFromJson(json);
+  
 
 @override final  String id;
 @override final  String chatId;
@@ -125,17 +122,14 @@ class _Message extends Message {
 @pragma('vm:prefer-inline')
 _$MessageCopyWith<_Message> get copyWith => __$MessageCopyWithImpl<_Message>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$MessageToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _Message&&(identical(other.id, id) || other.id == id)&&(identical(other.chatId, chatId) || other.chatId == chatId)&&(identical(other.sendById, sendById) || other.sendById == sendById)&&(identical(other.type, type) || other.type == type)&&(identical(other.content, content) || other.content == content)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.sendingTime, sendingTime) || other.sendingTime == sendingTime)&&(identical(other.expand, expand) || other.expand == expand)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.isLiked, isLiked) || other.isLiked == isLiked));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,chatId,sendById,type,content,collectionId,collectionName,sendingTime,expand,created,updated,isLiked);
 
@@ -202,7 +196,6 @@ $MessageExpandSendByIdCopyWith<$Res>? get expand {
 }
 }
 
-
 /// @nodoc
 mixin _$MessageExpandSendById {
 
@@ -213,8 +206,6 @@ mixin _$MessageExpandSendById {
 @pragma('vm:prefer-inline')
 $MessageExpandSendByIdCopyWith<MessageExpandSendById> get copyWith => _$MessageExpandSendByIdCopyWithImpl<MessageExpandSendById>(this as MessageExpandSendById, _$identity);
 
-  /// Serializes this MessageExpandSendById to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -222,7 +213,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is MessageExpandSendById&&(identical(other.sendById, sendById) || other.sendById == sendById));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,sendById);
 
@@ -279,11 +270,11 @@ $UserShortestCopyWith<$Res>? get sendById {
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _MessageExpandSendById extends MessageExpandSendById {
   const _MessageExpandSendById({this.sendById}): super._();
-  factory _MessageExpandSendById.fromJson(Map<String, dynamic> json) => _$MessageExpandSendByIdFromJson(json);
+  
 
 @override final  UserShortest? sendById;
 
@@ -293,17 +284,14 @@ class _MessageExpandSendById extends MessageExpandSendById {
 @pragma('vm:prefer-inline')
 _$MessageExpandSendByIdCopyWith<_MessageExpandSendById> get copyWith => __$MessageExpandSendByIdCopyWithImpl<_MessageExpandSendById>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$MessageExpandSendByIdToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _MessageExpandSendById&&(identical(other.sendById, sendById) || other.sendById == sendById));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,sendById);
 
