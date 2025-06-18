@@ -19,12 +19,16 @@ abstract class InjectableModule {
   PocketBase get pocketbase =>
       PocketBase(Platform.isAndroid ? GlobalConstants.pockerBaseUrlAndroid : GlobalConstants.pockerBaseUrlIOS);
 
-  @lazySingleton
-  Dio get dio {
+  @preResolve
+  @singleton
+  Future<Dio> get provideDio async {
     final dio = Dio(
       BaseOptions(
         baseUrl: Platform.isAndroid ? GlobalConstants.pockerBaseUrlAndroid : GlobalConstants.pockerBaseUrlIOS,
         connectTimeout: const Duration(seconds: 30),
+        receiveTimeout: const Duration(seconds: 30),
+        sendTimeout: const Duration(seconds: 30),
+        headers: {'Content-Type': 'application/json'},
       ),
     );
 

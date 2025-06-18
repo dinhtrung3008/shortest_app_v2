@@ -50,7 +50,7 @@ class CommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICom
 
     final formData = await _createFormData(body: body, mediaFiles: mediaFiles);
 
-    return handleResponse<CommentPostDTO>(
+    return execute<CommentPostDTO>(
       _iDioClient.postRequest(
         "/${APIUrls.commentsPostUrl}/records",
         formData: formData,
@@ -70,7 +70,7 @@ class CommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICom
 
     final formData = await _createFormData(body: body, mediaFiles: mediaFiles);
 
-    return handleResponse<CommentPostDTO>(
+    return execute<CommentPostDTO>(
       _iDioClient.patchRequest(
         "/${APIUrls.commentsPostUrl}/records/$commentId",
         formData: formData,
@@ -94,7 +94,7 @@ class CommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICom
       "expand": "owner",
     };
 
-    return handleResponse<ListCommentPostResponseDTO>(
+    return execute<ListCommentPostResponseDTO>(
       _iDioClient.getRequest("/${APIUrls.commentsPostUrl}/records", queryParams: queryParams),
       onSuccess: (response) => ListCommentPostResponseDTO.fromJson(response.data),
     );
@@ -102,7 +102,7 @@ class CommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICom
 
   @override
   Future<Unit> deleteComment({required String commentId}) async {
-    return handleResponse<Unit>(
+    return execute<Unit>(
       _iDioClient.deleteRequest("/${APIUrls.commentsPostUrl}/records/$commentId"),
       onSuccess: (_) {
         return unit;

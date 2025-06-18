@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/repositories/like_post/i_like_post_repository.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
 import '../../data/remote/like_post/like_post_remote_service.dart';
 
 @LazySingleton(as: IUnlikePost)
@@ -20,7 +20,7 @@ class UnlikePostImpl with ExecuteRepositoryImpl, ConnectionChecker implements IU
       return left(const BaseFailure.offline());
     }
 
-    return execute<Unit>(
+    return executeRepositoryService<Unit>(
       action: () async {
         await _iLikePostRemoteService.unlikePost(likePostId: likePostId);
         return right(unit);

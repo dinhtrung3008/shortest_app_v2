@@ -5,15 +5,15 @@ import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/repositories/auth/i_auth_repository.dart';
 import '../../../../domain/value_object/auth/auth_value_object.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
-import '../../data/remote/authentication/authentication_remote_service.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
+import '../../data/remote/auth/auth_remote_service.dart';
 import '../../dtos/user_shortest/user_shortest_dto.dart';
 
 @LazySingleton(as: ISignUpWithEmail)
 class SignUpWithEmailImpl with ExecuteRepositoryImpl, ConnectionChecker implements ISignUpWithEmail {
-  final IAuthenticationRemoteService _iAuthenticationSupabaseRemoteService;
+  final IAuthRemoteService _iAuthRemoteService;
 
-  SignUpWithEmailImpl(this._iAuthenticationSupabaseRemoteService);
+  SignUpWithEmailImpl(this._iAuthRemoteService);
 
   @override
   Future<Either<BaseFailure, Unit>> call({
@@ -31,7 +31,7 @@ class SignUpWithEmailImpl with ExecuteRepositoryImpl, ConnectionChecker implemen
       return left(const BaseFailure.offline(message: 'No internet connection'));
     }
 
-    return execute<Unit>(
+    return executeRepositoryService<Unit>(
       action: () async {
         final fullNameStr = fullName.getValueOrCrash();
         final emailStr = emailAddress.getValueOrCrash();
@@ -62,7 +62,7 @@ class SignUpWithEmailImpl with ExecuteRepositoryImpl, ConnectionChecker implemen
             address: addressStr,
           );
 
-          await _iAuthenticationSupabaseRemoteService.signUpWithEmailAndPassword(userDTO: userDTO);
+          await _iAuthRemoteService.signUpWithEmailAndPassword(userDTO: userDTO);
         }
         return right(unit);
       },

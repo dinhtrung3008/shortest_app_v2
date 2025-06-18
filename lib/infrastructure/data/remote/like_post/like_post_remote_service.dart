@@ -33,7 +33,7 @@ class LikePostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ILikePo
     final body = {"owner": currentUserId, "postOwner": postId};
     final queryParams = {"expand": "owner"};
 
-    return handleResponse<LikePostDTO>(
+    return execute<LikePostDTO>(
       _iDioClient.postRequest("/${APIUrls.likesPostUrl}/records", bodyParams: body, queryParams: queryParams),
       onSuccess: (response) => LikePostDTO.fromJson(response.data),
     );
@@ -41,7 +41,7 @@ class LikePostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ILikePo
 
   @override
   Future<Unit> unlikePost({required String likePostId}) async {
-    return handleResponse<Unit>(
+    return execute<Unit>(
       _iDioClient.deleteRequest("/${APIUrls.likesPostUrl}/records/$likePostId"),
       onSuccess: (response) {
         return unit;
@@ -53,7 +53,7 @@ class LikePostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ILikePo
   Future<ListLikePostResponseDTO> getLikesByPostId({required String postId, int page = 1, int perPage = 10}) async {
     final queryParams = {"page": page, "perPage": perPage, "filter": "(postOwner~'$postId')", "expand": "owner"};
 
-    return handleResponse<ListLikePostResponseDTO>(
+    return execute<ListLikePostResponseDTO>(
       _iDioClient.getRequest("/${APIUrls.likesPostUrl}/records", queryParams: queryParams),
       onSuccess: (response) => ListLikePostResponseDTO.fromJson(response.data),
     );

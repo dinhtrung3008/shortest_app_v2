@@ -5,7 +5,7 @@ import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/entities/like_post/like_post.dart';
 import '../../../../domain/repositories/like_post/i_like_post_repository.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
 import '../../data/remote/like_post/like_post_remote_service.dart';
 
 @LazySingleton(as: IGetLikesByPostId)
@@ -21,7 +21,7 @@ class GetLikesByPostIdImpl with ExecuteRepositoryImpl, ConnectionChecker impleme
       return left(const BaseFailure.offline());
     }
 
-    return execute<List<LikePost>?>(
+    return executeRepositoryService<List<LikePost>?>(
       action: () async {
         final response = await _iLikePostRemoteService.getLikesByPostId(postId: postId);
         if (response.likePosts != null) {

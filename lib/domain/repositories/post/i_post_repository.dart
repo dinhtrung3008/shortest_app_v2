@@ -39,10 +39,6 @@ abstract class IDeletePost {
   Future<Either<BaseFailure, Unit>> call({required String postId});
 }
 
-abstract class IGetPostCounts {
-  Future<Either<BaseFailure, int>> call();
-}
-
 abstract class IIncreaseLikesPostCount {
   Future<Either<BaseFailure, PostShortest>> call({required String postId});
 }

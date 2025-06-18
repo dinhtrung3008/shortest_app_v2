@@ -5,7 +5,7 @@ import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/entities/message/message.dart';
 import '../../../../domain/repositories/message/i_message_repository.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
 import '../../data/remote/message/message_remote_service.dart';
 
 @LazySingleton(as: ILikeMessage)
@@ -21,7 +21,7 @@ class LikeMessageImpl with ExecuteRepositoryImpl, ConnectionChecker implements I
       return left(const BaseFailure.offline());
     }
 
-    return execute<Message>(
+    return executeRepositoryService<Message>(
       action: () async {
         final response = await _iMessageRemoteService.likeMessage(messageId: messageId, isLiked: isLiked);
         return right(response.toDomain());

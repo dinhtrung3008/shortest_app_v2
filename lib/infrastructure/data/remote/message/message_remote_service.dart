@@ -48,7 +48,7 @@ class MessageRemoteServiceImpl with ExecuteRemoteServiceImpl implements IMessage
 
     final queryParams = {"expand": "sendById"};
 
-    return handleResponse<MessageDTO>(
+    return execute<MessageDTO>(
       _iDioClient.postRequest("/${APIUrls.messagesChatUrl}/records", bodyParams: body, queryParams: queryParams),
       onSuccess: (response) => MessageDTO.fromJson(response.data),
     );
@@ -69,7 +69,7 @@ class MessageRemoteServiceImpl with ExecuteRemoteServiceImpl implements IMessage
       "sort": "-created",
     };
 
-    return handleResponse<ListMessageResponseDTO>(
+    return execute<ListMessageResponseDTO>(
       _iDioClient.getRequest("/${APIUrls.messagesChatUrl}/records", queryParams: queryParams),
       onSuccess: (response) => ListMessageResponseDTO.fromJson(response.data),
     );
@@ -77,7 +77,7 @@ class MessageRemoteServiceImpl with ExecuteRemoteServiceImpl implements IMessage
 
   @override
   Future<Unit> deleteMessage({required String messageId}) {
-    return handleResponse<Unit>(
+    return execute<Unit>(
       _iDioClient.deleteRequest("/${APIUrls.messagesChatUrl}/records/$messageId"),
       onSuccess: (_) => unit,
     );
@@ -88,7 +88,7 @@ class MessageRemoteServiceImpl with ExecuteRemoteServiceImpl implements IMessage
     final body = MessageDTO(isLiked: isLiked).toJson();
     final queryParams = {"expand": "sendById"};
 
-    return handleResponse<MessageDTO>(
+    return execute<MessageDTO>(
       _iDioClient.patchRequest(
         "/${APIUrls.messagesChatUrl}/records/$messageId",
         bodyParams: body,
@@ -103,7 +103,7 @@ class MessageRemoteServiceImpl with ExecuteRemoteServiceImpl implements IMessage
     final body = MessageDTO(content: content).toJson();
     final queryParams = {"expand": "sendById"};
 
-    return handleResponse<MessageDTO>(
+    return execute<MessageDTO>(
       _iDioClient.patchRequest(
         "/${APIUrls.messagesChatUrl}/records/$messageId",
         bodyParams: body,

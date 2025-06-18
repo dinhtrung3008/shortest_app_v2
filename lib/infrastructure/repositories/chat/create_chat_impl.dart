@@ -5,7 +5,7 @@ import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/entities/chat/chat.dart';
 import '../../../../domain/repositories/chat/i_chat_repository.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
 import '../../data/remote/chat/chat_remote_service.dart';
 
 @LazySingleton(as: ICreateChatRoom)
@@ -20,7 +20,7 @@ class CreateChatImpl with ExecuteRepositoryImpl, ConnectionChecker implements IC
       return left(const BaseFailure.offline());
     }
 
-    return execute<Chat>(
+    return executeRepositoryService<Chat>(
       action: () async {
         final response = await _iChatRemoteService.createChatRoom(lastMessage: lastMessage, viewerUserId: viewerUserId);
         return right(response.toDomain());

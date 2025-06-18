@@ -7,7 +7,7 @@ import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/entities/user_shortest/user_shortest.dart';
 import '../../../../domain/repositories/current_user/i_current_user_repository.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
 import '../../data/local/user/user_local_service.dart';
 import '../../data/remote/current_user/current_user_remote_service.dart';
 import '../../dtos/user_shortest/user_shortest_dto.dart';
@@ -31,7 +31,7 @@ class UpdateCurrentUserImpl with ExecuteRepositoryImpl, ConnectionChecker implem
       return left(const BaseFailure.offline());
     }
 
-    return execute<UserShortest>(
+    return executeRepositoryService<UserShortest>(
       action: () async {
         final userDTO = UserShortestDTO(username: userName, bio: bio);
         final response = await _iUserSupabaseService.updateUser(

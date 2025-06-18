@@ -8,11 +8,11 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../domain/core/exceptions/exceptions.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
-import '../../../../presentation/core/constants/api_urls.dart';
+import '../../../../presentation/core/enums/post_interaction_type_enum.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/post_shortest/post_shortest_dto.dart';
 import '../../../dtos/user_shortest/user_shortest_dto.dart';
-import '../../client/dio_client.dart';
+import '../../services/post/post_api_service.dart';
 
 abstract class IPostRemoteService {
   Future<PostShortestDTO> createPost({required PostShortestDTO postDTO, List<XFile>? mediaFiles});
@@ -28,7 +28,6 @@ abstract class IPostRemoteService {
 
   Future<PostShortestDTO> getPostById({required String postId});
   Future<Unit> deletePost({required String postId});
-  Future<int> getPostsCount();
 
   Future<PostShortestDTO> increaseLikes({required String postId});
   Future<PostShortestDTO> decreaseLikes({required String postId});
@@ -41,18 +40,14 @@ abstract class IPostRemoteService {
 
 @LazySingleton(as: IPostRemoteService)
 class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemoteService {
-  final IDioClient _iDioClient;
+  final PostApiService _postApiService;
   final FlutterSecureStorage _secureStorage;
 
-  PostRemoteServiceImpl(this._iDioClient, this._secureStorage);
+  PostRemoteServiceImpl(this._postApiService, this._secureStorage);
 
-  Future<FormData> _createFormData({required Map<String, dynamic> body, List<XFile>? mediaFiles}) async {
-    final media =
-        mediaFiles != null && mediaFiles.isNotEmpty
-            ? await Future.wait(mediaFiles.map((file) => MultipartFile.fromFile(file.path, filename: file.name)))
-            : null;
-
-    return FormData.fromMap({...body, if (media != null) "mediaUrls": media});
+  Future<List<MultipartFile>> _convertXFilesToMultipart(List<XFile> files) {
+    if (files.isEmpty) return Future.value([]);
+    return Future.wait(files.map((file) => MultipartFile.fromFile(file.path, filename: file.name)));
   }
 
   Future<String> _buildFilter(String filter) async {
@@ -78,10 +73,10 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
 
   @override
   Future<PostShortestDTO> createPost({required PostShortestDTO postDTO, List<XFile>? mediaFiles}) async {
-    final formData = await _createFormData(body: postDTO.toJson(), mediaFiles: mediaFiles);
+    List<MultipartFile> multipartFiles = await _convertXFilesToMultipart(mediaFiles ?? []);
 
-    return await handleResponse<PostShortestDTO>(
-      _iDioClient.postRequest("/${APIUrls.postsUrl}/records", formData: formData, queryParams: {"expand": "owner"}),
+    return await executeApiService<PostShortestDTO>(
+      _postApiService.createPost(multipartFiles: multipartFiles, expand: "owner"),
       onSuccess: (response) => PostShortestDTO.fromJson(response.data),
     );
   }
@@ -93,16 +88,16 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
     String? visibility,
     List<XFile>? mediaFiles,
   }) async {
-    final formData = await _createFormData(
-      body: PostShortestDTO(content: content, visibility: visibility, updated: DateTime.now()).toJson(),
-      mediaFiles: mediaFiles,
-    );
+    List<MultipartFile> multipartFiles = await _convertXFilesToMultipart(mediaFiles ?? []);
 
-    return await handleResponse<PostShortestDTO>(
-      _iDioClient.patchRequest(
-        "/${APIUrls.postsUrl}/records/$postId",
-        formData: formData,
-        queryParams: {"expand": "owner"},
+    return await executeApiService<PostShortestDTO>(
+      _postApiService.updatePostById(
+        postId: postId,
+        content: content,
+        visibility: visibility,
+        updated: DateTime.now().toIso8601String(),
+        multipartFiles: multipartFiles,
+        expand: "owner",
       ),
       onSuccess: (response) => PostShortestDTO.fromJson(response.data),
     );
@@ -112,191 +107,127 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
   Future<ListPostShortestResponseDTO> getPosts({int page = 1, int perPage = 10, String filter = ""}) async {
     final finalFilter = await _buildFilter(filter);
 
-    return await handleResponse<ListPostShortestResponseDTO>(
-      _iDioClient.getRequest(
-        "/${APIUrls.postsUrl}/records",
-        queryParams: {"page": page, "perPage": perPage, "sort": "-created", "filter": finalFilter, "expand": "owner"},
-      ),
+    return await executeApiService<ListPostShortestResponseDTO>(
+      _postApiService.getPosts(page: page, perPage: perPage, sort: "-created", filter: finalFilter, expand: "owner"),
       onSuccess: (response) => ListPostShortestResponseDTO.fromJson(response.data),
     );
   }
 
   @override
   Future<PostShortestDTO> getPostById({required String postId}) async {
-    return await handleResponse<PostShortestDTO>(
-      _iDioClient.getRequest("/${APIUrls.postsUrl}/records/$postId", queryParams: {"expand": "owner"}),
+    return await executeApiService<PostShortestDTO>(
+      _postApiService.getPostById(postId: postId, expand: "owner"),
       onSuccess: (response) => PostShortestDTO.fromJson(response.data),
     );
   }
 
   @override
   Future<Unit> deletePost({required String postId}) async {
-    return await handleResponse<Unit>(
-      _iDioClient.deleteRequest("/${APIUrls.postsUrl}/records/$postId"),
-      onSuccess: (_) => unit,
-    );
+    return await executeApiService<Unit>(_postApiService.deletePostById(postId: postId), onSuccess: (_) => unit);
   }
 
   @override
-  Future<int> getPostsCount() async {
-    return await handleResponse<int>(
-      _iDioClient.deleteRequest("/${APIUrls.postsUrl}/records"),
-      onSuccess: (response) => response.data['totalItems'] ?? 0,
-    );
-  }
+  Future<PostShortestDTO> increaseLikes({required String postId}) =>
+      _updatePostInteraction(postId: postId, type: PostInteractionType.likes, isIncrease: true);
 
   @override
-  Future<PostShortestDTO> increaseLikes({required String postId}) async {
+  Future<PostShortestDTO> decreaseLikes({required String postId}) =>
+      _updatePostInteraction(postId: postId, type: PostInteractionType.likes, isIncrease: false);
+
+  @override
+  Future<PostShortestDTO> increaseComments({required String postId}) =>
+      _updatePostInteraction(postId: postId, type: PostInteractionType.comments, isIncrease: true);
+
+  @override
+  Future<PostShortestDTO> decreaseComments({required String postId}) =>
+      _updatePostInteraction(postId: postId, type: PostInteractionType.comments, isIncrease: false);
+
+  @override
+  Future<PostShortestDTO> increaseShares({required String postId}) =>
+      _updatePostInteraction(postId: postId, type: PostInteractionType.shares, isIncrease: true);
+
+  @override
+  Future<PostShortestDTO> decreaseShares({required String postId}) =>
+      _updatePostInteraction(postId: postId, type: PostInteractionType.shares, isIncrease: false);
+
+  @override
+  Future<PostShortestDTO> increaseViewsCount({required String postId}) =>
+      _updatePostInteraction(postId: postId, type: PostInteractionType.views, isIncrease: true);
+
+  //[MORE] <----- Implement _updatePostInteraction ----->
+  Future<PostShortestDTO> _updatePostInteraction({
+    required String postId,
+    required PostInteractionType type,
+    required bool isIncrease,
+  }) async {
     final currentUserId = await _getCurrentUserId();
-
     final post = await getPostById(postId: postId);
 
+    Map<String, dynamic> body;
+
+    switch (type) {
+      case PostInteractionType.likes:
+        body = _buildLikesUpdateBody(post, currentUserId, isIncrease);
+        break;
+      case PostInteractionType.comments:
+        body = _buildCommentsUpdateBody(post, currentUserId, isIncrease);
+        break;
+      case PostInteractionType.shares:
+        body = _buildSharesUpdateBody(post, currentUserId, isIncrease);
+        break;
+      case PostInteractionType.views:
+        body = _buildViewsUpdateBody(post, isIncrease);
+        break;
+    }
+
+    return await executeApiService<PostShortestDTO>(
+      _postApiService.updatePostData(postId: postId, body: body, expand: "owner"),
+      onSuccess: (response) => PostShortestDTO.fromJson(response.data),
+    );
+  }
+
+  Map<String, dynamic> _buildLikesUpdateBody(PostShortestDTO post, String userId, bool isIncrease) {
     final updatedLikes = List<String>.from(post.likes ?? []);
-    if (!updatedLikes.contains(currentUserId)) {
-      updatedLikes.add(currentUserId);
+
+    if (isIncrease && !updatedLikes.contains(userId)) {
+      updatedLikes.add(userId);
+    } else if (!isIncrease && updatedLikes.contains(userId)) {
+      updatedLikes.remove(userId);
     }
 
-    final body = PostShortestDTO(likesCount: (post.likesCount ?? 0) + 1, likes: updatedLikes).toJson();
-
-    return await handleResponse<PostShortestDTO>(
-      _iDioClient.patchRequest(
-        "/${APIUrls.postsUrl}/records/$postId",
-        bodyParams: body,
-        queryParams: {"expand": "owner"},
-      ),
-      onSuccess: (response) => PostShortestDTO.fromJson(response.data),
-    );
+    final newCount = isIncrease ? (post.likesCount ?? 0) + 1 : (post.likesCount ?? 0) - 1;
+    return PostShortestDTO(likesCount: newCount, likes: updatedLikes).toJson();
   }
 
-  @override
-  Future<PostShortestDTO> decreaseLikes({required String postId}) async {
-    final currentUserId = await _getCurrentUserId();
-
-    final post = await getPostById(postId: postId);
-
-    final updatedLikes = List<String>.from(post.likes ?? []);
-    if (updatedLikes.contains(currentUserId)) {
-      updatedLikes.remove(currentUserId);
-    }
-
-    final body = PostShortestDTO(likesCount: (post.likesCount ?? 0) - 1, likes: updatedLikes).toJson();
-
-    return await handleResponse<PostShortestDTO>(
-      _iDioClient.patchRequest(
-        "/${APIUrls.postsUrl}/records/$postId",
-        bodyParams: body,
-        queryParams: {"expand": "owner"},
-      ),
-      onSuccess: (response) => PostShortestDTO.fromJson(response.data),
-    );
-  }
-
-  @override
-  Future<PostShortestDTO> increaseComments({required String postId}) async {
-    final currentUserId = await _getCurrentUserId();
-
-    final post = await getPostById(postId: postId);
-
+  Map<String, dynamic> _buildCommentsUpdateBody(PostShortestDTO post, String userId, bool isIncrease) {
     final updatedComments = List<String>.from(post.comments ?? []);
-    if (!updatedComments.contains(currentUserId)) {
-      updatedComments.add(currentUserId);
+
+    if (isIncrease && !updatedComments.contains(userId)) {
+      updatedComments.add(userId);
+    } else if (!isIncrease && updatedComments.contains(userId)) {
+      updatedComments.remove(userId);
     }
 
-    final body = PostShortestDTO(commentsCount: (post.commentsCount ?? 0) + 1, comments: updatedComments).toJson();
-
-    return await handleResponse<PostShortestDTO>(
-      _iDioClient.patchRequest(
-        "/${APIUrls.postsUrl}/records/$postId",
-        bodyParams: body,
-        queryParams: {"expand": "owner"},
-      ),
-      onSuccess: (response) => PostShortestDTO.fromJson(response.data),
-    );
+    final newCount = isIncrease ? (post.commentsCount ?? 0) + 1 : (post.commentsCount ?? 0) - 1;
+    return PostShortestDTO(commentsCount: newCount, comments: updatedComments).toJson();
   }
 
-  @override
-  Future<PostShortestDTO> decreaseComments({required String postId}) async {
-    final currentUserId = await _getCurrentUserId();
-
-    final post = await getPostById(postId: postId);
-
-    final updatedComments = List<String>.from(post.comments ?? []);
-    if (updatedComments.contains(currentUserId)) {
-      updatedComments.remove(currentUserId);
-    }
-
-    final body = PostShortestDTO(commentsCount: (post.commentsCount ?? 0) - 1, comments: updatedComments).toJson();
-
-    return await handleResponse<PostShortestDTO>(
-      _iDioClient.patchRequest(
-        "/${APIUrls.postsUrl}/records/$postId",
-        bodyParams: body,
-        queryParams: {"expand": "owner"},
-      ),
-      onSuccess: (response) => PostShortestDTO.fromJson(response.data),
-    );
-  }
-
-  @override
-  Future<PostShortestDTO> increaseShares({required String postId}) async {
-    final currentUserId = await _getCurrentUserId();
-
-    final post = await getPostById(postId: postId);
-
+  Map<String, dynamic> _buildSharesUpdateBody(PostShortestDTO post, String userId, bool isIncrease) {
     final updatedShares = List<String>.from(post.shares ?? []);
-    if (!updatedShares.contains(currentUserId)) {
-      updatedShares.add(currentUserId);
+
+    if (isIncrease && !updatedShares.contains(userId)) {
+      updatedShares.add(userId);
+    } else if (!isIncrease && updatedShares.contains(userId)) {
+      updatedShares.remove(userId);
     }
 
-    final body = PostShortestDTO(sharesCount: (post.sharesCount ?? 0) + 1, shares: updatedShares).toJson();
-
-    return await handleResponse<PostShortestDTO>(
-      _iDioClient.patchRequest(
-        "/${APIUrls.postsUrl}/records/$postId",
-        bodyParams: body,
-        queryParams: {"expand": "owner"},
-      ),
-      onSuccess: (response) => PostShortestDTO.fromJson(response.data),
-    );
+    final newCount = isIncrease ? (post.sharesCount ?? 0) + 1 : (post.sharesCount ?? 0) - 1;
+    return PostShortestDTO(sharesCount: newCount, shares: updatedShares).toJson();
   }
 
-  @override
-  Future<PostShortestDTO> decreaseShares({required String postId}) async {
-    final currentUserId = await _getCurrentUserId();
-
-    final post = await getPostById(postId: postId);
-
-    final updatedShares = List<String>.from(post.shares ?? []);
-    if (updatedShares.contains(currentUserId)) {
-      updatedShares.remove(currentUserId);
-    }
-
-    final body = PostShortestDTO(sharesCount: (post.sharesCount ?? 0) - 1, shares: updatedShares).toJson();
-
-    return await handleResponse<PostShortestDTO>(
-      _iDioClient.patchRequest(
-        "/${APIUrls.postsUrl}/records/$postId",
-        bodyParams: body,
-        queryParams: {"expand": "owner"},
-      ),
-      onSuccess: (response) => PostShortestDTO.fromJson(response.data),
-    );
-  }
-
-  @override
-  Future<PostShortestDTO> increaseViewsCount({required String postId}) async {
-    final post = await getPostById(postId: postId);
-
-    final body = PostShortestDTO(viewsCount: (post.viewsCount ?? 0) + 1).toJson();
-
-    return await handleResponse<PostShortestDTO>(
-      _iDioClient.patchRequest(
-        "/${APIUrls.postsUrl}/records/$postId",
-        bodyParams: body,
-        queryParams: {"expand": "owner"},
-      ),
-      onSuccess: (response) => PostShortestDTO.fromJson(response.data),
-    );
+  Map<String, dynamic> _buildViewsUpdateBody(PostShortestDTO post, bool isIncrease) {
+    final newCount = isIncrease ? (post.viewsCount ?? 0) + 1 : (post.viewsCount ?? 0) - 1;
+    return PostShortestDTO(viewsCount: newCount).toJson();
   }
 
   Future<String> _getCurrentUserId() async {

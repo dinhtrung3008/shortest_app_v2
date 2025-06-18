@@ -37,7 +37,7 @@ class SharePostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IShare
 
     final queryParams = {"expand": "owner"};
 
-    return handleResponse<SharePostDTO>(
+    return execute<SharePostDTO>(
       _iDioClient.postRequest("/${APIUrls.sharesPostUrl}/records", bodyParams: body, queryParams: queryParams),
       onSuccess: (response) {
         return SharePostDTO.fromJson(response.data);
@@ -49,7 +49,7 @@ class SharePostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IShare
   Future<SharePostDTO> updateSharePost({required String sharePostId}) async {
     final queryParams = {"expand": "owner"};
 
-    return handleResponse<SharePostDTO>(
+    return execute<SharePostDTO>(
       _iDioClient.patchRequest("/${APIUrls.sharesPostUrl}/records/$sharePostId", queryParams: queryParams),
       onSuccess: (response) {
         return SharePostDTO.fromJson(response.data);
@@ -65,7 +65,7 @@ class SharePostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IShare
   }) async {
     final queryParams = {"page": page, "perPage": perPage, "filter": "(postOwner~'$postId')", "expand": "owner"};
 
-    return handleResponse<ListSharePostResponseDTO>(
+    return execute<ListSharePostResponseDTO>(
       _iDioClient.getRequest("/${APIUrls.sharesPostUrl}/records", queryParams: queryParams),
       onSuccess: (response) {
         return ListSharePostResponseDTO.fromJson(response.data);
@@ -75,7 +75,7 @@ class SharePostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IShare
 
   @override
   Future<Unit> deleteSharePost({required String sharePostId}) async {
-    return handleResponse<Unit>(
+    return execute<Unit>(
       _iDioClient.deleteRequest("/${APIUrls.sharesPostUrl}/records/$sharePostId"),
       onSuccess: (_) {
         return unit;

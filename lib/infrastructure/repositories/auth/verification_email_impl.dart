@@ -5,15 +5,15 @@ import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/repositories/auth/i_auth_repository.dart';
 import '../../../../domain/value_object/auth/auth_value_object.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
-import '../../data/remote/authentication/authentication_remote_service.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
+import '../../data/remote/auth/auth_remote_service.dart';
 import '../../dtos/user_shortest/user_shortest_dto.dart';
 
 @LazySingleton(as: IVerificationEmail)
 class VerificationEmailImpl with ExecuteRepositoryImpl, ConnectionChecker implements IVerificationEmail {
-  final IAuthenticationRemoteService _iAuthenticationSupabaseRemoteService;
+  final IAuthRemoteService _iAuthRemoteService;
 
-  VerificationEmailImpl(this._iAuthenticationSupabaseRemoteService);
+  VerificationEmailImpl(this._iAuthRemoteService);
 
   @override
   Future<Either<BaseFailure, Unit>> call({required EmailAddress emailAddress}) async {
@@ -22,13 +22,13 @@ class VerificationEmailImpl with ExecuteRepositoryImpl, ConnectionChecker implem
       return left(const BaseFailure.offline());
     }
 
-    return execute<Unit>(
+    return executeRepositoryService<Unit>(
       action: () async {
         final emailStr = emailAddress.getValueOrCrash();
 
         if (emailStr.isNotEmpty) {
           final userDTO = UserShortestDTO(email: emailStr);
-          await _iAuthenticationSupabaseRemoteService.requestVerificationEmail(userDTO: userDTO);
+          await _iAuthRemoteService.requestVerificationEmail(userDTO: userDTO);
         }
         return right(unit);
       },

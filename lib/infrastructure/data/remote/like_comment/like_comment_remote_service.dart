@@ -27,7 +27,7 @@ class LikeCommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements 
   Future<LikeCommentDTO> likeComment({required String commentId}) async {
     final body = LikeCommentDTO(commentOwner: commentId);
 
-    return handleResponse<LikeCommentDTO>(
+    return execute<LikeCommentDTO>(
       _iDioClient.postRequest('/${APIUrls.likesCommentsUrl}/records', bodyParams: body.toJson()),
       onSuccess: (response) => LikeCommentDTO.fromJson(response.data),
     );
@@ -35,7 +35,7 @@ class LikeCommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements 
 
   @override
   Future<void> unlikeComment({required String likeCommentId}) async {
-    return handleResponse<void>(
+    return execute<void>(
       _iDioClient.deleteRequest('/${APIUrls.likesCommentsUrl}/records/$likeCommentId'),
       onSuccess: (response) {
         return;
@@ -51,7 +51,7 @@ class LikeCommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements 
   }) async {
     final queryParams = {'filter': "(commentOwner~'$commentId')", 'page': page, 'perPage': perPage};
 
-    return handleResponse<ListLikeCommentResponseDTO>(
+    return execute<ListLikeCommentResponseDTO>(
       _iDioClient.getRequest('/${APIUrls.likesCommentsUrl}/records', queryParams: queryParams),
       onSuccess: (response) => ListLikeCommentResponseDTO.fromJson(response.data),
     );
@@ -59,7 +59,7 @@ class LikeCommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements 
 
   @override
   Future<Unit> deleteLikeComment({required String likeCommentId}) async {
-    return handleResponse<Unit>(
+    return execute<Unit>(
       _iDioClient.deleteRequest('/${APIUrls.likesCommentsUrl}/records/$likeCommentId'),
       onSuccess: (response) {
         return unit;

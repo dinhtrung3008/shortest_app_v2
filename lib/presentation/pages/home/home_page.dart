@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shortest_app/presentation/pages/sign_in/sign_in_page.dart';
+
+import '../../core/utils/navigator/navigator_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +20,12 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('Welcome to the Home Page!', style: TextStyle(fontSize: 24)),
-            ElevatedButton(onPressed: () {}, child: const Text('Go to Profile', style: TextStyle(color: Colors.black))),
+            ElevatedButton(
+              onPressed: () {
+                NavigationService().navigateAndRemoveAll(SignInPage());
+              },
+              child: const Text('Go back Sign-In', style: TextStyle(color: Colors.black)),
+            ),
           ],
         ),
       ),

@@ -37,7 +37,7 @@ class SearchTrendRemoteServiceImpl with ExecuteRemoteServiceImpl implements ISea
       "sort": "-likesCount,-viewsCount",
     };
 
-    return handleResponse<ListPostShortestResponseDTO>(
+    return execute<ListPostShortestResponseDTO>(
       _iDioClient.getRequest("/${APIUrls.postsUrl}/records", queryParams: queryParams),
       onSuccess: (response) {
         return ListPostShortestResponseDTO.fromJson(response.data);
