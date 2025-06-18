@@ -4,10 +4,9 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../domain/core/exceptions/exceptions.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
-import '../../../../presentation/core/constants/api_urls.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/chat/chat_dto.dart';
-import '../../client/dio_client.dart';
+import '../../services/chat/chat_api_service.dart';
 
 abstract class IChatRemoteService {
   Future<ListChatResponseDTO> getChatRooms({int page = 1, int perPage = 10, String filter = ""});
@@ -20,19 +19,107 @@ abstract class IChatRemoteService {
 
 @LazySingleton(as: IChatRemoteService)
 class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemoteService {
-  final IDioClient _iDioClient;
+  final ChatApiService _chatApiService;
   final FlutterSecureStorage _secureStorage;
 
-  ChatRemoveServiceImpl(this._iDioClient, this._secureStorage);
+  ChatRemoveServiceImpl(this._chatApiService, this._secureStorage);
 
   @override
   Future<ChatDTO> createChatRoom({required String lastMessage, required String viewerUserId}) async {
-    final currentUserId = await _secureStorage.read(key: UserConstants.idField);
+    final currentUserId = await _getCurrentUserId();
 
+    final body = _buildCreateChatRoomBody(
+      currentUserId: currentUserId,
+      viewerUserId: viewerUserId,
+      lastMessage: lastMessage,
+    );
+
+    return await executeApiService<ChatDTO>(
+      _chatApiService.createChatRoom(body: body, expand: "users"),
+      onSuccess: (response) => ChatDTO.fromJson(response.data),
+    );
+  }
+
+  @override
+  Future<ListChatResponseDTO> getChatRooms({int page = 1, int perPage = 10, String filter = ""}) async {
+    final currentUserId = await _getCurrentUserId();
+
+    final finalFilter = filter.isNotEmpty ? filter : "(users~'$currentUserId')";
+
+    return await executeApiService<ListChatResponseDTO>(
+      _chatApiService.getChatRooms(page: page, perPage: perPage, filter: finalFilter, expand: "users"),
+      onSuccess: (response) => ListChatResponseDTO.fromJson(response.data),
+    );
+  }
+
+  @override
+  Future<Unit> markAsRead({required String chatId}) async {
+    final currentChat = await _getChatById(chatId);
+    final currentUserId = await _getCurrentUserId();
+
+    final body = _buildMarkAsReadBody(currentChat, currentUserId);
+
+    return await executeApiService<Unit>(
+      _chatApiService.updateChatData(chatId: chatId, body: body, expand: "users"),
+      onSuccess: (_) => unit,
+    );
+  }
+
+  @override
+  Future<Unit> markAsUnRead({required String chatId}) async {
+    final currentChat = await _getChatById(chatId);
+    final currentUserId = await _getCurrentUserId();
+
+    final body = _buildMarkAsUnReadBody(currentChat, currentUserId);
+
+    return await executeApiService<Unit>(
+      _chatApiService.updateChatData(chatId: chatId, body: body, expand: "users"),
+      onSuccess: (_) => unit,
+    );
+  }
+
+  @override
+  Future<Unit> deleteChatRoom({required String chatId}) async {
+    return await executeApiService<Unit>(_chatApiService.deleteChatRoom(chatId: chatId), onSuccess: (_) => unit);
+  }
+
+  @override
+  Future<Unit> updateChatRoom({required String chatId, required String lastMessage}) async {
+    final currentChat = await _getChatById(chatId);
+    final currentUserId = await _getCurrentUserId();
+
+    final body = _buildUpdateChatRoomBody(
+      currentChat: currentChat,
+      currentUserId: currentUserId,
+      lastMessage: lastMessage,
+    );
+
+    return await executeApiService<Unit>(
+      _chatApiService.updateChatData(chatId: chatId, body: body, expand: "users"),
+      onSuccess: (_) => unit,
+    );
+  }
+
+  Future<String> _getCurrentUserId() async {
+    final currentUserId = await _secureStorage.read(key: UserConstants.idField);
     if (currentUserId == null) {
       throw CacheException(message: 'User ID not found in cache');
     }
+    return currentUserId;
+  }
 
+  Future<ChatDTO> _getChatById(String chatId) async {
+    return await executeApiService<ChatDTO>(
+      _chatApiService.getChatRoomById(chatId: chatId),
+      onSuccess: (response) => ChatDTO.fromJson(response.data),
+    );
+  }
+
+  Map<String, dynamic> _buildCreateChatRoomBody({
+    required String currentUserId,
+    required String viewerUserId,
+    required String lastMessage,
+  }) {
     final lastMessages = LastMessagesDTO(sendByUserId: '', messages: []);
 
     final List<UsersInChatDTO> usersInChat = [
@@ -42,56 +129,15 @@ class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemote
 
     final List<String> users = [currentUserId, viewerUserId];
 
-    final body =
-        ChatDTO(
-          lastMessages: lastMessages,
-          lastSenderId: currentUserId,
-          users: users,
-          usersInChat: usersInChat,
-        ).toJson();
-
-    final queryParams = {"expand": "users"};
-
-    return await handleResponse<ChatDTO>(
-      _iDioClient.postRequest("/${APIUrls.chatUrl}/records", bodyParams: body, queryParams: queryParams),
-      onSuccess: (response) => ChatDTO.fromJson(response.data),
-    );
+    return ChatDTO(
+      lastMessages: lastMessages,
+      lastSenderId: currentUserId,
+      users: users,
+      usersInChat: usersInChat,
+    ).toJson();
   }
 
-  @override
-  Future<ListChatResponseDTO> getChatRooms({int page = 1, int perPage = 10, String filter = ""}) async {
-    final currentUserId = await _secureStorage.read(key: UserConstants.idField);
-
-    if (currentUserId == null) {
-      throw CacheException(message: 'Current user ID not found');
-    }
-
-    final queryParams = {
-      "page": page,
-      "perPage": perPage,
-      "filter": filter.isNotEmpty ? filter : "(users~'$currentUserId')",
-      "expand": "users",
-    };
-
-    return handleResponse<ListChatResponseDTO>(
-      _iDioClient.getRequest("/${APIUrls.chatUrl}/records", queryParams: queryParams),
-      onSuccess: (response) => ListChatResponseDTO.fromJson(response.data),
-    );
-  }
-
-  @override
-  Future<Unit> markAsRead({required String chatId}) async {
-    final currentChat = await handleResponse<ChatDTO>(
-      _iDioClient.getRequest("/${APIUrls.chatUrl}/records/$chatId"),
-      onSuccess: (response) => ChatDTO.fromJson(response.data),
-    );
-
-    final currentUserId = await _secureStorage.read(key: UserConstants.idField);
-
-    if (currentUserId == null) {
-      throw CacheException(message: 'User id not found');
-    }
-
+  Map<String, dynamic> _buildMarkAsReadBody(ChatDTO currentChat, String currentUserId) {
     final usersInChat = List<UsersInChatDTO>.from(currentChat.usersInChat ?? []);
 
     final updatedUsersInChat =
@@ -107,29 +153,10 @@ class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemote
       updatedLastMessages = currentChat.lastMessages?.copyWith(messages: []);
     }
 
-    final body = ChatDTO(usersInChat: updatedUsersInChat, lastMessages: updatedLastMessages).toJson();
-
-    final queryParams = {"expand": "users"};
-
-    return await handleResponse<Unit>(
-      _iDioClient.patchRequest("/${APIUrls.chatUrl}/records/$chatId", bodyParams: body, queryParams: queryParams),
-      onSuccess: (_) => unit,
-    );
+    return ChatDTO(usersInChat: updatedUsersInChat, lastMessages: updatedLastMessages).toJson();
   }
 
-  @override
-  Future<Unit> markAsUnRead({required String chatId}) async {
-    final currentChat = await handleResponse<ChatDTO>(
-      _iDioClient.getRequest("/${APIUrls.chatUrl}/records/$chatId"),
-      onSuccess: (response) => ChatDTO.fromJson(response.data),
-    );
-
-    final currentUserId = await _secureStorage.read(key: UserConstants.idField);
-
-    if (currentUserId == null) {
-      throw CacheException(message: 'User id not found');
-    }
-
+  Map<String, dynamic> _buildMarkAsUnReadBody(ChatDTO currentChat, String currentUserId) {
     final usersInChat = List<UsersInChatDTO>.from(currentChat.usersInChat ?? []);
 
     final updatedUsersInChat =
@@ -140,36 +167,14 @@ class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemote
           return userInChat;
         }).toList();
 
-    final body = ChatDTO(usersInChat: updatedUsersInChat).toJson();
-
-    final queryParams = {"expand": "users"};
-
-    return await handleResponse<Unit>(
-      _iDioClient.patchRequest("/${APIUrls.chatUrl}/records/$chatId", bodyParams: body, queryParams: queryParams),
-      onSuccess: (_) => unit,
-    );
+    return ChatDTO(usersInChat: updatedUsersInChat).toJson();
   }
 
-  @override
-  Future<Unit> deleteChatRoom({required String chatId}) {
-    return handleResponse<Unit>(
-      _iDioClient.deleteRequest("/${APIUrls.chatUrl}/records/$chatId"),
-      onSuccess: (_) => unit,
-    );
-  }
-
-  @override
-  Future<Unit> updateChatRoom({required String chatId, required String lastMessage}) async {
-    final currentChat = await handleResponse<ChatDTO>(
-      _iDioClient.getRequest("/${APIUrls.chatUrl}/records/$chatId"),
-      onSuccess: (response) => ChatDTO.fromJson(response.data),
-    );
-
-    final currentUserId = await _secureStorage.read(key: UserConstants.idField);
-
-    if (currentUserId == null) {
-      throw CacheException(message: 'Current user ID not found');
-    }
+  Map<String, dynamic> _buildUpdateChatRoomBody({
+    required ChatDTO currentChat,
+    required String currentUserId,
+    required String lastMessage,
+  }) {
     List<String> updatedMessages = [];
     final allUsersRead = currentChat.usersInChat?.every((user) => user.isRead == true);
 
@@ -183,13 +188,6 @@ class ChatRemoveServiceImpl with ExecuteRemoteServiceImpl implements IChatRemote
 
     final lastMessages = LastMessagesDTO(sendByUserId: currentUserId, messages: updatedMessages);
 
-    final body = ChatDTO(lastMessages: lastMessages, lastSenderId: currentUserId, lastMessage: lastMessage).toJson();
-
-    final queryParams = {"expand": "users"};
-
-    return await handleResponse<Unit>(
-      _iDioClient.patchRequest("/${APIUrls.chatUrl}/records/$chatId", bodyParams: body, queryParams: queryParams),
-      onSuccess: (_) => unit,
-    );
+    return ChatDTO(lastMessages: lastMessages, lastSenderId: currentUserId, lastMessage: lastMessage).toJson();
   }
 }

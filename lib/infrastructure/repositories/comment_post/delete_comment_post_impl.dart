@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/repositories/comment_post/i_comment_post_repository.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
 import '../../data/remote/comment_post/comment_post_remote_service.dart';
 
 @LazySingleton(as: IDeleteCommentPost)
@@ -20,7 +20,7 @@ class DeleteCommentPostImpl with ExecuteRepositoryImpl, ConnectionChecker implem
       return left(const BaseFailure.offline());
     }
 
-    return execute<Unit>(
+    return executeRepositoryService<Unit>(
       action: () async {
         await _iCommentPostRemoteService.deleteComment(commentId: commentId);
         return right(unit);

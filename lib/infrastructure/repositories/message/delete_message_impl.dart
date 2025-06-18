@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/repositories/message/i_message_repository.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
 import '../../data/remote/message/message_remote_service.dart';
 
 @LazySingleton(as: IDeleteMessage)
@@ -20,7 +20,7 @@ class DeleteMessageImpl with ExecuteRepositoryImpl, ConnectionChecker implements
       return left(const BaseFailure.offline());
     }
 
-    return execute<Unit>(
+    return executeRepositoryService<Unit>(
       action: () async {
         await _iMessageRemoteService.deleteMessage(messageId: messageId);
         return right(unit);

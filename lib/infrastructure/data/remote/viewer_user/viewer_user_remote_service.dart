@@ -23,7 +23,7 @@ class ViewerUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements IView
 
   @override
   Future<UserShortestDTO> getViewerById({required String viewerId}) async {
-    return handleResponse<UserShortestDTO>(
+    return execute<UserShortestDTO>(
       _iDioClient.getRequest("/${APIUrls.usersUrl}/records/$viewerId"),
       onSuccess: (response) => UserShortestDTO.fromJson(response.data),
     );
@@ -39,7 +39,7 @@ class ViewerUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements IView
 
     final updatedFollowers = List<String>.from(viewerFollowers)..add(currentUserId);
 
-    return handleResponse<UserShortestDTO>(
+    return execute<UserShortestDTO>(
       _iDioClient.patchRequest("/${APIUrls.usersUrl}/records/$viewerId", bodyParams: {'followers': updatedFollowers}),
       onSuccess: (response) => UserShortestDTO.fromJson(response.data),
     );
@@ -55,7 +55,7 @@ class ViewerUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements IView
 
     final updatedFollowers = List<String>.from(viewerFollowers)..remove(currentUserId);
 
-    return handleResponse<UserShortestDTO>(
+    return execute<UserShortestDTO>(
       _iDioClient.patchRequest("/${APIUrls.usersUrl}/records/$viewerId", bodyParams: {'followers': updatedFollowers}),
       onSuccess: (response) => UserShortestDTO.fromJson(response.data),
     );

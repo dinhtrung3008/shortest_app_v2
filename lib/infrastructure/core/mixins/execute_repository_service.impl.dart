@@ -4,7 +4,9 @@ import '../../../../domain/core/exceptions/exceptions.dart';
 import '../../../../domain/core/failures/base_failure.dart';
 
 mixin ExecuteRepositoryImpl {
-  Future<Either<BaseFailure, T>> execute<T>({required Future<Either<BaseFailure, T>> Function() action}) async {
+  Future<Either<BaseFailure, T>> executeRepositoryService<T>({
+    required Future<Either<BaseFailure, T>> Function() action,
+  }) async {
     try {
       return await action();
     } on ServerException catch (server) {

@@ -5,7 +5,7 @@ import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/entities/post_shortest/post_shortest.dart';
 import '../../../../domain/repositories/search/i_search_repository.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
 import '../../data/remote/search_trend/search_trend_remote_service.dart';
 
 @LazySingleton(as: IGetSearchTrend)
@@ -26,7 +26,7 @@ class GetSearchTrendImpl with ExecuteRepositoryImpl, ConnectionChecker implement
       return left(const BaseFailure.offline());
     }
 
-    return execute<List<PostShortest>?>(
+    return executeRepositoryService<List<PostShortest>?>(
       action: () async {
         final response = await _iSearchTrendRemoteService.getSearchTrend(
           page: page,

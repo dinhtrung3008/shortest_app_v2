@@ -5,7 +5,7 @@ import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/entities/user_shortest/user_shortest.dart';
 import '../../../../domain/repositories/search/i_search_repository.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
 import '../../data/remote/current_user/current_user_remote_service.dart';
 
 @LazySingleton(as: IRequestListSearch)
@@ -21,7 +21,7 @@ class RequestListSearchImpl with ExecuteRepositoryImpl, ConnectionChecker implem
       return left(const BaseFailure.offline());
     }
 
-    return execute<List<UserShortest>?>(
+    return executeRepositoryService<List<UserShortest>?>(
       action: () async {
         final userRemote = await _iUserSupabaseService.getUsersSearchByUsername(userName: userName);
         if (userRemote.usersShortest != null) {

@@ -52,7 +52,7 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
       return none();
     }
 
-    return handleResponse<Option<UserShortestDTO?>>(
+    return execute<Option<UserShortestDTO?>>(
       _iDioClient.getRequest("/${APIUrls.usersUrl}/records/$currentUserId"),
       onSuccess: (response) {
         final userDTO = UserShortestDTO.fromJson(response.data);
@@ -74,7 +74,7 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
       if (coverImage != null) 'banner': await MultipartFile.fromFile(coverImage.path, filename: _generateFileName()),
     });
 
-    return handleResponse<UserShortestDTO>(
+    return execute<UserShortestDTO>(
       _iDioClient.patchRequest("/${APIUrls.usersUrl}/records/$currentUserId", formData: formData),
       onSuccess: (response) => UserShortestDTO.fromJson(response.data),
     );
@@ -87,7 +87,7 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
 
   @override
   Future<ListUserShortestResponseDTO> getUsersSearchByUsername({required String userName}) async {
-    return handleResponse<ListUserShortestResponseDTO>(
+    return execute<ListUserShortestResponseDTO>(
       _iDioClient.getRequest("/${APIUrls.usersUrl}/records", queryParams: {"filter": "(username~'$userName')"}),
       onSuccess: (response) => ListUserShortestResponseDTO.fromJson(response.data),
     );
@@ -102,7 +102,7 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
 
     final updatedFollowings = List<String>.from(currentUserFollowings)..add(viewerUserId);
 
-    return handleResponse<UserShortestDTO>(
+    return execute<UserShortestDTO>(
       _iDioClient.patchRequest(
         "/${APIUrls.usersUrl}/records/$currentUserId",
         bodyParams: {'followings': updatedFollowings},
@@ -120,7 +120,7 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
 
     final updatedFollowings = List<String>.from(currentUserFollowings)..remove(viewerUserId);
 
-    return handleResponse<UserShortestDTO>(
+    return execute<UserShortestDTO>(
       _iDioClient.patchRequest(
         "/${APIUrls.usersUrl}/records/$currentUserId",
         bodyParams: {'followings': updatedFollowings},

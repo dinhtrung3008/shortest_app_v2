@@ -5,7 +5,7 @@ import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/entities/user_shortest/user_shortest.dart';
 import '../../../../domain/repositories/viewer_user/i_viewer_user_repository.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
 import '../../data/remote/viewer_user/viewer_user_remote_service.dart';
 
 @LazySingleton(as: IDecreaseFollowers)
@@ -24,7 +24,7 @@ class DecreaseFollowersImpl with ExecuteRepositoryImpl, ConnectionChecker implem
       return left(const BaseFailure.offline());
     }
 
-    return execute<UserShortest>(
+    return executeRepositoryService<UserShortest>(
       action: () async {
         final response = await _iViewerUserRemoveService.decrementFollowers(
           viewerFollowers: viewerFollowers,

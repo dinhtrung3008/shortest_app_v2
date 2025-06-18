@@ -6,7 +6,7 @@ import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/entities/comment_post/comment_post.dart';
 import '../../../../domain/repositories/comment_post/i_comment_post_repository.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
 import '../../data/remote/comment_post/comment_post_remote_service.dart';
 
 @LazySingleton(as: IAddCommentPost)
@@ -26,7 +26,7 @@ class AddCommentPostImpl with ExecuteRepositoryImpl, ConnectionChecker implement
       return left(const BaseFailure.offline());
     }
 
-    return execute<CommentPost>(
+    return executeRepositoryService<CommentPost>(
       action: () async {
         final response = await _iCommentPostRemoteService.addComment(
           content: content,

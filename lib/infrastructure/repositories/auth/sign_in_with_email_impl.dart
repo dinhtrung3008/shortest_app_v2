@@ -5,13 +5,13 @@ import '../../../../domain/core/failures/base_failure.dart';
 import '../../../../domain/repositories/auth/i_auth_repository.dart';
 import '../../../../domain/value_object/auth/auth_value_object.dart';
 import '../../core/mixins/connectivity.dart';
-import '../../core/mixins/execute_repository_impl.dart';
-import '../../data/remote/authentication/authentication_remote_service.dart';
+import '../../core/mixins/execute_repository_service.impl.dart';
+import '../../data/remote/auth/auth_remote_service.dart';
 import '../../dtos/user_shortest/user_shortest_dto.dart';
 
 @LazySingleton(as: ISignInWithEmail)
 class SignInWithEmailImpl with ExecuteRepositoryImpl, ConnectionChecker implements ISignInWithEmail {
-  final IAuthenticationRemoteService _iAuthSupabaseService;
+  final IAuthRemoteService _iAuthSupabaseService;
 
   SignInWithEmailImpl(this._iAuthSupabaseService);
 
@@ -23,7 +23,7 @@ class SignInWithEmailImpl with ExecuteRepositoryImpl, ConnectionChecker implemen
       return left(BaseFailure.offline(message: 'No internet connection'));
     }
 
-    return execute<Unit>(
+    return executeRepositoryService<Unit>(
       action: () async {
         final emailStr = email.getValueOrCrash();
         final passwordStr = password.getValueOrCrash();
