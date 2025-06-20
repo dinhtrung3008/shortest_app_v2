@@ -15,14 +15,8 @@ abstract class ICurrentUserRemoteService {
   Future<Option<UserShortestDTO?>> getCurrentUserById();
   Future<UserShortestDTO> updateUser({required UserShortestDTO userDTO, File? profileImage, File? coverImage});
   Future<ListUserShortestResponseDTO> getUsersSearchByUsername({required String userName});
-  Future<UserShortestDTO> increaseFollowings({
-    required List<String> currentUserFollowings,
-    required String viewerUserId,
-  });
-  Future<UserShortestDTO> decreaseFollowings({
-    required List<String> currentUserFollowings,
-    required String viewerUserId,
-  });
+  Future<UserShortestDTO> increaseFollowings({required List<String> currentUserFollowings, required String viewerId});
+  Future<UserShortestDTO> decreaseFollowings({required List<String> currentUserFollowings, required String viewerId});
   Future<Unit> updateInterest(List<String> selectedInterests);
 }
 
@@ -103,10 +97,10 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
   @override
   Future<UserShortestDTO> increaseFollowings({
     required List<String> currentUserFollowings,
-    required String viewerUserId,
+    required String viewerId,
   }) async {
     final currentUserId = await getCurrentUserId();
-    final updatedFollowings = List<String>.from(currentUserFollowings)..add(viewerUserId);
+    final updatedFollowings = List<String>.from(currentUserFollowings)..add(viewerId);
 
     return executeApiService<UserShortestDTO>(
       _currentUserApiService.updateFollowings(userId: currentUserId, body: {'followings': updatedFollowings}),
@@ -117,10 +111,10 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
   @override
   Future<UserShortestDTO> decreaseFollowings({
     required List<String> currentUserFollowings,
-    required String viewerUserId,
+    required String viewerId,
   }) async {
     final currentUserId = await getCurrentUserId();
-    final updatedFollowings = List<String>.from(currentUserFollowings)..remove(viewerUserId);
+    final updatedFollowings = List<String>.from(currentUserFollowings)..remove(viewerId);
 
     return executeApiService<UserShortestDTO>(
       _currentUserApiService.updateFollowings(userId: currentUserId, body: {'followings': updatedFollowings}),
