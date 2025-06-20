@@ -38,9 +38,9 @@ class AuthRemoteServiceImpl with ExecuteRemoteServiceImpl implements IAuthRemote
         final authDTO = AuthDTO.fromJson(response.data);
         final token = authDTO.token;
         final userId = authDTO.user!.id;
-        final userJsonString = jsonEncode(authDTO.user!.toDomain().toJson());
+        final userJsonString = jsonEncode(authDTO.user!.toJson());
 
-        await _storage.write(key: UserConstants.cachedUserKey, value: userJsonString);
+        await _storage.write(key: UserConstants.cachedCurrentUerKey, value: userJsonString);
         await _storage.write(key: GlobalConstants.accessToken, value: token);
         await _storage.write(key: UserConstants.idField, value: userId);
         return unit;

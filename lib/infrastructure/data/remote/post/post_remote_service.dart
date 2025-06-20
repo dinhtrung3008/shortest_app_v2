@@ -51,7 +51,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
   }
 
   Future<String> _buildFilter(String filter) async {
-    final cachedUserJson = await _secureStorage.read(key: UserConstants.cachedUserKey);
+    final cachedUserJson = await _secureStorage.read(key: UserConstants.cachedCurrentUerKey);
     if (cachedUserJson == null) {
       throw CacheException(message: "User data not found in cache.");
     }
@@ -76,7 +76,13 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
     List<MultipartFile> multipartFiles = await _convertXFilesToMultipart(mediaFiles ?? []);
 
     return await executeApiService<PostShortestDTO>(
-      _postApiService.createPost(multipartFiles: multipartFiles, expand: "owner"),
+      _postApiService.createPost(
+        multipartFiles: multipartFiles,
+        content: postDTO.content,
+        visibility: postDTO.visibility,
+        updated: postDTO.updated?.toIso8601String() ?? DateTime.now().toIso8601String(),
+        expand: "owner",
+      ),
       onSuccess: (response) => PostShortestDTO.fromJson(response.data),
     );
   }
@@ -91,7 +97,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
     List<MultipartFile> multipartFiles = await _convertXFilesToMultipart(mediaFiles ?? []);
 
     return await executeApiService<PostShortestDTO>(
-      _postApiService.updatePostById(
+      _postApiService.updatePost(
         postId: postId,
         content: content,
         visibility: visibility,
@@ -123,7 +129,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
 
   @override
   Future<Unit> deletePost({required String postId}) async {
-    return await executeApiService<Unit>(_postApiService.deletePostById(postId: postId), onSuccess: (_) => unit);
+    return await executeApiService<Unit>(_postApiService.deletePost(postId: postId), onSuccess: (_) => unit);
   }
 
   @override
@@ -154,7 +160,6 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
   Future<PostShortestDTO> increaseViewsCount({required String postId}) =>
       _updatePostInteraction(postId: postId, type: PostInteractionType.views, isIncrease: true);
 
-  //[MORE] <----- Implement _updatePostInteraction ----->
   Future<PostShortestDTO> _updatePostInteraction({
     required String postId,
     required PostInteractionType type,
@@ -181,7 +186,7 @@ class PostRemoteServiceImpl with ExecuteRemoteServiceImpl implements IPostRemote
     }
 
     return await executeApiService<PostShortestDTO>(
-      _postApiService.updatePostData(postId: postId, body: body, expand: "owner"),
+      _postApiService.updatePostEngagement(postId: postId, body: body, expand: "owner"),
       onSuccess: (response) => PostShortestDTO.fromJson(response.data),
     );
   }

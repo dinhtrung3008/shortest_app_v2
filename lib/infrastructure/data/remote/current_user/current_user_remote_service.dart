@@ -7,10 +7,9 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../domain/core/exceptions/exceptions.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
-import '../../../../presentation/core/constants/api_urls.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/user_shortest/user_shortest_dto.dart';
-import '../../client/dio_client.dart';
+import '../../services/current_user/current_user_api_service.dart';
 
 abstract class ICurrentUserRemoteService {
   Future<Option<UserShortestDTO?>> getCurrentUserById();
@@ -29,10 +28,10 @@ abstract class ICurrentUserRemoteService {
 
 @LazySingleton(as: ICurrentUserRemoteService)
 class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICurrentUserRemoteService {
-  final IDioClient _iDioClient;
+  final CurrentUserApiService _currentUserApiService;
   final FlutterSecureStorage _secureStorage;
 
-  CurrentUserRemoteServiceImpl(this._iDioClient, this._secureStorage);
+  CurrentUserRemoteServiceImpl(this._currentUserApiService, this._secureStorage);
 
   Future<String> getCurrentUserId() async {
     final currentUserId = await _secureStorage.read(key: UserConstants.idField);
@@ -52,8 +51,8 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
       return none();
     }
 
-    return execute<Option<UserShortestDTO?>>(
-      _iDioClient.getRequest("/${APIUrls.usersUrl}/records/$currentUserId"),
+    return executeApiService<Option<UserShortestDTO?>>(
+      _currentUserApiService.getCurrentUserById(userId: currentUserId),
       onSuccess: (response) {
         final userDTO = UserShortestDTO.fromJson(response.data);
         return some(userDTO);
@@ -65,17 +64,25 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
   Future<UserShortestDTO> updateUser({required UserShortestDTO userDTO, File? profileImage, File? coverImage}) async {
     final currentUserId = await getCurrentUserId();
 
+    MultipartFile? avatarFile;
+    MultipartFile? bannerFile;
+
+    if (profileImage != null) {
+      avatarFile = await MultipartFile.fromFile(profileImage.path, filename: _generateFileName());
+    }
+
+    if (coverImage != null) {
+      bannerFile = await MultipartFile.fromFile(coverImage.path, filename: _generateFileName());
+    }
+
     final body = userDTO.toJson();
-
-    FormData formData = FormData.fromMap({
-      ...body,
-      if (profileImage != null)
-        'avatar': await MultipartFile.fromFile(profileImage.path, filename: _generateFileName()),
-      if (coverImage != null) 'banner': await MultipartFile.fromFile(coverImage.path, filename: _generateFileName()),
-    });
-
-    return execute<UserShortestDTO>(
-      _iDioClient.patchRequest("/${APIUrls.usersUrl}/records/$currentUserId", formData: formData),
+    return executeApiService<UserShortestDTO>(
+      _currentUserApiService.updateUser(
+        userId: currentUserId,
+        body: body,
+        profileImage: avatarFile,
+        coverImage: bannerFile,
+      ),
       onSuccess: (response) => UserShortestDTO.fromJson(response.data),
     );
   }
@@ -87,8 +94,8 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
 
   @override
   Future<ListUserShortestResponseDTO> getUsersSearchByUsername({required String userName}) async {
-    return execute<ListUserShortestResponseDTO>(
-      _iDioClient.getRequest("/${APIUrls.usersUrl}/records", queryParams: {"filter": "(username~'$userName')"}),
+    return executeApiService<ListUserShortestResponseDTO>(
+      _currentUserApiService.getUsersSearchByUsername(filter: "(username~'$userName')"),
       onSuccess: (response) => ListUserShortestResponseDTO.fromJson(response.data),
     );
   }
@@ -99,14 +106,10 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
     required String viewerUserId,
   }) async {
     final currentUserId = await getCurrentUserId();
-
     final updatedFollowings = List<String>.from(currentUserFollowings)..add(viewerUserId);
 
-    return execute<UserShortestDTO>(
-      _iDioClient.patchRequest(
-        "/${APIUrls.usersUrl}/records/$currentUserId",
-        bodyParams: {'followings': updatedFollowings},
-      ),
+    return executeApiService<UserShortestDTO>(
+      _currentUserApiService.updateFollowings(userId: currentUserId, body: {'followings': updatedFollowings}),
       onSuccess: (response) => UserShortestDTO.fromJson(response.data),
     );
   }
@@ -117,20 +120,21 @@ class CurrentUserRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICur
     required String viewerUserId,
   }) async {
     final currentUserId = await getCurrentUserId();
-
     final updatedFollowings = List<String>.from(currentUserFollowings)..remove(viewerUserId);
 
-    return execute<UserShortestDTO>(
-      _iDioClient.patchRequest(
-        "/${APIUrls.usersUrl}/records/$currentUserId",
-        bodyParams: {'followings': updatedFollowings},
-      ),
+    return executeApiService<UserShortestDTO>(
+      _currentUserApiService.updateFollowings(userId: currentUserId, body: {'followings': updatedFollowings}),
       onSuccess: (response) => UserShortestDTO.fromJson(response.data),
     );
   }
 
   @override
   Future<Unit> updateInterest(List<String> selectedInterests) async {
-    return unit;
+    final currentUserId = await getCurrentUserId();
+
+    return executeApiService<Unit>(
+      _currentUserApiService.updateInterests(userId: currentUserId, body: {'interests': selectedInterests}),
+      onSuccess: (_) => unit,
+    );
   }
 }

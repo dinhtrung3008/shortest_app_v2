@@ -11,9 +11,9 @@ import '../../dtos/user_shortest/user_shortest_dto.dart';
 
 @LazySingleton(as: ISignInWithEmail)
 class SignInWithEmailImpl with ExecuteRepositoryImpl, ConnectionChecker implements ISignInWithEmail {
-  final IAuthRemoteService _iAuthSupabaseService;
+  final IAuthRemoteService _iAuthRemoteService;
 
-  SignInWithEmailImpl(this._iAuthSupabaseService);
+  SignInWithEmailImpl(this._iAuthRemoteService);
 
   @override
   Future<Either<BaseFailure, Unit>> call({required EmailAddress email, required Password password}) async {
@@ -30,7 +30,7 @@ class SignInWithEmailImpl with ExecuteRepositoryImpl, ConnectionChecker implemen
 
         if (emailStr.isNotEmpty && passwordStr.isNotEmpty) {
           final userDTO = UserShortestDTO(identity: emailStr, password: passwordStr);
-          await _iAuthSupabaseService.signInWithEmailAndPassword(userDTO: userDTO);
+          await _iAuthRemoteService.signInWithEmailAndPassword(userDTO: userDTO);
         }
         return right(unit);
       },

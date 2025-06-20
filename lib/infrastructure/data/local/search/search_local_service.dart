@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../../domain/core/exceptions/exceptions.dart';
 import '../../../../../domain/entities/user_shortest/user_shortest.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
+import '../../../dtos/user_shortest/user_shortest_dto.dart';
 
 abstract class ISearchLocalService {
   Future<Unit> cacheListSearchHistory(UserShortest userEntity);
@@ -25,9 +26,10 @@ class SearchLocalServiceImpl implements ISearchLocalService {
     try {
       final cachedHistoryJson = await _secureStorage.read(key: UserConstants.cachedListSearchHistoryKey);
 
-      List<UserShortest> searchHistory = cachedHistoryJson != null
-          ? (jsonDecode(cachedHistoryJson) as List).map((e) => UserShortest.fromJson(e)).toList()
-          : [];
+      List<UserShortest> searchHistory =
+          cachedHistoryJson != null
+              ? (jsonDecode(cachedHistoryJson) as List).map((e) => UserShortestDTO.fromJson(e).toDomain()).toList()
+              : [];
 
       if (!searchHistory.any((user) => user.id == userEntity.id)) {
         searchHistory.add(userEntity);
@@ -37,7 +39,9 @@ class SearchLocalServiceImpl implements ISearchLocalService {
         searchHistory = searchHistory.sublist(searchHistory.length - 10);
       }
 
-      final updatedHistoryJson = jsonEncode(searchHistory.map((user) => user.toJson()).toList());
+      final updatedHistoryJson = jsonEncode(
+        searchHistory.map((user) => UserShortestDTO.fromDomain(user).toJson()).toList(),
+      );
       await _secureStorage.write(key: UserConstants.cachedListSearchHistoryKey, value: updatedHistoryJson);
 
       return unit;
@@ -56,7 +60,7 @@ class SearchLocalServiceImpl implements ISearchLocalService {
       }
 
       final List<UserShortest> searchHistoryList =
-          (jsonDecode(searchHistoryJson) as List).map((e) => UserShortest.fromJson(e)).toList();
+          (jsonDecode(searchHistoryJson) as List).map((e) => UserShortestDTO.fromJson(e).toDomain()).toList();
 
       return searchHistoryList;
     } catch (e) {

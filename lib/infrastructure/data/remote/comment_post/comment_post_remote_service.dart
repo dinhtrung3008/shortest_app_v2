@@ -6,10 +6,9 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../domain/core/exceptions/exceptions.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
-import '../../../../presentation/core/constants/api_urls.dart';
 import '../../../core/mixins/execute_service_remote_impl.dart';
 import '../../../dtos/comment_post/comment_post_dto.dart';
-import '../../client/dio_client.dart';
+import '../../services/comment_post/comment_post_api_service.dart';
 
 abstract class ICommentPostRemoteService {
   Future<CommentPostDTO> addComment({required String content, required String postId, List<XFile>? mediaFiles});
@@ -24,18 +23,15 @@ abstract class ICommentPostRemoteService {
 
 @LazySingleton(as: ICommentPostRemoteService)
 class CommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICommentPostRemoteService {
-  final IDioClient _iDioClient;
+  final CommentPostApiService _commentPostApiService;
   final FlutterSecureStorage _secureStorage;
 
-  CommentPostRemoteServiceImpl(this._iDioClient, this._secureStorage);
+  CommentPostRemoteServiceImpl(this._commentPostApiService, this._secureStorage);
 
-  Future<FormData> _createFormData({required Map<String, dynamic> body, List<XFile>? mediaFiles}) async {
-    final media =
-        mediaFiles != null && mediaFiles.isNotEmpty
-            ? await Future.wait(mediaFiles.map((file) => MultipartFile.fromFile(file.path, filename: file.name)))
-            : null;
+  Future<List<MultipartFile>?> _createMultipartFiles(List<XFile>? mediaFiles) async {
+    if (mediaFiles == null || mediaFiles.isEmpty) return null;
 
-    return FormData.fromMap({...body, if (media != null) "mediaUrls": media});
+    return await Future.wait(mediaFiles.map((file) => MultipartFile.fromFile(file.path, filename: file.name)));
   }
 
   @override
@@ -46,15 +42,15 @@ class CommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICom
       throw CacheException(message: 'Current user ID not found');
     }
 
-    final body = CommentPostDTO(content: content, owner: currentUserId, postOwner: postId).toJson();
+    final multipartFiles = await _createMultipartFiles(mediaFiles);
 
-    final formData = await _createFormData(body: body, mediaFiles: mediaFiles);
-
-    return execute<CommentPostDTO>(
-      _iDioClient.postRequest(
-        "/${APIUrls.commentsPostUrl}/records",
-        formData: formData,
-        queryParams: {"expand": "owner"},
+    return executeApiService<CommentPostDTO>(
+      _commentPostApiService.addComment(
+        content: content,
+        owner: currentUserId,
+        postOwner: postId,
+        mediaFiles: multipartFiles,
+        expand: "owner",
       ),
       onSuccess: (response) => CommentPostDTO.fromJson(response.data),
     );
@@ -66,15 +62,15 @@ class CommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICom
     required String newContent,
     List<XFile>? mediaFiles,
   }) async {
-    final body = CommentPostDTO(content: newContent, updated: DateTime.now()).toJson();
+    final multipartFiles = await _createMultipartFiles(mediaFiles);
 
-    final formData = await _createFormData(body: body, mediaFiles: mediaFiles);
-
-    return execute<CommentPostDTO>(
-      _iDioClient.patchRequest(
-        "/${APIUrls.commentsPostUrl}/records/$commentId",
-        formData: formData,
-        queryParams: {"expand": "owner"},
+    return executeApiService<CommentPostDTO>(
+      _commentPostApiService.updateComment(
+        commentId: commentId,
+        content: newContent,
+        updated: DateTime.now().toIso8601String(),
+        mediaFiles: multipartFiles,
+        expand: "owner",
       ),
       onSuccess: (response) => CommentPostDTO.fromJson(response.data),
     );
@@ -86,27 +82,20 @@ class CommentPostRemoteServiceImpl with ExecuteRemoteServiceImpl implements ICom
     int perPage = 10,
     required String postId,
   }) async {
-    final queryParams = {
-      "page": page,
-      "perPage": perPage,
-      "sort": "-created",
-      "filter": "(postOwner~'$postId')",
-      "expand": "owner",
-    };
-
-    return execute<ListCommentPostResponseDTO>(
-      _iDioClient.getRequest("/${APIUrls.commentsPostUrl}/records", queryParams: queryParams),
+    return executeApiService<ListCommentPostResponseDTO>(
+      _commentPostApiService.getCommentsByPostId(
+        page: page,
+        perPage: perPage,
+        sort: "-created",
+        filter: "(postOwner~'$postId')",
+        expand: "owner",
+      ),
       onSuccess: (response) => ListCommentPostResponseDTO.fromJson(response.data),
     );
   }
 
   @override
   Future<Unit> deleteComment({required String commentId}) async {
-    return execute<Unit>(
-      _iDioClient.deleteRequest("/${APIUrls.commentsPostUrl}/records/$commentId"),
-      onSuccess: (_) {
-        return unit;
-      },
-    );
+    return executeApiService<Unit>(_commentPostApiService.deleteComment(commentId: commentId), onSuccess: (_) => unit);
   }
 }

@@ -45,7 +45,7 @@ class RefreshTokenInterceptor extends Interceptor {
       } catch (refreshError) {
         if (refreshError is DioException && refreshError.response?.statusCode == 401) {
           await _secureStorage.delete(key: GlobalConstants.accessToken);
-          await _secureStorage.delete(key: UserConstants.cachedUserKey);
+          await _secureStorage.delete(key: UserConstants.cachedCurrentUerKey);
           await _secureStorage.delete(key: UserConstants.idField);
         }
       }

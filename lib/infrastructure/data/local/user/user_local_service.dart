@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../../domain/core/exceptions/exceptions.dart';
 import '../../../../../domain/entities/user_shortest/user_shortest.dart';
 import '../../../../../presentation/core/constants/user_constants.dart';
+import '../../../dtos/user_shortest/user_shortest_dto.dart';
 
 abstract class IUserLocalService {
   Future<Unit> caheCurrentUser(UserShortest user);
@@ -23,8 +24,8 @@ class UserLocalServiceImpl implements IUserLocalService {
   @override
   Future<Unit> caheCurrentUser(UserShortest user) async {
     try {
-      final userJson = jsonEncode(user.toJson());
-      await _secureStorage.write(key: UserConstants.cachedUserKey, value: userJson);
+      final userJson = jsonEncode(UserShortestDTO.fromDomain(user).toJson());
+      await _secureStorage.write(key: UserConstants.cachedCurrentUerKey, value: userJson);
       return unit;
     } catch (e) {
       throw CacheException(message: e.toString());
@@ -34,14 +35,14 @@ class UserLocalServiceImpl implements IUserLocalService {
   @override
   Future<UserShortest?> getCachedCurrentUser() async {
     try {
-      final userJson = await _secureStorage.read(key: UserConstants.cachedUserKey);
+      final userJson = await _secureStorage.read(key: UserConstants.cachedCurrentUerKey);
 
       if (userJson == null) {
         return null;
       }
 
       final userMap = jsonDecode(userJson);
-      final userEntity = UserShortest.fromJson(userMap);
+      final userEntity = UserShortestDTO.fromJson(userMap).toDomain();
       return userEntity;
     } catch (e) {
       throw CacheException(message: e.toString());
@@ -51,7 +52,7 @@ class UserLocalServiceImpl implements IUserLocalService {
   @override
   Future<Unit> deleteCachedCurrentUser() async {
     try {
-      await _secureStorage.delete(key: UserConstants.cachedUserKey);
+      await _secureStorage.delete(key: UserConstants.cachedCurrentUerKey);
       return unit;
     } catch (e) {
       throw CacheException(message: e.toString());
