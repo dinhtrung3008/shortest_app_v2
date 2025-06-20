@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../../presentation/core/constants/api_urls.dart';
-import '../../../dtos/auth/auth_dto.dart';
 
 part 'auth_api_service.g.dart';
 
@@ -28,5 +27,5 @@ abstract class AuthApiService {
   Future<HttpResponse> requestPasswordReset({@Body() required Map<String, dynamic> body});
 
   @POST("$usersUrl/auth/refresh-token")
-  Future<AuthDTO> refreshToken({@Body() required Map<String, dynamic> body});
+  Future<HttpResponse> refreshToken({@Body() required Map<String, dynamic> body});
 }

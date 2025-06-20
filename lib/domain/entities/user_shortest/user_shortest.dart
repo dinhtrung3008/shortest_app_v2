@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_shortest.freezed.dart';
-part 'user_shortest.g.dart';
 
 @freezed
 abstract class UserShortest with _$UserShortest {
@@ -39,6 +38,4 @@ abstract class UserShortest with _$UserShortest {
   }
 
   bool isMe(String currentUserId, String otherUserId) => currentUserId == otherUserId;
-
-  factory UserShortest.fromJson(Map<String, dynamic> json) => _$UserShortestFromJson(json);
 }

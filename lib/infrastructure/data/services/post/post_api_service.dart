@@ -17,13 +17,16 @@ abstract class PostApiService {
   @POST("$postsUrl/records")
   @MultiPart()
   Future<HttpResponse> createPost({
+    @Part(name: "content") String? content,
+    @Part(name: "visibility") String? visibility,
+    @Part(name: "updated") String? updated,
     @Part(name: "mediaUrls") List<MultipartFile>? multipartFiles,
     @Query("expand") String? expand,
   });
 
   @PATCH("$postsUrl/records/{postId}")
   @MultiPart()
-  Future<HttpResponse> updatePostById({
+  Future<HttpResponse> updatePost({
     @Path("postId") required String postId,
     @Part(name: "content") String? content,
     @Part(name: "visibility") String? visibility,
@@ -45,10 +48,10 @@ abstract class PostApiService {
   Future<HttpResponse> getPostById({@Path("postId") required String postId, @Query("expand") String? expand});
 
   @DELETE("$postsUrl/records/{postId}")
-  Future<HttpResponse> deletePostById({@Path("postId") required String postId});
+  Future<HttpResponse> deletePost({@Path("postId") required String postId});
 
   @PATCH("$postsUrl/records/{postId}")
-  Future<HttpResponse> updatePostData({
+  Future<HttpResponse> updatePostEngagement({
     @Path("postId") required String postId,
     @Body() required Map<String, dynamic> body,
     @Query("expand") String? expand,

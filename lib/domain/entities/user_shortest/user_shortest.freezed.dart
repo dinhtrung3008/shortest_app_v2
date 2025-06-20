@@ -12,7 +12,6 @@ part of 'user_shortest.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$UserShortest {
 
@@ -23,8 +22,6 @@ mixin _$UserShortest {
 @pragma('vm:prefer-inline')
 $UserShortestCopyWith<UserShortest> get copyWith => _$UserShortestCopyWithImpl<UserShortest>(this as UserShortest, _$identity);
 
-  /// Serializes this UserShortest to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -32,7 +29,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is UserShortest&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.bio, bio) || other.bio == bio)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.verified, verified) || other.verified == verified)&&(identical(other.popular, popular) || other.popular == popular)&&(identical(other.emailVisibility, emailVisibility) || other.emailVisibility == emailVisibility)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.banner, banner) || other.banner == banner)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.address, address) || other.address == address)&&const DeepCollectionEquality().equals(other.friendsRequest, friendsRequest)&&const DeepCollectionEquality().equals(other.followings, followings)&&const DeepCollectionEquality().equals(other.followers, followers)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&const DeepCollectionEquality().equals(other.interests, interests)&&const DeepCollectionEquality().equals(other.likedPosts, likedPosts)&&const DeepCollectionEquality().equals(other.viewedPosts, viewedPosts)&&const DeepCollectionEquality().equals(other.savedPosts, savedPosts));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hashAll([runtimeType,id,username,email,bio,collectionId,collectionName,verified,popular,emailVisibility,avatar,banner,birthDate,phoneNumber,gender,address,const DeepCollectionEquality().hash(friendsRequest),const DeepCollectionEquality().hash(followings),const DeepCollectionEquality().hash(followers),created,updated,const DeepCollectionEquality().hash(interests),const DeepCollectionEquality().hash(likedPosts),const DeepCollectionEquality().hash(viewedPosts),const DeepCollectionEquality().hash(savedPosts)]);
 
@@ -100,11 +97,11 @@ as List<String>?,
 
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _UserShortest extends UserShortest {
   const _UserShortest({required this.id, required this.username, required this.email, this.bio, required this.collectionId, required this.collectionName, this.verified, this.popular, required this.emailVisibility, this.avatar, this.banner, this.birthDate, this.phoneNumber, this.gender, this.address, final  List<String>? friendsRequest, final  List<String>? followings, final  List<String>? followers, required this.created, required this.updated, final  List<String>? interests, final  List<String>? likedPosts, final  List<String>? viewedPosts, final  List<String>? savedPosts}): _friendsRequest = friendsRequest,_followings = followings,_followers = followers,_interests = interests,_likedPosts = likedPosts,_viewedPosts = viewedPosts,_savedPosts = savedPosts,super._();
-  factory _UserShortest.fromJson(Map<String, dynamic> json) => _$UserShortestFromJson(json);
+  
 
 @override final  String id;
 @override final  String username;
@@ -193,17 +190,14 @@ class _UserShortest extends UserShortest {
 @pragma('vm:prefer-inline')
 _$UserShortestCopyWith<_UserShortest> get copyWith => __$UserShortestCopyWithImpl<_UserShortest>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$UserShortestToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserShortest&&(identical(other.id, id) || other.id == id)&&(identical(other.username, username) || other.username == username)&&(identical(other.email, email) || other.email == email)&&(identical(other.bio, bio) || other.bio == bio)&&(identical(other.collectionId, collectionId) || other.collectionId == collectionId)&&(identical(other.collectionName, collectionName) || other.collectionName == collectionName)&&(identical(other.verified, verified) || other.verified == verified)&&(identical(other.popular, popular) || other.popular == popular)&&(identical(other.emailVisibility, emailVisibility) || other.emailVisibility == emailVisibility)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.banner, banner) || other.banner == banner)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.address, address) || other.address == address)&&const DeepCollectionEquality().equals(other._friendsRequest, _friendsRequest)&&const DeepCollectionEquality().equals(other._followings, _followings)&&const DeepCollectionEquality().equals(other._followers, _followers)&&(identical(other.created, created) || other.created == created)&&(identical(other.updated, updated) || other.updated == updated)&&const DeepCollectionEquality().equals(other._interests, _interests)&&const DeepCollectionEquality().equals(other._likedPosts, _likedPosts)&&const DeepCollectionEquality().equals(other._viewedPosts, _viewedPosts)&&const DeepCollectionEquality().equals(other._savedPosts, _savedPosts));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hashAll([runtimeType,id,username,email,bio,collectionId,collectionName,verified,popular,emailVisibility,avatar,banner,birthDate,phoneNumber,gender,address,const DeepCollectionEquality().hash(_friendsRequest),const DeepCollectionEquality().hash(_followings),const DeepCollectionEquality().hash(_followers),created,updated,const DeepCollectionEquality().hash(_interests),const DeepCollectionEquality().hash(_likedPosts),const DeepCollectionEquality().hash(_viewedPosts),const DeepCollectionEquality().hash(_savedPosts)]);
 

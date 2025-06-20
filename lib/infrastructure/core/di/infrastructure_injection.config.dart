@@ -44,8 +44,8 @@ import '../../data/remote/comment_post/comment_post_remote_service.dart'
     as _i825;
 import '../../data/remote/current_user/current_user_remote_service.dart'
     as _i157;
-import '../../data/remote/like_comment/like_comment_remote_service.dart'
-    as _i210;
+import '../../data/remote/like_comment_post/like_comment_post_remote_service.dart'
+    as _i968;
 import '../../data/remote/like_post/like_post_remote_service.dart' as _i512;
 import '../../data/remote/message/message_remote_service.dart' as _i897;
 import '../../data/remote/message/message_subcribe_service.dart' as _i816;
@@ -56,6 +56,13 @@ import '../../data/remote/share_post/share_post_remote_service.dart' as _i465;
 import '../../data/remote/viewer_user/viewer_user_remote_service.dart' as _i418;
 import '../../data/services/auth/auth_api_service.dart' as _i329;
 import '../../data/services/chat/chat_api_service.dart' as _i604;
+import '../../data/services/comment_post/comment_post_api_service.dart'
+    as _i655;
+import '../../data/services/current_user/current_user_api_service.dart'
+    as _i773;
+import '../../data/services/like_comment_post/like_comment_post_api_service.dart'
+    as _i658;
+import '../../data/services/like_post/like_post_api_service.dart' as _i512;
 import '../../data/services/post/post_api_service.dart' as _i1028;
 import '../../repositories/auth/password_reset_impl.dart' as _i923;
 import '../../repositories/auth/sign_in_with_email_impl.dart' as _i404;
@@ -154,8 +161,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i604.ChatApiService>(
       () => _i604.ChatApiService(gh<_i361.Dio>()),
     );
+    gh.lazySingleton<_i773.CurrentUserApiService>(
+      () => _i773.CurrentUserApiService(gh<_i361.Dio>()),
+    );
     gh.lazySingleton<_i329.AuthApiService>(
       () => _i329.AuthApiService(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i658.LikeCommentPostApiService>(
+      () => _i658.LikeCommentPostApiService(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i655.CommentPostApiService>(
+      () => _i655.CommentPostApiService(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i512.LikePostApiService>(
+      () => _i512.LikePostApiService(gh<_i361.Dio>()),
     );
     gh.lazySingleton<_i462.IDioClient>(
       () => _i462.DioClientImpl(gh<_i361.Dio>()),
@@ -166,14 +185,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i530.IUserLocalService>(
       () => _i530.UserLocalServiceImpl(gh<_i558.FlutterSecureStorage>()),
     );
-    gh.lazySingleton<_i825.ICommentPostRemoteService>(
-      () => _i825.CommentPostRemoteServiceImpl(
-        gh<_i462.IDioClient>(),
+    gh.lazySingleton<_i157.ICurrentUserRemoteService>(
+      () => _i157.CurrentUserRemoteServiceImpl(
+        gh<_i773.CurrentUserApiService>(),
         gh<_i558.FlutterSecureStorage>(),
       ),
     );
-    gh.lazySingleton<_i210.ILikeCommentPostRemoteService>(
-      () => _i210.LikeCommentPostRemoteServiceImpl(gh<_i462.IDioClient>()),
+    gh.lazySingleton<_i917.IDecreaseFollowings>(
+      () => _i809.DecrementFollowingsImpl(
+        gh<_i157.ICurrentUserRemoteService>(),
+        gh<_i530.IUserLocalService>(),
+      ),
+    );
+    gh.lazySingleton<_i917.IUpdateCurrentUser>(
+      () => _i1020.UpdateCurrentUserImpl(
+        gh<_i157.ICurrentUserRemoteService>(),
+        gh<_i530.IUserLocalService>(),
+      ),
+    );
+    gh.lazySingleton<_i917.IIncreaseFollowings>(
+      () => _i216.IncrementFollowingsImpl(
+        gh<_i157.ICurrentUserRemoteService>(),
+        gh<_i530.IUserLocalService>(),
+      ),
     );
     gh.lazySingleton<_i897.IMessageRemoteService>(
       () => _i897.MessageRemoteServiceImpl(
@@ -189,12 +223,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i693.ISearchTrendRemoteService>(
       () => _i693.SearchTrendRemoteServiceImpl(gh<_i462.IDioClient>()),
-    );
-    gh.lazySingleton<_i512.ILikePostRemoteService>(
-      () => _i512.LikePostRemoteServiceImpl(
-        gh<_i462.IDioClient>(),
-        gh<_i558.FlutterSecureStorage>(),
-      ),
     );
     gh.lazySingleton<_i418.IViewerUserRemoteService>(
       () => _i418.ViewerUserRemoteServiceImpl(
@@ -230,6 +258,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i865.IDeleteChatRoom>(
       () => _i570.DeleteChatImpl(gh<_i495.IChatRemoteService>()),
     );
+    gh.lazySingleton<_i917.IGetCurrentUserById>(
+      () => _i275.GetCurrentUserByIdImpl(
+        gh<_i157.ICurrentUserRemoteService>(),
+        gh<_i530.IUserLocalService>(),
+      ),
+    );
     gh.lazySingleton<_i865.IMarkAsRead>(
       () => _i791.MarkAsReadImpl(gh<_i495.IChatRemoteService>()),
     );
@@ -242,14 +276,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i865.IAddSharePost>(
       () => _i765.AddSharePostImpl(gh<_i465.ISharePostRemoteService>()),
     );
-    gh.lazySingleton<_i157.ICurrentUserRemoteService>(
-      () => _i157.CurrentUserRemoteServiceImpl(
-        gh<_i462.IDioClient>(),
-        gh<_i558.FlutterSecureStorage>(),
-      ),
-    );
     gh.lazySingleton<_i522.IRequestListSearch>(
       () => _i29.RequestListSearchImpl(gh<_i157.ICurrentUserRemoteService>()),
+    );
+    gh.lazySingleton<_i825.ICommentPostRemoteService>(
+      () => _i825.CommentPostRemoteServiceImpl(
+        gh<_i655.CommentPostApiService>(),
+        gh<_i558.FlutterSecureStorage>(),
+      ),
     );
     gh.lazySingleton<_i522.IGetListSearchHistory>(
       () => _i12.GetListSearchHistoryImpl(gh<_i771.ISearchLocalService>()),
@@ -270,15 +304,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i244.IUpdateCommentPost>(
       () => _i1041.UpdateCommentPostImpl(gh<_i825.ICommentPostRemoteService>()),
     );
-    gh.lazySingleton<_i436.IGetLikesByPostId>(
-      () => _i762.GetLikesByPostIdImpl(gh<_i512.ILikePostRemoteService>()),
-    );
     gh.lazySingleton<_i244.IGetCommentsByPostId>(
       () =>
           _i177.GetCommentsByPostIdImpl(gh<_i825.ICommentPostRemoteService>()),
     );
-    gh.lazySingleton<_i436.ILikePost>(
-      () => _i1054.LikePostImpl(gh<_i512.ILikePostRemoteService>()),
+    gh.lazySingleton<_i512.ILikePostRemoteService>(
+      () => _i512.LikePostRemoteServiceImpl(
+        gh<_i512.LikePostApiService>(),
+        gh<_i558.FlutterSecureStorage>(),
+      ),
     );
     gh.lazySingleton<_i317.IPostRemoteService>(
       () => _i317.PostRemoteServiceImpl(
@@ -288,6 +322,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i92.IUpdatePost>(
       () => _i646.UpdatePostImpl(gh<_i317.IPostRemoteService>()),
+    );
+    gh.lazySingleton<_i968.ILikeCommentPostRemoteService>(
+      () => _i968.LikeCommentPostRemoteServiceImpl(
+        gh<_i658.LikeCommentPostApiService>(),
+      ),
     );
     gh.lazySingleton<_i244.IAddCommentPost>(
       () => _i511.AddCommentPostImpl(gh<_i825.ICommentPostRemoteService>()),
@@ -316,38 +355,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i92.IIncreaseLikesPostCount>(
       () => _i363.IncreaseLikesPostCountImpl(gh<_i317.IPostRemoteService>()),
     );
-    gh.lazySingleton<_i917.IDecreaseFollowings>(
-      () => _i809.DecrementFollowingsImpl(
-        gh<_i157.ICurrentUserRemoteService>(),
-        gh<_i530.IUserLocalService>(),
-      ),
-    );
     gh.lazySingleton<_i999.ILikeMessage>(
       () => _i293.LikeMessageImpl(gh<_i897.IMessageRemoteService>()),
     );
     gh.lazySingleton<_i999.ICreateMessage>(
       () => _i640.CreateMessageImpl(gh<_i897.IMessageRemoteService>()),
     );
+    gh.lazySingleton<_i1064.ISignInWithEmail>(
+      () => _i404.SignInWithEmailImpl(gh<_i750.IAuthRemoteService>()),
+    );
     gh.lazySingleton<_i865.IUpdateChatRoom>(
       () => _i839.UpdateChatImpl(gh<_i495.IChatRemoteService>()),
-    );
-    gh.lazySingleton<_i917.IUpdateCurrentUser>(
-      () => _i1020.UpdateCurrentUserImpl(
-        gh<_i157.ICurrentUserRemoteService>(),
-        gh<_i530.IUserLocalService>(),
-      ),
     );
     gh.lazySingleton<_i699.IIncreaseFollowers>(
       () => _i410.IncreaseFollowersImpl(gh<_i418.IViewerUserRemoteService>()),
     );
     gh.lazySingleton<_i999.IDeleteMessage>(
       () => _i999.DeleteMessageImpl(gh<_i897.IMessageRemoteService>()),
-    );
-    gh.lazySingleton<_i917.IIncreaseFollowings>(
-      () => _i216.IncrementFollowingsImpl(
-        gh<_i157.ICurrentUserRemoteService>(),
-        gh<_i530.IUserLocalService>(),
-      ),
     );
     gh.lazySingleton<_i1064.ISignOut>(
       () => _i872.SignOutImpl(
@@ -362,15 +386,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1064.ISignUpWithEmail>(
       () => _i315.SignUpWithEmailImpl(gh<_i750.IAuthRemoteService>()),
     );
-    gh.lazySingleton<_i1064.ISignInWithEmail>(
-      () => _i404.SignInWithEmailImpl(gh<_i750.IAuthRemoteService>()),
-    );
-    gh.lazySingleton<_i917.IGetCurrentUserById>(
-      () => _i275.GetCurrentUserByIdImpl(
-        gh<_i157.ICurrentUserRemoteService>(),
-        gh<_i530.IUserLocalService>(),
-      ),
-    );
     gh.lazySingleton<_i92.IIncreaseSharesPostCount>(
       () => _i961.IncreaseSharesPostCountImpl(gh<_i317.IPostRemoteService>()),
     );
@@ -380,8 +395,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i92.IIncreaseViewsPostCount>(
       () => _i26.IncreaseViewsPostCountImpl(gh<_i317.IPostRemoteService>()),
     );
+    gh.lazySingleton<_i436.IGetLikesByPostId>(
+      () => _i762.GetLikesByPostIdImpl(gh<_i512.ILikePostRemoteService>()),
+    );
     gh.lazySingleton<_i92.IIncreaseCommentsPostCount>(
       () => _i286.IncreaseCommentsPostCountImpl(gh<_i317.IPostRemoteService>()),
+    );
+    gh.lazySingleton<_i436.ILikePost>(
+      () => _i1054.LikePostImpl(gh<_i512.ILikePostRemoteService>()),
     );
     gh.lazySingleton<_i92.IDecreaseCommentsPostCount>(
       () => _i443.DecreaseCommentsPostCountImpl(gh<_i317.IPostRemoteService>()),
