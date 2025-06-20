@@ -10,25 +10,20 @@ abstract class IGetCurrentUserById {
 }
 
 abstract class IUpdateCurrentUser {
-  Future<Either<BaseFailure, UserShortest>> call({
-    String? userName,
-    String? bio,
-    File? profileImage,
-    File? coverImage,
-  });
+  Future<Either<BaseFailure, UserShortest>> call({String? userName, String? bio, File? profileImage, File? coverImage});
 }
 
 abstract class IIncreaseFollowings {
   Future<Either<BaseFailure, UserShortest>> call({
     required List<String> currentUserFollowings,
-    required String viewerUserId,
+    required String viewerId,
   });
 }
 
 abstract class IDecreaseFollowings {
   Future<Either<BaseFailure, UserShortest>> call({
     required List<String> currentUserFollowings,
-    required String viewerUserId,
+    required String viewerId,
   });
 }
 

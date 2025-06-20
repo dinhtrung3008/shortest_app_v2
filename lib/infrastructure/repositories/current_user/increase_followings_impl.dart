@@ -19,7 +19,7 @@ class IncrementFollowingsImpl with ExecuteRepositoryImpl, ConnectionChecker impl
   @override
   Future<Either<BaseFailure, UserShortest>> call({
     required List<String> currentUserFollowings,
-    required String viewerUserId,
+    required String viewerId,
   }) async {
     final hasInternet = await internetChecker();
     if (!hasInternet) {
@@ -30,7 +30,7 @@ class IncrementFollowingsImpl with ExecuteRepositoryImpl, ConnectionChecker impl
       action: () async {
         final response = await _iCurrentUserRemoteService.increaseFollowings(
           currentUserFollowings: currentUserFollowings,
-          viewerUserId: viewerUserId,
+          viewerId: viewerId,
         );
 
         await _iUserLocalService.caheCurrentUser(response.toDomain());
